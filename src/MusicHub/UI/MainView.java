@@ -13,8 +13,7 @@ public class MainView extends BasicContainer {
 	private HScene subScene;
 	
 	public MainView(HScene scene, String title){
-		super(scene, title);
-		
+		super(scene, title);		
 		scene.add(this);
 	}
 

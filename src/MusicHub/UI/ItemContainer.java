@@ -25,12 +25,9 @@ public class ItemContainer extends HContainer {
 		label= new HText(intro,0, 0, this.getWidth()-20, this.getHeight()-20);
 		label.setFont(new Font("Tiresias",Font.PLAIN,13));
 		label.setForeground(Color.cyan);
-		//label.setBackground(Color.white);
+		//label.setBackground(Color.white);-
 		
-		
-		
-		icon = new HIcon(Toolkit.getDefaultToolkit().createImage("http://www.valsf.com.uy/mvdexchange/mvd/Bra.png"));
-		
+		icon = new HIcon(Toolkit.getDefaultToolkit().getImage("http://www.valsf.com.uy/mvdexchange/mvd/Bra.png"));		
 		icon.setSize(250, 250);
 		
 		this.add(icon);

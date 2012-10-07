@@ -1,3 +1,5 @@
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -6,6 +8,7 @@ import javax.tv.xlet.XletContext;
 import javax.tv.xlet.XletStateChangeException;
 
 import org.havi.ui.HContainer;
+import org.havi.ui.HIcon;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
@@ -79,12 +82,6 @@ public class Main implements Xlet, KeyListener {
 		scene.requestFocus();
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
