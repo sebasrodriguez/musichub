@@ -10,6 +10,7 @@ public class RssItem {
 	private String intro;
 	private String content;
 	private int votes;
+	private String imageUrl;
 	private List<Comment> comments;
 
 	public String getTitle() {
@@ -58,6 +59,14 @@ public class RssItem {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

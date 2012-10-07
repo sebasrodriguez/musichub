@@ -7,24 +7,24 @@ import MusicHub.Domain.Contracts.*;
 
 public class ServiceLocator {
 
-	public IRssService getRssService() {
-		return (IRssService)new RssManager();
+	public static IRssService getRssService() {
+		return new RssService();
 	}
 
-	public IRssParser getRssParser() {
-		return (IRssParser)new RssParser();
+	public static IRssParser getRssParser() {
+		return new RssParser();
 	}
 
 	public IStorageService getStorageService() {
-		return (IStorageService)new StorageService();
+		return new StorageService();
 	}
 	
 	public IRssManager getRssManager(){
-		return (IRssManager)new RssManager();
+		return new RssManager();
 	}
 	
 	public ITwitterManager getTwitterManager(){
-		return (ITwitterManager)new TwitterManager();
+		return new TwitterManager();
 	}
 
 }
