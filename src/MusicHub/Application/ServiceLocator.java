@@ -15,15 +15,15 @@ public class ServiceLocator {
 		return new RssParser();
 	}
 
-	public IStorageService getStorageService() {
+	public static IStorageService getStorageService() {
 		return new StorageService();
 	}
 	
-	public IRssManager getRssManager(){
+	public static IRssManager getRssManager(){
 		return new RssManager();
 	}
 	
-	public ITwitterManager getTwitterManager(){
+	public static ITwitterManager getTwitterManager(){
 		return new TwitterManager();
 	}
 

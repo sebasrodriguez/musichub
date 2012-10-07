@@ -1,7 +1,10 @@
 package MusicHub.DataTypes;
 
-public class Comment {
+import java.io.Serializable;
 
+public class Comment implements Serializable {
+
+	private static final long serialVersionUID = -8142398701252295800L;
 	private String text;
 
 	public String getText() {
