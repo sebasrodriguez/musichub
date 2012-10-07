@@ -4,5 +4,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libraries/javatv.jar"/>
 	<classpathentry kind="lib" path="libraries/xletview.jar"/>
+	<classpathentry kind="lib" path="libraries/rome-1.0.jar"/>
+	<classpathentry kind="lib" path="libraries/jdom-2.0.3.jar"/>
+	<classpathentry kind="lib" path="libraries/jdom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
