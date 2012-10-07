@@ -1,9 +1,11 @@
 package MusicHub.DataTypes;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RssFeed {
+public class RssFeed implements Serializable {
 
+	private static final long serialVersionUID = -2135119529525138690L;
 	private String url;
 	private String name;
 	private String description;
