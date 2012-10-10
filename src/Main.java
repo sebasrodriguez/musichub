@@ -66,6 +66,7 @@ public class Main implements Xlet, KeyListener {
 		this.scene.addKeyListener(this);
 		
 		mainView= new MainView(this.scene, "MainView");
+		
 	}
 
 	@Override
@@ -78,8 +79,9 @@ public class Main implements Xlet, KeyListener {
 	public void startXlet() throws XletStateChangeException {
 		// TODO Auto-generated method stub		
 		
+		//mainView.requestFocus();
 		scene.setVisible(true);
-		scene.requestFocus();
+		//scene.requestFocus();
 	}
 
 
