@@ -1,3 +1,4 @@
+package MusicHub.UI;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,7 +13,9 @@ import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
 import org.havi.ui.HTextButton;
 
-import util.Conf;
+import MusicHub.Util.Conf;
+
+
 
 
 public class UOptionItem extends HContainer{
@@ -61,7 +64,14 @@ public class UOptionItem extends HContainer{
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
-		this.setBackground(Color.GRAY);
+		
+		if(selected){
+			this.setBackground(Color.GRAY);
+		}
+		else{
+			this.setBackground(Color.BLACK);
+		}
 		repaint();
+		
 	}
 }

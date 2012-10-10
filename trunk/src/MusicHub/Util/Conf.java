@@ -12,6 +12,7 @@ public class Conf {
 	private static int menuHeight;
 	private static String fontName;
 	private static int fontSize;
+	private static int itemHeight;
 	
 	
 /*	public Conf(){			
@@ -27,6 +28,8 @@ public class Conf {
 			menuHeight=Integer.parseInt(prop.getProperty("menuHeight"));
 			fontName=prop.getProperty("fontName");
 			fontSize=Integer.parseInt(prop.getProperty("fontSize"));
+			itemHeight=Integer.parseInt(prop.getProperty("itemHeight"));
+					
 			
 			
 		} catch (FileNotFoundException e) {
@@ -54,6 +57,9 @@ public class Conf {
 		return fontSize;
 	}
 	
+	public static int getItemHeight(){
+		return itemHeight;
+	}
 	
 	
 

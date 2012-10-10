@@ -1,3 +1,4 @@
+package MusicHub.UI;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -10,7 +11,9 @@ import java.util.List;
 import org.havi.ui.HComponent;
 import org.havi.ui.HContainer;
 
-import util.Conf;
+import MusicHub.Util.Conf;
+
+
 
 
 public class UMenuScrollable extends HContainer implements KeyListener, FocusListener {
@@ -26,11 +29,16 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 	public UMenuScrollable(){
 		
 		listItems= new LinkedList();
-		menuContainer= new HContainer(0,0,this.getWidth(), this.getHeight());
-		menuContainer.setSize(250,204);
-		wrapper= new HContainer();
-		addKeyListener(this);
-		addFocusListener(this);
+		
+		setSubContainers();
+		
+	}
+	
+	//Constructor que acepta una lista de UOptionItem
+	public UMenuScrollable(List items){		
+		this.listItems=items;
+		setSubContainers();
+		showItems();
 	}
 	
 	
@@ -38,6 +46,14 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 		
 		//TODO Conf.getItemsHeight
 		return Conf.getItemHeight() * getNumItems();
+	}
+	
+	private void setSubContainers(){
+		menuContainer= new HContainer(0,0,this.getWidth(), this.getHeight());
+		menuContainer.setSize(250,204);
+		wrapper= new HContainer();
+		addKeyListener(this);
+		addFocusListener(this);
 	}
 	
 	public void addOption (UOptionItem opt){	
@@ -67,7 +83,7 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 		
 		//Indico que la primera opcion es la seleccionada
 		((UOptionItem)this.listItems.get(0)).setSelected(true);
-		itemSelected=(UOptionItem)this.listItems.get(0); // no se si lo preciso
+		itemSelected=(UOptionItem)this.listItems.get(0); 
 				
 		menuContainer.setVisible(true);		
 		this.add(menuContainer);	
@@ -83,19 +99,23 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 		//flecha abajo
 		if  (e.getKeyCode() == 40){
 			
-			System.out.println("item d");
+			itemSelected.setSelected(false);
+			UOptionItem next=null;
+			selectedItemIndex++;
 			
-			UOptionItem next=((UOptionItem)menuContainer.getComponent(selectedItemIndex++));
+			if(selectedItemIndex<menuContainer.getComponentCount()){				
+				next=((UOptionItem)menuContainer.getComponent(selectedItemIndex));
+			}
+			else{
+				selectedItemIndex=0;
+				next=((UOptionItem)menuContainer.getComponent(selectedItemIndex));
+			}
+			
 			next.setSelected(true);
+			itemSelected=next;		//Guardo una referencia a la opcion seleccionada		
 			
 			System.out.println(next.getName());
 			
-			//this.itemSelected.setSelected(false);		
-			
-			//((UOptionItem)this.listItems.get(selectedItemIndex)).setSelected(false);
-			//selectedItemIndex++;
-			//((UOptionItem)this.listItems.get(selectedItemIndex)).transferFocus();
-			//repaint();
 		
 		 }  
 		
@@ -115,11 +135,7 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 
 
 	public void focusGained(FocusEvent arg0) {
-		// TODO Auto-generated method stub		
-		/*this.transferFocus();
-		this.transferFocusDownCycle();*/
 		System.out.println("menu focus");		
-		//this.menuContainer.getComponent(0).requestFocus();
 		
 	}
 
