@@ -1,7 +1,11 @@
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.tv.xlet.Xlet;
 import javax.tv.xlet.XletContext;
@@ -15,6 +19,8 @@ import org.havi.ui.HSceneTemplate;
 
 import MusicHub.UI.ItemContainer;
 import MusicHub.UI.MainView;
+import MusicHub.UI.UMenuScrollable;
+import MusicHub.UI.UOptionItem;
 import MusicHub.Util.Conf;
 
 
@@ -22,7 +28,9 @@ public class Main implements Xlet, KeyListener {
 	
 	private XletContext contexto;
 	private HScene scene;
-	private HContainer mainView;
+	private MainView mainView;
+	private Image img;
+	private UMenuScrollable mainMenu;
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -54,6 +62,7 @@ public class Main implements Xlet, KeyListener {
 		// TODO Auto-generated method stub
 		
 		this.contexto = arg0;
+		
 		Conf.load();
 		HSceneTemplate template = new HSceneTemplate();
 		template.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
@@ -65,7 +74,10 @@ public class Main implements Xlet, KeyListener {
 		this.scene = HSceneFactory.getInstance().getBestScene(template);
 		this.scene.addKeyListener(this);
 		
-		mainView= new MainView(this.scene, "MainView");
+		mainView= new MainView("MainView");
+		
+		scene.add(mainView);
+		
 		
 	}
 
@@ -77,13 +89,12 @@ public class Main implements Xlet, KeyListener {
 
 	@Override
 	public void startXlet() throws XletStateChangeException {
-		// TODO Auto-generated method stub		
-		
-		//mainView.requestFocus();
+		// TODO Auto-generated method stub			
+		System.out.println("Estado START");
 		scene.setVisible(true);
-		//scene.requestFocus();
-	}
 
+		
+	}
 
 
 }

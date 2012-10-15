@@ -22,11 +22,10 @@ public class BasicContainer extends HContainer {
 	private HIcon icon;
 	private Image img;
 	
-	public BasicContainer(HScene scene, String title){
+	public BasicContainer(String title){
 		
-		this.subScene=scene;
-		this.setBounds(scene.getBounds());
-		
+		//this.setBounds(scene.getBounds());
+		this.setBounds(0, 0, 722, 576);
 		this.titleText= new HStaticText("MusicHub");
 		this.titleText.setBounds(0, 0, this.getWidth(), 60);
 		this.titleText.setFont(new Font(Conf.getFontName(), Font.PLAIN, Conf.getFontSize()));
@@ -39,8 +38,6 @@ public class BasicContainer extends HContainer {
 		
 		this.add(icon);
 		//this.add(titleText);
-		
-
 		
 	}
 	
