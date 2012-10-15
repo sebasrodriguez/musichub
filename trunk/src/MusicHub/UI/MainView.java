@@ -7,6 +7,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,15 +18,17 @@ import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
 import org.havi.ui.HScene;
 
-public class MainView extends BasicContainer {
+public class MainView extends BasicContainer implements KeyListener, FocusListener {
 	
 	private HScene subScene;
 	private UMenuScrollable mainMenu;
 	private Image img;
 	private HIcon ico;
 	
-	public MainView(HScene scene, String title){
-		super(scene, title);		
+	public MainView(String title){
+		super(title);
+		
+		
 		
 		img=Toolkit.getDefaultToolkit().getImage("../imgs/arrow_img3.jpg");		
 		//ico= new HIcon(img,0,0,800,500);		
@@ -34,34 +40,60 @@ public class MainView extends BasicContainer {
 		UOptionItem item3= new UOptionItem(new HIcon(img,0,0,800,500), "Opcion 3");
 		item3.setName("item 2");
 		UOptionItem item4= new UOptionItem(new HIcon(img,0,0,800,500), "Opcion 4");
-		item4.setName("item 3");
-		
+		item4.setName("item 3");		
 		
 		List itemList=new LinkedList();
 		itemList.add(item);
 		itemList.add(item2);
 		itemList.add(item3);
-		itemList.add(item4);	
-		
+		itemList.add(item4);			
 		
 		mainMenu= new UMenuScrollable(itemList);
-		mainMenu.setBounds(150, 60, 500, 500);
+		mainMenu.setBounds(150, 60, 500, 500);		
 		
-		
-		scene.add(mainMenu);
-		scene.add(this);
-		mainMenu.requestFocus();
-
+		this.add(mainMenu);	
+		//scene.add(this);
 	}
 
-	/*@Override
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mainView focus");
+		//mainMenu.requestFocus();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("main lost");
+		
+	}
+
+	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		mainMenu.requestFocus();
 		super.paint(g);
-	}*/
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

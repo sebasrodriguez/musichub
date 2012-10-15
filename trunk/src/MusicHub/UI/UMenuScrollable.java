@@ -75,7 +75,7 @@ public class UMenuScrollable extends HContainer implements KeyListener, FocusLis
 			itemHPos+=aux.getHeight();
 			aux.setLocation(0,itemHPos);
 			
-			System.out.println(String.valueOf(aux.getName()));
+			//System.out.println(String.valueOf(aux.getName()));
 			this.menuContainer.add(aux,index);
 			
 			index++;			
