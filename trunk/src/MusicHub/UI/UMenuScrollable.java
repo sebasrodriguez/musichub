@@ -61,11 +61,9 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 
 		int index = 0;
 		for (UOptionItem optionItem : this.listItems) {
-			if (optionItem.isShown()) {
-				System.out.println("is shown" + index);
+			if (optionItem.isShown()) {				
 				indexes.add(index);
-			} else if (!optionItem.isShown() && indexes.size() > 0) {
-				System.out.println("no es mostrado termino" + index);
+			} else if (!optionItem.isShown() && indexes.size() > 0) {				
 				break;
 			}
 			index++;
