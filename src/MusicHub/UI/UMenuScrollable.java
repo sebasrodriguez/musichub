@@ -14,17 +14,19 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 
 	private static final long serialVersionUID = 1L;
 	private List<UOptionItem> listItems;
+	private int itemsToShow;
 	private HContainer menuContainer;
 	private int selectedItemIndex = 0;
 	private UOptionItem itemSelected;
 
 	private int getMenuHeight(){
-		return this.getNumItems() * Conf.getItemHeight();
+		return this.itemsToShow * Conf.getItemHeight();
 	}
 
 	// Constructor que acepta una lista de UOptionItem
-	public UMenuScrollable(List<UOptionItem> items, int x, int y) {
+	public UMenuScrollable(List<UOptionItem> items, int itemsToShow, int x, int y) {
 		this.listItems = items;
+		this.itemsToShow = itemsToShow;
 		setSubContainers();
 		showItems();
 		this.setBounds(x, y, Conf.getMenuWidth(), this.getMenuHeight());
@@ -74,8 +76,9 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 			break;
 		case 40:
 		case 38:
+			// set selected item
 			itemSelected.setSelected(false);
-			UOptionItem next = null;
+			UOptionItem selected = null;
 			if (e.getKeyCode() == 40) {
 				selectedItemIndex++;
 			} else {
@@ -87,37 +90,29 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 			}
 
 			if (selectedItemIndex < menuContainer.getComponentCount()) {
-				next = ((UOptionItem) menuContainer
+				selected = ((UOptionItem) menuContainer
 						.getComponent(selectedItemIndex));
 			} else {
 				selectedItemIndex = 0;
-				next = ((UOptionItem) menuContainer
+				selected = ((UOptionItem) menuContainer
 						.getComponent(selectedItemIndex));
 			}
 
-			next.setSelected(true);
-			itemSelected = next;
+			selected.setSelected(true);
+			itemSelected = selected;
 			break;
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void focusGained(FocusEvent arg0) {
-		System.out.println("menu focus");
-
 	}
 
 	public void focusLost(FocusEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 }
