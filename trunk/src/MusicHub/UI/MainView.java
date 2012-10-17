@@ -38,7 +38,7 @@ public class MainView extends BasicContainer implements KeyListener,
 		itemList.add(item3);
 		itemList.add(item4);
 
-		mainMenu = new UMenuScrollable(itemList, 150, 150);
+		mainMenu = new UMenuScrollable(itemList, 3, 150, 150);
 
 		this.add(mainMenu);
 		// scene.add(this);
