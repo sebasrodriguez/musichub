@@ -14,6 +14,7 @@ public class UOptionItem extends HContainer {
 	private HIcon ico;
 	private HTextButton button;
 	private boolean selected;
+	private boolean isShown;
 
 	public UOptionItem(HIcon ico, String title) {
 		super();
@@ -55,5 +56,13 @@ public class UOptionItem extends HContainer {
 			this.setBackground(Color.BLACK);
 		}
 		repaint();
+	}
+	
+	public boolean isShown(){
+		return this.isShown;
+	}
+	
+	public void isShown(boolean value){
+		this.isShown = value;
 	}
 }

@@ -31,12 +31,18 @@ public class MainView extends BasicContainer implements KeyListener,
 				"Twitter");
 		UOptionItem item4 = new UOptionItem(new HIcon(img, 0, 0, 800, 500),
 				"Ayuda");
+		UOptionItem item5 = new UOptionItem(new HIcon(img, 0, 0, 800, 500),
+				"Ayuda 5");
+		UOptionItem item6 = new UOptionItem(new HIcon(img, 0, 0, 800, 500),
+				"Ayuda 6");
 
 		List<UOptionItem> itemList = new LinkedList<UOptionItem>();
 		itemList.add(item);
 		itemList.add(item2);
 		itemList.add(item3);
 		itemList.add(item4);
+		itemList.add(item5);
+		itemList.add(item6);
 
 		mainMenu = new UMenuScrollable(itemList, 3, 150, 150);
 
