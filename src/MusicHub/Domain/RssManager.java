@@ -1,8 +1,6 @@
 package MusicHub.Domain;
 
 import java.util.List;
-
-import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.Domain.Contracts.IRssManager;
