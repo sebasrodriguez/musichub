@@ -36,7 +36,7 @@ public class MainView extends BasicContainer implements ISelectedOption {
 		itemList.add(item2);
 		itemList.add(item3);
 		itemList.add(item4);
-		itemList.add(item5);		
+		itemList.add(item5);
 
 		mainMenu = new UMenuScrollable(itemList, 5, 150, 150);		
 		
@@ -51,7 +51,7 @@ public class MainView extends BasicContainer implements ISelectedOption {
 	}
 
 	@Override
-	public void selectedOption(String option) {
+	public void selectedOption(int selectedIndex) {
 		ViewManager.getInstance().changeView("ChannelsView");		
 	}
 

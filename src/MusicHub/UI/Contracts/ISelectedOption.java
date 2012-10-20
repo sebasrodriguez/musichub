@@ -2,6 +2,6 @@ package MusicHub.UI.Contracts;
 
 public interface ISelectedOption {
 
-	public void selectedOption(String option);
+	public void selectedOption(int selectedIndex);
 	
 }
