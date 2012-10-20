@@ -145,8 +145,8 @@ public class UMenuScrollable extends HContainer implements KeyListener{
 			// scroll menu if selected item is not visible
 			List<Integer> shownItemsIndexes = this.getShownItemsIndexes();
 
-			if (shownItemsIndexes.size() != this.itemsToShow) {
-				if (!shownItemsIndexes.contains(selectedItemIndex)) {
+			if (shownItemsIndexes.size() > this.itemsToShow) {
+				if (!shownItemsIndexes.contains(selectedItemIndex)) {					
 					// Si movio un elemento para abajo actualizo todos los
 					// visibles
 					if (shownItemsIndexes.get(shownItemsIndexes.size() - 1) + 1 == selectedItemIndex) {
@@ -177,16 +177,6 @@ public class UMenuScrollable extends HContainer implements KeyListener{
 			}
 			break;
 		}
-	}
-
-	@Override
-	public void paint(Graphics g) {
-		Rectangle r = this.getBounds();
-
-		g.setColor(Color.RED);
-		g.drawRect(r.x, r.y, r.width, r.height);
-
-		super.paint(g);
 	}
 
 	public void keyReleased(KeyEvent e) {
