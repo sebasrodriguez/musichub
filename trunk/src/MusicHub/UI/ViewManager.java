@@ -4,6 +4,7 @@ import org.havi.ui.HContainer;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
+import MusicHub.DataTypes.*;
 
 public class ViewManager extends HContainer {
 	
@@ -13,6 +14,7 @@ public class ViewManager extends HContainer {
 	private BasicContainer visibleView;
 	private MainView mainView;
 	private ChannelsView channelsView;
+	private ContentView contentsView;
 	
 	private ViewManager(){		
 	}
@@ -30,7 +32,7 @@ public class ViewManager extends HContainer {
 				new org.havi.ui.HScreenDimension(1, 1), HSceneTemplate.REQUIRED);
 		template.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION,
 				new org.havi.ui.HScreenPoint(0, 0), HSceneTemplate.REQUIRED);
-		this.scene = HSceneFactory.getInstance().getBestScene(template);		
+		this.scene = HSceneFactory.getInstance().getBestScene(template);
 		
 		mainView = new MainView();
 		visibleView = mainView;
@@ -39,13 +41,17 @@ public class ViewManager extends HContainer {
 		scene.setVisible(true);
 	}
 	
-	public void changeView(String newView){
+	public void changeView(String newView, Object[] args){
 		scene.remove(visibleView);
 		
 		if(newView == "ChannelsView"){			
 			channelsView = new ChannelsView();
 			scene.add(channelsView);
 			visibleView = channelsView;
+		} else if(newView == "ContentView"){
+			contentsView = new ContentView((RssFeed)args[0]);
+			scene.add(contentsView);
+			visibleView = contentsView;
 		}
 		
 		scene.repaint();

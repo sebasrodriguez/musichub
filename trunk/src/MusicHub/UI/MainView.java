@@ -37,7 +37,7 @@ public class MainView extends BasicContainer implements ISelectedOption {
 
 	@Override
 	public void selectedOption(int selectedIndex) {
-		ViewManager.getInstance().changeView("ChannelsView");
+		ViewManager.getInstance().changeView("ChannelsView", null);
 	}
 
 }
