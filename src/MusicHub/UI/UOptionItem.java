@@ -24,9 +24,12 @@ public class UOptionItem extends HContainer {
 		this.setSize(Conf.getMenuWidth(), Conf.getMenuHeight());
 		this.selected = false;
 
-		this.ico = ico;
-		ico.setBounds(0, 0, 20, 30);
-		ico.setFocusable(false);
+		if (ico != null) {
+			this.ico = ico;
+			ico.setBounds(0, 0, 20, 30);
+			ico.setFocusable(false);
+			this.add(ico);
+		}
 
 		this.title = title;
 		button = new HTextButton(title);
@@ -35,7 +38,6 @@ public class UOptionItem extends HContainer {
 		button.setFont(new Font(Conf.getFontName(), Font.BOLD, Conf
 				.getFontSize()));
 
-		this.add(ico);
 		this.add(button);
 	}
 
@@ -59,12 +61,12 @@ public class UOptionItem extends HContainer {
 		}
 		repaint();
 	}
-	
-	public boolean isShown(){
+
+	public boolean isShown() {
 		return this.isShown;
 	}
-	
-	public void isShown(boolean value){
+
+	public void isShown(boolean value) {
 		this.isShown = value;
 	}
 
