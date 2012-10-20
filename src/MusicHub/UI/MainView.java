@@ -11,8 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 import org.havi.ui.HIcon;
 
+import MusicHub.UI.Contracts.ISelectedOption;
+
 public class MainView extends BasicContainer implements KeyListener,
-		FocusListener {
+		FocusListener, ISelectedOption {
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable mainMenu;
@@ -44,8 +46,8 @@ public class MainView extends BasicContainer implements KeyListener,
 		itemList.add(item5);
 		itemList.add(item6);
 
-		mainMenu = new UMenuScrollable(itemList, 3, 150, 150);
-
+		mainMenu = new UMenuScrollable(itemList, 3, 150, 150);		
+		
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
 		// scene.add(this);
@@ -89,6 +91,12 @@ public class MainView extends BasicContainer implements KeyListener,
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void selectedOption(String option) {
+		// TODO: cargar vista de canales
+		System.out.println("selected option " + option);
 	}
 
 }

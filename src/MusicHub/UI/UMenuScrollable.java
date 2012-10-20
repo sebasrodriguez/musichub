@@ -3,6 +3,8 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -11,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.havi.ui.HContainer;
+
+import MusicHub.UI.Contracts.ISelectedOption;
 import MusicHub.Util.Conf;
 
 public class UMenuScrollable extends HContainer implements KeyListener,
-		FocusListener {
+		FocusListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private List<UOptionItem> listItems;
@@ -49,7 +53,7 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 	private void setShownItems(List<Integer> shownItemsIndexes) {
 		int index = 0;
 
-		for (UOptionItem optionItem : this.listItems) {			
+		for (UOptionItem optionItem : this.listItems) {
 			optionItem
 					.isShown(shownItemsIndexes.contains(index) ? true : false);
 			index++;
@@ -61,9 +65,9 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 
 		int index = 0;
 		for (UOptionItem optionItem : this.listItems) {
-			if (optionItem.isShown()) {				
+			if (optionItem.isShown()) {
 				indexes.add(index);
-			} else if (!optionItem.isShown() && indexes.size() > 0) {				
+			} else if (!optionItem.isShown() && indexes.size() > 0) {
 				break;
 			}
 			index++;
@@ -113,7 +117,9 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 		// flecha abajo y arriba
 		switch (e.getKeyCode()) {
 		case 10:
-			System.out.println("ok");
+			if (this.getParent() instanceof ISelectedOption) {
+				((ISelectedOption) this.getParent()).selectedOption(itemSelected.getTitle());
+			}			
 			break;
 		case 40:
 		case 38:
@@ -144,7 +150,7 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 
 			// scroll menu if selected item is not visible
 			List<Integer> shownItemsIndexes = this.getShownItemsIndexes();
-			
+
 			if (!shownItemsIndexes.contains(selectedItemIndex)) {
 				// Si movio un elemento para abajo actualizo todos los visibles
 				if (shownItemsIndexes.get(shownItemsIndexes.size() - 1) + 1 == selectedItemIndex) {
@@ -157,12 +163,13 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 						optionItem.setLocation(optionItem.getX(),
 								optionItem.getY() - Conf.getItemHeight());
 					}
-				} // si movio un elemento hacia arriba muevo todos los contenidos hacia arriba
-				else if(shownItemsIndexes.get(0) - 1 == selectedItemIndex){
-					// actualizamos la lista de elementos mostrados										
+				} // si movio un elemento hacia arriba muevo todos los
+					// contenidos hacia arriba
+				else if (shownItemsIndexes.get(0) - 1 == selectedItemIndex) {
+					// actualizamos la lista de elementos mostrados
 					shownItemsIndexes.remove(shownItemsIndexes.size() - 1);
 					shownItemsIndexes.add(selectedItemIndex);
-					
+
 					this.setShownItems(shownItemsIndexes);
 
 					for (UOptionItem optionItem : listItems) {
@@ -195,5 +202,11 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 	}
 
 	public void focusLost(FocusEvent arg0) {
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }

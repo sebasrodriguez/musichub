@@ -15,6 +15,7 @@ public class UOptionItem extends HContainer {
 	private HTextButton button;
 	private boolean selected;
 	private boolean isShown;
+	private String title;
 
 	public UOptionItem(HIcon ico, String title) {
 		super();
@@ -27,6 +28,7 @@ public class UOptionItem extends HContainer {
 		ico.setBounds(0, 0, 20, 30);
 		ico.setFocusable(false);
 
+		this.title = title;
 		button = new HTextButton(title);
 		button.setBounds(0, 0, this.getWidth(), Conf.getItemHeight());
 		button.setForeground(Color.white);
@@ -64,5 +66,9 @@ public class UOptionItem extends HContainer {
 	
 	public void isShown(boolean value){
 		this.isShown = value;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 }
