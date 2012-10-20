@@ -101,6 +101,10 @@ public class UMenuScrollable extends HContainer implements KeyListener{
 		menuContainer.setVisible(true);
 		this.add(menuContainer);
 	}
+	
+	public int getSelectedItemIndex(){
+		return selectedItemIndex;
+	}
 
 	// KeyListeners
 	public void keyPressed(KeyEvent e) {
