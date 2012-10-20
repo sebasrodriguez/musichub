@@ -17,11 +17,10 @@ public class UOptionItem extends HContainer {
 	private boolean isShown;
 	private String title;
 
-	public UOptionItem(HIcon ico, String title) {
+	public UOptionItem(HIcon ico, String title, int width, int height) {
 		super();
 
-		this.setBounds(10, 10, 0, 0);
-		this.setSize(Conf.getMenuWidth(), Conf.getMenuHeight());
+		this.setBounds(10, 10, width, height);
 		this.selected = false;
 
 		if (ico != null) {
