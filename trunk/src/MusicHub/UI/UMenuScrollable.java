@@ -1,8 +1,5 @@
 package MusicHub.UI;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -112,7 +109,7 @@ public class UMenuScrollable extends HContainer implements KeyListener{
 		case 10:
 			if (this.getParent() instanceof ISelectedOption) {
 				((ISelectedOption) this.getParent())
-						.selectedOption(itemSelected.getTitle());
+						.selectedOption(selectedItemIndex);
 			}
 			break;
 		case 40:
