@@ -20,7 +20,7 @@ public class BasicContainer extends HContainer {
 	private HIcon icon;
 	private Image img;
 
-	public BasicContainer(String title) {
+	public BasicContainer() {
 		this.setBounds(0, 0, 722, 576);
 		this.titleText = new HStaticText("MusicHub");
 		this.titleText.setBounds(0, 0, this.getWidth(), 60);
