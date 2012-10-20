@@ -28,6 +28,9 @@ public class ChannelsView extends BasicContainer implements ISelectedOption {
 
 	@Override
 	public void selectedOption(int selectedIndex) {
+		Object[] args = { this.rssFeeds.get(selectedIndex) };
+		ViewManager.getInstance().changeView("ContentView",
+				args);
 	}
 
 	private void loadRssChannelsMenu() {
@@ -35,10 +38,11 @@ public class ChannelsView extends BasicContainer implements ISelectedOption {
 		rssFeeds = ServiceLocator.getRssManager().getRssFeeds();
 
 		for (RssFeed rssFeed : rssFeeds) {
-			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(), menuWidth, menuHeight));
+			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(),
+					menuWidth, menuHeight));
 		}
-		
-		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, 30, 150);
+
+		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, 30, 100);
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
 	}
