@@ -3,22 +3,16 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.havi.ui.HContainer;
-
 import MusicHub.UI.Contracts.ISelectedOption;
 import MusicHub.Util.Conf;
 
-public class UMenuScrollable extends HContainer implements KeyListener,
-		FocusListener, ActionListener {
+public class UMenuScrollable extends HContainer implements KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	private List<UOptionItem> listItems;
@@ -43,8 +37,8 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 	}
 
 	private void initializeShownItems() {
-		for (int i = 0; i < itemsToShow; i++) {
-			if (this.listItems.size() > itemsToShow) {
+		for (int i = 0; i < itemsToShow; i++) {			
+			if (this.listItems.size() >= itemsToShow) {				
 				this.listItems.get(i).isShown(true);
 			}
 		}
@@ -80,7 +74,6 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 		menuContainer = new HContainer(0, 0, Conf.getMenuWidth(),
 				this.getMenuHeight());
 		addKeyListener(this);
-		addFocusListener(this);
 	}
 
 	public void addOption(UOptionItem opt) {
@@ -118,8 +111,9 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 		switch (e.getKeyCode()) {
 		case 10:
 			if (this.getParent() instanceof ISelectedOption) {
-				((ISelectedOption) this.getParent()).selectedOption(itemSelected.getTitle());
-			}			
+				((ISelectedOption) this.getParent())
+						.selectedOption(itemSelected.getTitle());
+			}
 			break;
 		case 40:
 		case 38:
@@ -151,30 +145,33 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 			// scroll menu if selected item is not visible
 			List<Integer> shownItemsIndexes = this.getShownItemsIndexes();
 
-			if (!shownItemsIndexes.contains(selectedItemIndex)) {
-				// Si movio un elemento para abajo actualizo todos los visibles
-				if (shownItemsIndexes.get(shownItemsIndexes.size() - 1) + 1 == selectedItemIndex) {
-					// actualizamos la lista de elementos mostrados
-					shownItemsIndexes.remove(0);
-					shownItemsIndexes.add(selectedItemIndex);
-					this.setShownItems(shownItemsIndexes);
+			if (shownItemsIndexes.size() != this.itemsToShow) {
+				if (!shownItemsIndexes.contains(selectedItemIndex)) {
+					// Si movio un elemento para abajo actualizo todos los
+					// visibles
+					if (shownItemsIndexes.get(shownItemsIndexes.size() - 1) + 1 == selectedItemIndex) {
+						// actualizamos la lista de elementos mostrados
+						shownItemsIndexes.remove(0);
+						shownItemsIndexes.add(selectedItemIndex);
+						this.setShownItems(shownItemsIndexes);
 
-					for (UOptionItem optionItem : listItems) {
-						optionItem.setLocation(optionItem.getX(),
-								optionItem.getY() - Conf.getItemHeight());
-					}
-				} // si movio un elemento hacia arriba muevo todos los
-					// contenidos hacia arriba
-				else if (shownItemsIndexes.get(0) - 1 == selectedItemIndex) {
-					// actualizamos la lista de elementos mostrados
-					shownItemsIndexes.remove(shownItemsIndexes.size() - 1);
-					shownItemsIndexes.add(selectedItemIndex);
+						for (UOptionItem optionItem : listItems) {
+							optionItem.setLocation(optionItem.getX(),
+									optionItem.getY() - Conf.getItemHeight());
+						}
+					} // si movio un elemento hacia arriba muevo todos los
+						// contenidos hacia arriba
+					else if (shownItemsIndexes.get(0) - 1 == selectedItemIndex) {
+						// actualizamos la lista de elementos mostrados
+						shownItemsIndexes.remove(shownItemsIndexes.size() - 1);
+						shownItemsIndexes.add(selectedItemIndex);
 
-					this.setShownItems(shownItemsIndexes);
+						this.setShownItems(shownItemsIndexes);
 
-					for (UOptionItem optionItem : listItems) {
-						optionItem.setLocation(optionItem.getX(),
-								optionItem.getY() + Conf.getItemHeight());
+						for (UOptionItem optionItem : listItems) {
+							optionItem.setLocation(optionItem.getX(),
+									optionItem.getY() + Conf.getItemHeight());
+						}
 					}
 				}
 			}
@@ -196,17 +193,5 @@ public class UMenuScrollable extends HContainer implements KeyListener,
 	}
 
 	public void keyTyped(KeyEvent e) {
-	}
-
-	public void focusGained(FocusEvent arg0) {
-	}
-
-	public void focusLost(FocusEvent arg0) {
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 }
