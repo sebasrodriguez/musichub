@@ -9,7 +9,8 @@ import org.havi.ui.HContainer;
 
 public class BasicPanel extends HContainer implements FocusListener{
 	
-	public BasicPanel(){
+	public BasicPanel(int x, int y, int w, int h){
+		super();
 		
 	}
 

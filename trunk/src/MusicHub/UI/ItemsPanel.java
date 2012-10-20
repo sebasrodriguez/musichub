@@ -25,7 +25,7 @@ public class ItemsPanel extends BasicPanel implements KeyListener, ISelectedOpti
 	
 	
 	public ItemsPanel(List<UOptionItem> itemsList, int x, int y, int w, int h){
-		super();
+		super(x,y,w,h);
 		
 		//itemsMenu= new UMenuScrollable(items, itemsToShow, x, y);
 		this.setBounds(x,y,w,h);		
