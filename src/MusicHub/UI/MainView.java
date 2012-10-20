@@ -20,8 +20,8 @@ public class MainView extends BasicContainer implements KeyListener,
 	private UMenuScrollable mainMenu;
 	private Image img;
 
-	public MainView(String title) {
-		super(title);
+	public MainView() {
+		super();
 
 		img = Toolkit.getDefaultToolkit().getImage("../imgs/arrow_img3.jpg");
 
@@ -95,6 +95,9 @@ public class MainView extends BasicContainer implements KeyListener,
 
 	@Override
 	public void selectedOption(String option) {
+		ViewManager.getInstance().changeView("ChannelsView");
+		//((ViewManager)this.getParent()).changeView("ChannelsView");
+		//((RootView)this.getParent()).changeView(RSSChanel);
 		// TODO: cargar vista de canales
 		System.out.println("selected option " + option);
 	}
