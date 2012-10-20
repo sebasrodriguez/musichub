@@ -29,11 +29,12 @@ public class BasicContainer extends HContainer {
 		this.titleText.setHorizontalAlignment((int) HStaticText.LEFT_ALIGNMENT);
 		this.titleText.setForeground(Color.WHITE);
 
-		img = Toolkit.getDefaultToolkit().getImage("../assets/logo.gif");
-		icon = new HIcon(img, 10, 10, 250, 250);
-		icon.setSize(126, 56);
+		img = Toolkit.getDefaultToolkit().getImage("../assets/bgImage.gif");
+		icon = new HIcon(img, 0, 0, this.getWidth(),this.getHeight());
+		//icon.setSize(126, 56);
 
 		this.add(icon);
+		this.pushToBack(icon);
 	}
 
 	@Override
