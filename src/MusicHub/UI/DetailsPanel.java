@@ -14,9 +14,8 @@ public class DetailsPanel extends BasicPanel {
 	private String content;
 	private String imgURL;
 	
-	public DetailsPanel(int x, int y, int w, int h){
+	public DetailsPanel(int x, int y, int w, int h){	
 		super(x,y,w,h);
-		
 		this.setBounds(x, y, w, h);
 	}
 	
