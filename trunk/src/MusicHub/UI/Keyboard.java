@@ -1,5 +1,7 @@
 package MusicHub.UI;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -10,8 +12,72 @@ import org.havi.ui.HContainer;
 import MusicHub.UI.Contracts.ISelectedOption;
 import MusicHub.Util.Conf;
 
-public class Keyboard extends HContainer implements KeyListener {	
+public class Keyboard extends HContainer implements KeyListener {
+	
+	
+	private String letters = "1234567890QWERTYUIOPASDFGHJKL<ZXCVBNM:/_ ";
+	private int x = 20;
+	private int y = 20;
+	
+	public Keyboard(){
+		this.setBounds(0, 0, 220, 120);
+		this.drawKeyboard();
+	}
 
+	private void drawKeyboard(){		
+		for(int i = 0;i < letters.length();i++){			
+			Key n = new Key(x,y,letters.charAt(i));
+			if(letters.charAt(i) == '0' || letters.charAt(i) == 'P' || letters.charAt(i) == '<' || letters.charAt(i) == '_'){
+				if(letters.charAt(i) == '_'){
+					x = 120;
+					y +=20;
+				}else{
+					y +=20;
+					x = 20;
+					
+				}
+			}else{
+				x +=20;
+			}
+			
+			this.add(n);
+			this.repaint();
+			
+		}
+		
+	}
+	
+	
+	
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paint(g);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	
+	
+	
+	
+/*
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Key> column1;
 	private ArrayList<Key> column2;
@@ -29,9 +95,19 @@ public class Keyboard extends HContainer implements KeyListener {
 		column2 = new ArrayList<Key>();
 		column3 = new ArrayList<Key>();
 		column4 = new ArrayList<Key>();
-		this.initializeKeybord();		
+		this.initializeKeybord();
+		this.setBounds(0, 0, 100, 100);
 	}
 	
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paint(g);
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, 100, 100);
+		this.requestFocus();
+	}
+
 	private void initializeKeybord(){
 		System.out.println("Initialize keyboard");
 	
@@ -158,6 +234,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			break;		
 		case 38:
 			//subo una fila
+			System.out.println("keypressed");
 			if(y != 278){
 				y = y - 42;
 			}			
@@ -212,5 +289,5 @@ public class Keyboard extends HContainer implements KeyListener {
 		
 	}
 	
-	
+	*/
 }
