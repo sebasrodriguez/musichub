@@ -14,13 +14,13 @@ public class MainView extends BasicContainer implements IMenuContainer {
 		super();
 
 		List<UOptionItem> itemList = new LinkedList<UOptionItem>();
-		itemList.add(new UOptionItem(null, "Canales", "Canales", 150, 60));
-		itemList.add(new UOptionItem(null, "Facebook", "Facebook", 150, 60));
-		itemList.add(new UOptionItem(null, "Twitter", "Twitter", 150, 60));
-		itemList.add(new UOptionItem(null, "Ayuda", "Ayuda", 150, 60));
-		itemList.add(new UOptionItem(null, "Salir", "Salir", 150, 60));
+		itemList.add(new UOptionItem(null, "Canales", "ChannelsView", 150, 60));
+		itemList.add(new UOptionItem(null, "Facebook", "FacebookView", 150, 60));
+		itemList.add(new UOptionItem(null, "Twitter", "TwitterView", 150, 60));
+		itemList.add(new UOptionItem(null, "Ayuda", "HelpView", 150, 60));
+		itemList.add(new UOptionItem(null, "Salir", "Exit", 150, 60));
 
-		mainMenu = new UMenuScrollable(itemList, 5, this, 150, 150);
+		mainMenu = new UMenuScrollable(itemList, 5, this, 30, 100);
 
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
@@ -34,12 +34,11 @@ public class MainView extends BasicContainer implements IMenuContainer {
 
 	@Override
 	public void selectedOption(UOptionItem selectedOption) {
-		ViewManager.getInstance().changeView("ChannelsView", null);
+		ViewManager.getInstance().changeView((String) selectedOption.getValue(), null);
 	}
 
 	@Override
 	public void stepedOnOption(UOptionItem option) {
-		System.out.println("stepedOnOption" + option.getValue());
 	}
 
 }
