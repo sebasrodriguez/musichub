@@ -17,7 +17,7 @@ public class StorageService implements IStorageService {
 		List<RssFeed> rssFeeds = new ArrayList<RssFeed>();
 
 		try {
-			FileInputStream feedsFile = new FileInputStream("rssFeeds");
+			FileInputStream feedsFile = new FileInputStream("../assets/rssFeeds");
 			ObjectInputStream restore = new ObjectInputStream(feedsFile);
 
 			rssFeeds = (List<RssFeed>) restore.readObject();
