@@ -1,11 +1,16 @@
 package MusicHub.UI;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.havi.ui.HContainer;
+
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.UI.Contracts.IMenuContainer;
+import MusicHub.UI.Controls.FeedDescriptionBox;
 
 public class ChannelsView extends BasicContainer implements IMenuContainer {
 
@@ -15,9 +20,18 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	private List<RssFeed> rssFeeds;
 	private int menuWidth = 300;
 	private int menuHeight = 60;
+	private FeedDescriptionBox descriptionBox;
 
 	public ChannelsView() {
-		this.loadRssChannelsMenu();
+		this.loadDescriptionBox();
+		this.loadRssChannelsMenu();		
+	}
+
+	private void loadDescriptionBox() {
+		descriptionBox = new FeedDescriptionBox();
+
+		this.add(descriptionBox);
+		this.popToFront(descriptionBox);
 	}
 
 	@Override
@@ -35,7 +49,6 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 					menuHeight));
 		}
 
-		// mainMenu = new UMenuScrollable(channelsOptionsItems, 5, 30, 100);
 		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, this, 30, 100);
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
@@ -43,7 +56,7 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 
 	@Override
 	public void stepedOnOption(UOptionItem option) {		
-
+		this.descriptionBox.setDescription(((RssFeed) option.getValue()).getDescription());
 	}
 
 	@Override
