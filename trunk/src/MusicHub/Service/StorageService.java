@@ -36,7 +36,7 @@ public class StorageService implements IStorageService {
 		rssFeeds.add(feed);
 
 		try {
-			FileOutputStream saveFile = new FileOutputStream("assets/rssFeeds");
+			FileOutputStream saveFile = new FileOutputStream("../assets/rssFeeds");
 			ObjectOutputStream save = new ObjectOutputStream(saveFile);
 
 			save.writeObject(rssFeeds);
