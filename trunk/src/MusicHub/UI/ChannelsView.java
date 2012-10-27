@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
-import MusicHub.UI.Contracts.ISelectedOption;
+import MusicHub.UI.Contracts.IMenuContainer;
 
-public class ChannelsView extends BasicContainer implements ISelectedOption {
+public class ChannelsView extends BasicContainer implements IMenuContainer {
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable mainMenu;
@@ -26,24 +26,29 @@ public class ChannelsView extends BasicContainer implements ISelectedOption {
 		super.paint(g);
 	}
 
-	@Override
-	public void selectedOption(int selectedIndex) {
-		Object[] args = { this.rssFeeds.get(selectedIndex) };
-		ViewManager.getInstance().changeView("ContentView",
-				args);
-	}
-
 	private void loadRssChannelsMenu() {
 		channelsOptionsItems = new LinkedList<UOptionItem>();
 		rssFeeds = ServiceLocator.getRssManager().getRssFeeds();
 
 		for (RssFeed rssFeed : rssFeeds) {
-			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(),
-					menuWidth, menuHeight));
+			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(), rssFeed, menuWidth,
+					menuHeight));
 		}
 
-		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, 30, 100);
+		// mainMenu = new UMenuScrollable(channelsOptionsItems, 5, 30, 100);
+		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, this, 30, 100);
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
+	}
+
+	@Override
+	public void stepedOnOption(UOptionItem option) {		
+
+	}
+
+	@Override
+	public void selectedOption(UOptionItem selectedOption) {
+		Object[] args = { selectedOption.getValue() };
+		ViewManager.getInstance().changeView("ContentView", args);
 	}
 }

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.havi.ui.HContainer;
-import MusicHub.UI.Contracts.ISelectedOption;
+import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.Util.Conf;
 
 public class UMenuScrollable extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
+	private IMenuContainer menuParentContainer;
 	private List<UOptionItem> listItems;
 	private int itemsToShow;
 	private HContainer menuContainer;
@@ -30,14 +31,16 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 	}
 
 	// Constructor que acepta una lista de UOptionItem
-	public UMenuScrollable(List<UOptionItem> items, int itemsToShow, int x,
-			int y) {
+	public UMenuScrollable(List<UOptionItem> items, int itemsToShow,
+			IMenuContainer menuParentContainer, int x, int y) {
 		this.listItems = items;
-		this.itemsToShow = itemsToShow;		
+		this.itemsToShow = itemsToShow;
+		this.setMenuParentContainer(menuParentContainer);
 		this.setSubContainers();
 		this.showItems();
 		this.initializeShownItems();
 		this.setBounds(x, y, this.getMenuWidth(), this.getMenuHeight());
+		this.getMenuParentContainer().stepedOnOption(itemSelected);
 	}
 
 	private void initializeShownItems() {
@@ -52,8 +55,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		int index = 0;
 
 		for (UOptionItem optionItem : this.listItems) {
-			optionItem
-					.isShown(shownItemsIndexes.contains(index) ? true : false);
+			optionItem.isShown(shownItemsIndexes.contains(index) ? true : false);
 			index++;
 		}
 	}
@@ -65,7 +67,8 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		for (UOptionItem optionItem : this.listItems) {
 			if (optionItem.isShown()) {
 				indexes.add(index);
-			} else if (!optionItem.isShown() && indexes.size() > 0) {
+			}
+			else if (!optionItem.isShown() && indexes.size() > 0) {
 				break;
 			}
 			index++;
@@ -75,8 +78,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 	}
 
 	private void setSubContainers() {
-		menuContainer = new HContainer(0, 0, this.getMenuWidth(),
-				this.getMenuHeight());
+		menuContainer = new HContainer(0, 0, this.getMenuWidth(), this.getMenuHeight());
 		addKeyListener(this);
 	}
 
@@ -108,9 +110,17 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		menuContainer.setVisible(true);
 		this.add(menuContainer);
 	}
-	
-	public int getSelectedItemIndex(){
+
+	public int getSelectedItemIndex() {
 		return selectedItemIndex;
+	}
+
+	public IMenuContainer getMenuParentContainer() {
+		return menuParentContainer;
+	}
+
+	public void setMenuParentContainer(IMenuContainer menuParentContainer) {
+		this.menuParentContainer = menuParentContainer;
 	}
 
 	// KeyListeners
@@ -118,10 +128,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		// flecha abajo y arriba
 		switch (e.getKeyCode()) {
 		case 10:
-			if (this.getParent() instanceof ISelectedOption) {
-				((ISelectedOption) this.getParent())
-						.selectedOption(selectedItemIndex);
-			}
+			this.getMenuParentContainer().selectedOption(itemSelected);
 			break;
 		case 40:
 		case 38:
@@ -129,25 +136,25 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 			itemSelected.setSelected(false);
 			if (e.getKeyCode() == 40) {
 				selectedItemIndex++;
-			} else {
+			}
+			else {
 				selectedItemIndex--;
 			}
 
 			if (selectedItemIndex < 0) {
 				selectedItemIndex = 0;
 			}
-			if (selectedItemIndex >= this.listItems.size() - 1) {				
+			if (selectedItemIndex >= this.listItems.size() - 1) {
 				selectedItemIndex = this.listItems.size() - 1;
 			}
 
 			UOptionItem selected = null;
 			if (selectedItemIndex < menuContainer.getComponentCount()) {
-				selected = ((UOptionItem) menuContainer
-						.getComponent(selectedItemIndex));
-			} else {
+				selected = ((UOptionItem) menuContainer.getComponent(selectedItemIndex));
+			}
+			else {
 				selectedItemIndex = menuContainer.getComponentCount() - 1;
-				selected = ((UOptionItem) menuContainer
-						.getComponent(selectedItemIndex));
+				selected = ((UOptionItem) menuContainer.getComponent(selectedItemIndex));
 			}
 
 			selected.setSelected(true);
@@ -156,7 +163,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 			// scroll menu if selected item is not visible
 			List<Integer> shownItemsIndexes = this.getShownItemsIndexes();
 
-			if (this.listItems.size() > this.itemsToShow) {				
+			if (this.listItems.size() > this.itemsToShow) {
 				if (!shownItemsIndexes.contains(selectedItemIndex)) {
 					// Si movio un elemento para abajo actualizo todos los
 					// visibles
@@ -186,6 +193,8 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 					}
 				}
 			}
+			// Disparamos el evento de stepedOn
+			this.getMenuParentContainer().stepedOnOption(itemSelected);
 			break;
 		}
 	}
