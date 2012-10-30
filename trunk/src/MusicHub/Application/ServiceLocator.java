@@ -18,13 +18,17 @@ public class ServiceLocator {
 	public static IStorageService getStorageService() {
 		return new StorageService();
 	}
-	
-	public static IRssManager getRssManager(){
+
+	public static IRssManager getRssManager() {
 		return new RssManager();
 	}
-	
-	public static ITwitterManager getTwitterManager(){
+
+	public static ITwitterManager getTwitterManager() {
 		return new TwitterManager();
+	}
+
+	public static ITwitterService getTwitterService() {
+		return new TwitterService();
 	}
 
 }
