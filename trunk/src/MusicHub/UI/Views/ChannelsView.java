@@ -1,4 +1,4 @@
-package MusicHub.UI;
+package MusicHub.UI.Views;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,6 +9,10 @@ import org.havi.ui.HContainer;
 
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
+import MusicHub.UI.BasicContainer;
+import MusicHub.UI.UMenuScrollable;
+import MusicHub.UI.UOptionItem;
+import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Controls.FeedDescriptionBox;
 

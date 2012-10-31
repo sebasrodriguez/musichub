@@ -5,9 +5,12 @@ import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
 import MusicHub.DataTypes.*;
+import MusicHub.UI.Views.ChannelsView;
+import MusicHub.UI.Views.MainView;
+import MusicHub.UI.Views.TwitterView;
 
 public class ViewManager extends HContainer {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static ViewManager instance = null;
 	private HScene scene;
@@ -15,45 +18,52 @@ public class ViewManager extends HContainer {
 	private MainView mainView;
 	private ChannelsView channelsView;
 	private ContentView contentsView;
-	
-	private ViewManager(){		
+	private TwitterView twitterView;
+
+	private ViewManager() {
 	}
-	
-	public static ViewManager getInstance(){
-		if(instance == null){
+
+	public static ViewManager getInstance() {
+		if (instance == null) {
 			instance = new ViewManager();
 		}
 		return instance;
 	}
-	
-	public void loadInitialView(){
+
+	public void loadInitialView() {
 		HSceneTemplate template = new HSceneTemplate();
 		template.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
 				new org.havi.ui.HScreenDimension(1, 1), HSceneTemplate.REQUIRED);
-		template.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION,
-				new org.havi.ui.HScreenPoint(0, 0), HSceneTemplate.REQUIRED);
+		template.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION, new org.havi.ui.HScreenPoint(
+				0, 0), HSceneTemplate.REQUIRED);
 		this.scene = HSceneFactory.getInstance().getBestScene(template);
-		
+
 		mainView = new MainView();
 		visibleView = mainView;
 		scene.add(mainView);
-		
+
 		scene.setVisible(true);
 	}
-	
-	public void changeView(String newView, Object[] args){
+
+	public void changeView(String newView, Object[] args) {
 		scene.remove(visibleView);
-		
-		if(newView == "ChannelsView"){			
+
+		if (newView == "ChannelsView") {
 			channelsView = new ChannelsView();
 			scene.add(channelsView);
 			visibleView = channelsView;
-		} else if(newView == "ContentView"){
-			contentsView = new ContentView((RssFeed)args[0]);
+		}
+		else if (newView == "ContentView") {
+			contentsView = new ContentView((RssFeed) args[0]);
 			scene.add(contentsView);
 			visibleView = contentsView;
 		}
-		
+		else if (newView == "TwitterView") {
+			twitterView = new TwitterView();
+			scene.add(twitterView);
+			visibleView = twitterView;
+		}
+
 		scene.repaint();
 	}
 }
