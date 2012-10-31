@@ -6,8 +6,8 @@ import javax.tv.xlet.XletStateChangeException;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
-import MusicHub.UI.MainView;
 import MusicHub.UI.ViewManager;
+import MusicHub.UI.Views.MainView;
 import MusicHub.Util.Conf;
 
 public class Main implements Xlet, KeyListener {
