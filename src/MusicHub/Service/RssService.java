@@ -35,6 +35,8 @@ public class RssService implements IRssService {
 				item.setDate(rssItem.getPubDate());
 				item.setImageUrl(parser.getImageFromRssContent(rssItem.getDescription()));
 				item.setVotes(66);
+				
+				items.add(item);
 			}
 		}
 		catch (Exception ex) {
