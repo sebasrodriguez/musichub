@@ -14,7 +14,7 @@ import MusicHub.UI.Contracts.IKeyboardReceiver;
 public class Keyboard extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
-	private String letters = "1234567890QWERTYUIOPASDFGHJKL<ZXCVBNM:/_ ";
+	private String letters = "1234567890QWERTYUIOPASDFGHJKL.ZXCVBNM:/_ ";
 	private int xPosition;
 	private int keyWidth = 50;
 	private int keyHeight = 50;
@@ -44,7 +44,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			Key n = new Key(xPosition, yPosition, letters.charAt(i),
 					this.keyWidth, this.keyHeight);
 			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P'
-					|| letters.charAt(i) == '<' || letters.charAt(i) == '_') {
+					|| letters.charAt(i) == '.' || letters.charAt(i) == '_') {
 				if (letters.charAt(i) == '_') {
 					xPosition = xStartPosition + (keyWidth * 4);
 					yPosition += keyHeight;
@@ -125,18 +125,19 @@ public class Keyboard extends HContainer implements KeyListener {
 		case ControlKeyConstants.DOWN:
 			break;
 		case ControlKeyConstants.OK:
-			// backspace
-			if (kb.get(currentIndex).getKey() == '<') {
-				String aux = "";
-				for (int i = 0; i < actualString.length() - 1; i++) {
-					aux = aux + actualString.charAt(i);
-				}
-				actualString = aux;
-			} else {
-				actualString = actualString + kb.get(currentIndex).getKey();
-			}
+			/*
+			 * // backspace if (kb.get(currentIndex).getKey() == '<') { String
+			 * aux = ""; for (int i = 0; i < actualString.length() - 1; i++) {
+			 * aux = aux + actualString.charAt(i); } actualString = aux; } else
+			 * { 
+			 */
+			actualString = actualString + kb.get(currentIndex).getKey(); 
 			this.keyboardReceiver.keyboardText(actualString);
 			break;
+		case ControlKeyConstants.YELLOW:
+			actualString = actualString.substring(0, actualString.length() - 1);
+			this.keyboardReceiver.keyboardText(actualString);
+		break;
 		}
 	}
 
