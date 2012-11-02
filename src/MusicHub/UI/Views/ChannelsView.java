@@ -7,13 +7,15 @@ import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
+import MusicHub.UI.Keyboard;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
+import MusicHub.UI.Contracts.IKeyboardReceiver;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Controls.FeedDescriptionBox;
 
-public class ChannelsView extends BasicContainer implements IMenuContainer {
+public class ChannelsView extends BasicContainer implements IMenuContainer, IKeyboardReceiver {
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable mainMenu;
@@ -22,6 +24,8 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	private int menuWidth = 300;
 	private int menuHeight = 60;
 	private FeedDescriptionBox descriptionBox;
+	private boolean focusOnKeyboard = false;
+	private Keyboard keyboard;
 
 	public ChannelsView() {
 		this.loadDescriptionBox();
@@ -37,7 +41,14 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 
 	@Override
 	public void paint(Graphics g) {
-		mainMenu.requestFocus();
+		System.out.println("paint");
+		if (focusOnKeyboard) {			
+			keyboard.requestFocus();
+			keyboard.addKeyListener(keyboard);
+		}
+		else {
+			mainMenu.requestFocus();
+		}
 		super.paint(g);
 	}
 
@@ -72,6 +83,18 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 		case ControlKeyConstants.RED:
 			ViewManager.getInstance().changeView("MainView", null);
 			break;
+		case ControlKeyConstants.GREEN:
+			focusOnKeyboard = true;
+			keyboard = new Keyboard(this);
+			this.add(keyboard);
+			this.popToFront(keyboard);
+			this.repaint();
+			break;
 		}
+	}
+
+	@Override
+	public void keyboardText(String text) {
+		System.out.println(text);
 	}
 }

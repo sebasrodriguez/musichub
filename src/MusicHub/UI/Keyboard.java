@@ -9,6 +9,8 @@ import java.util.Iterator;
 
 import org.havi.ui.HContainer;
 
+import MusicHub.UI.Contracts.IKeyboardReceiver;
+
 public class Keyboard extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
@@ -18,16 +20,13 @@ public class Keyboard extends HContainer implements KeyListener {
 	private ArrayList<Key> kb;
 	private int currentIndex = 0;
 	private String actualString = "";
+	private IKeyboardReceiver keyboardReceiver;
 
-	/**
-	 * Metodo contstructor Setea los limites del recuadro donde se va a dibujar
-	 * el teclado
-	 */
-	public Keyboard() {
+	public Keyboard(IKeyboardReceiver keyboardReceiver) {
 		this.setBounds(0, 0, 220, 140);
 		this.fillArray();
 		this.drawKeyboard();
-
+		this.keyboardReceiver = keyboardReceiver;
 	}
 
 	/**
@@ -37,16 +36,18 @@ public class Keyboard extends HContainer implements KeyListener {
 		kb = new ArrayList<Key>();
 		for (int i = 0; i < letters.length(); i++) {
 			Key n = new Key(x, y, letters.charAt(i));
-			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P'
-					|| letters.charAt(i) == '<' || letters.charAt(i) == '_') {
+			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P' || letters.charAt(i) == '<'
+					|| letters.charAt(i) == '_') {
 				if (letters.charAt(i) == '_') {
 					x = 120;
 					y += 20;
-				} else {
+				}
+				else {
 					y += 20;
 					x = 20;
 				}
-			} else {
+			}
+			else {
 				x += 20;
 			}
 			this.kb.add(n);
@@ -63,8 +64,6 @@ public class Keyboard extends HContainer implements KeyListener {
 			this.repaint();
 		}
 		this.paintFocusIn(currentIndex);
-		// this.add(url);
-
 	}
 
 	@Override
@@ -100,7 +99,8 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa del largo, posicionarse en el ultimo indice
 			if (currentIndex >= kb.size()) {
 				currentIndex = kb.size() - 1;
-			} else {
+			}
+			else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex - 1);
 			}
@@ -112,7 +112,8 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa para los negativos, posicionarse en el primer elemento
 			if (currentIndex < 0) {
 				currentIndex = 0;
-			} else {
+			}
+			else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex + 1);
 			}
@@ -129,13 +130,11 @@ public class Keyboard extends HContainer implements KeyListener {
 					aux = aux + actualString.charAt(i);
 				}
 				actualString = aux;
-			} else {
+			}
+			else {
 				actualString = actualString + kb.get(currentIndex).getKey();
 			}
-			this.repaint();
-			break;
-		case ControlKeyConstants.GREEN:
-			System.out.println("URL: " + actualString);
+			this.keyboardReceiver.keyboardText(actualString);
 			break;
 		}
 	}
