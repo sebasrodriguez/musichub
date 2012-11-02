@@ -1,4 +1,4 @@
-package MusicHub.UI;
+package MusicHub.UI.Controls;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,24 +6,30 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.havi.ui.HContainer;
 
+import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.Contracts.IKeyboardReceiver;
 
 public class Keyboard extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private String letters = "1234567890QWERTYUIOPASDFGHJKL<ZXCVBNM:/_ ";
-	private int x = 20;
-	private int y = 40;
+	private int xPosition;
+	private int keyWidth = 50;
+	private int keyHeight = 50;
+	private int yPosition;
+	private int xStartPosition;
 	private ArrayList<Key> kb;
 	private int currentIndex = 0;
 	private String actualString = "";
 	private IKeyboardReceiver keyboardReceiver;
 
-	public Keyboard(IKeyboardReceiver keyboardReceiver) {
-		this.setBounds(0, 0, 220, 140);
+	public Keyboard(IKeyboardReceiver keyboardReceiver, int x, int y) {
+		this.xPosition = x;
+		this.yPosition = y;
+		this.xStartPosition = x;
+		this.setBounds(xPosition, yPosition, 700, 700);
 		this.fillArray();
 		this.drawKeyboard();
 		this.keyboardReceiver = keyboardReceiver;
@@ -35,20 +41,19 @@ public class Keyboard extends HContainer implements KeyListener {
 	private void fillArray() {
 		kb = new ArrayList<Key>();
 		for (int i = 0; i < letters.length(); i++) {
-			Key n = new Key(x, y, letters.charAt(i));
-			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P' || letters.charAt(i) == '<'
-					|| letters.charAt(i) == '_') {
+			Key n = new Key(xPosition, yPosition, letters.charAt(i),
+					this.keyWidth, this.keyHeight);
+			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P'
+					|| letters.charAt(i) == '<' || letters.charAt(i) == '_') {
 				if (letters.charAt(i) == '_') {
-					x = 120;
-					y += 20;
+					xPosition = xStartPosition + (keyWidth * 4);
+					yPosition += keyHeight;
+				} else {
+					yPosition += keyHeight;
+					xPosition = xStartPosition;
 				}
-				else {
-					y += 20;
-					x = 20;
-				}
-			}
-			else {
-				x += 20;
+			} else {
+				xPosition += keyWidth;
 			}
 			this.kb.add(n);
 		}
@@ -61,7 +66,6 @@ public class Keyboard extends HContainer implements KeyListener {
 		Iterator<Key> itKey = kb.iterator();
 		while (itKey.hasNext()) {
 			this.add(itKey.next());
-			this.repaint();
 		}
 		this.paintFocusIn(currentIndex);
 	}
@@ -99,8 +103,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa del largo, posicionarse en el ultimo indice
 			if (currentIndex >= kb.size()) {
 				currentIndex = kb.size() - 1;
-			}
-			else {
+			} else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex - 1);
 			}
@@ -112,8 +115,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa para los negativos, posicionarse en el primer elemento
 			if (currentIndex < 0) {
 				currentIndex = 0;
-			}
-			else {
+			} else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex + 1);
 			}
@@ -130,8 +132,7 @@ public class Keyboard extends HContainer implements KeyListener {
 					aux = aux + actualString.charAt(i);
 				}
 				actualString = aux;
-			}
-			else {
+			} else {
 				actualString = actualString + kb.get(currentIndex).getKey();
 			}
 			this.keyboardReceiver.keyboardText(actualString);
