@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import MusicHub.UI.BasicContainer;
+import MusicHub.UI.Keyboard;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
@@ -26,7 +27,7 @@ public class MainView extends BasicContainer implements IMenuContainer{
 		itemList.add(new UOptionItem(null, "Salir", "Exit", 150, 60));
 
 		mainMenu = new UMenuScrollable(itemList, 5, this, 30, 100);
-
+		
 		this.add(mainMenu);
 		this.popToFront(mainMenu);
 	}
