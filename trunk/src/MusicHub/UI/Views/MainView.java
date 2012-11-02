@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import MusicHub.UI.BasicContainer;
-import MusicHub.UI.Keyboard;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
