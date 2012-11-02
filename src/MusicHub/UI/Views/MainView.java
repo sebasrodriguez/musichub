@@ -10,7 +10,7 @@ import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
 
-public class MainView extends BasicContainer implements IMenuContainer {
+public class MainView extends BasicContainer implements IMenuContainer{
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable mainMenu;
@@ -46,4 +46,7 @@ public class MainView extends BasicContainer implements IMenuContainer {
 	public void stepedOnOption(UOptionItem option) {
 	}
 
+	@Override
+	public void unmanagedKey(int keyCode) {		
+	}
 }

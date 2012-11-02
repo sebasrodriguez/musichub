@@ -196,6 +196,9 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 			// Disparamos el evento de stepedOn
 			this.getMenuParentContainer().stepedOnOption(itemSelected);
 			break;
+		default:
+			this.getMenuParentContainer().unmanagedKey(e.getKeyCode());
+			break;
 		}
 	}
 

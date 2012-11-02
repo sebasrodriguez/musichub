@@ -48,6 +48,11 @@ public class ViewManager extends HContainer {
 	public void changeView(String newView, Object[] args) {
 		scene.remove(visibleView);
 
+		if(newView == "MainView"){
+			mainView = new MainView();
+			scene.add(mainView);
+			visibleView = mainView;
+		}
 		if (newView == "ChannelsView") {
 			channelsView = new ChannelsView();
 			scene.add(channelsView);
