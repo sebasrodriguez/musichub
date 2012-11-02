@@ -1,15 +1,12 @@
 package MusicHub.UI.Views;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.havi.ui.HContainer;
-
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.UI.BasicContainer;
+import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
@@ -28,7 +25,7 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 
 	public ChannelsView() {
 		this.loadDescriptionBox();
-		this.loadRssChannelsMenu();		
+		this.loadRssChannelsMenu();
 	}
 
 	private void loadDescriptionBox() {
@@ -59,7 +56,7 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	}
 
 	@Override
-	public void stepedOnOption(UOptionItem option) {		
+	public void stepedOnOption(UOptionItem option) {
 		this.descriptionBox.setDescription(((RssFeed) option.getValue()).getDescription());
 	}
 
@@ -67,5 +64,14 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	public void selectedOption(UOptionItem selectedOption) {
 		Object[] args = { selectedOption.getValue() };
 		ViewManager.getInstance().changeView("ContentView", args);
+	}
+
+	@Override
+	public void unmanagedKey(int keyCode) {
+		switch (keyCode) {
+		case ControlKeyConstants.RED:
+			ViewManager.getInstance().changeView("MainView", null);
+			break;
+		}
 	}
 }

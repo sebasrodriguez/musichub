@@ -5,6 +5,6 @@ import MusicHub.UI.UOptionItem;
 public interface IMenuContainer {
 	
 	void selectedOption(UOptionItem selectedOption);
-	void stepedOnOption(UOptionItem option);
-
+	void stepedOnOption(UOptionItem option);	
+	void unmanagedKey(int keyCode);
 }
