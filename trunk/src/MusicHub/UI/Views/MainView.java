@@ -47,6 +47,6 @@ public class MainView extends BasicContainer implements IMenuContainer{
 	}
 
 	@Override
-	public void unmanagedKey(int keyCode) {		
+	public void unmanagedMenuKey(int keyCode) {		
 	}
 }

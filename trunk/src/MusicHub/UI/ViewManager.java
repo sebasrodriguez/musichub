@@ -5,6 +5,7 @@ import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
 import MusicHub.DataTypes.*;
+import MusicHub.UI.Views.AddChannelView;
 import MusicHub.UI.Views.ChannelsView;
 import MusicHub.UI.Views.MainView;
 import MusicHub.UI.Views.TwitterView;
@@ -19,6 +20,7 @@ public class ViewManager extends HContainer {
 	private ChannelsView channelsView;
 	private ContentView contentsView;
 	private TwitterView twitterView;
+	private AddChannelView addChannelView;
 
 	private ViewManager() {
 	}
@@ -48,7 +50,7 @@ public class ViewManager extends HContainer {
 	public void changeView(String newView, Object[] args) {
 		scene.remove(visibleView);
 
-		if(newView == "MainView"){
+		if (newView == "MainView") {
 			mainView = new MainView();
 			scene.add(mainView);
 			visibleView = mainView;
@@ -67,6 +69,11 @@ public class ViewManager extends HContainer {
 			twitterView = new TwitterView();
 			scene.add(twitterView);
 			visibleView = twitterView;
+		}
+		else if (newView == "AddChannelView") {
+			addChannelView = new AddChannelView();
+			scene.add(addChannelView);
+			visibleView = addChannelView;
 		}
 
 		scene.repaint();
