@@ -10,13 +10,10 @@ import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
-import MusicHub.UI.Contracts.IKeyboardReceiver;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Controls.FeedDescriptionBox;
-import MusicHub.UI.Controls.Keyboard;
 
-public class ChannelsView extends BasicContainer implements IMenuContainer,
-		IKeyboardReceiver {
+public class ChannelsView extends BasicContainer implements IMenuContainer {
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable mainMenu;
@@ -25,8 +22,6 @@ public class ChannelsView extends BasicContainer implements IMenuContainer,
 	private int menuWidth = 300;
 	private int menuHeight = 60;
 	private FeedDescriptionBox descriptionBox;
-	private boolean focusOnKeyboard = false;
-	private Keyboard keyboard;
 
 	public ChannelsView() {
 		this.loadDescriptionBox();
@@ -42,9 +37,7 @@ public class ChannelsView extends BasicContainer implements IMenuContainer,
 
 	@Override
 	public void paint(Graphics g) {
-		if (!focusOnKeyboard) {
-			mainMenu.requestFocus();
-		}
+		mainMenu.requestFocus();
 		super.paint(g);
 	}
 
@@ -53,8 +46,8 @@ public class ChannelsView extends BasicContainer implements IMenuContainer,
 		rssFeeds = ServiceLocator.getRssManager().getRssFeeds();
 
 		for (RssFeed rssFeed : rssFeeds) {
-			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(),
-					rssFeed, menuWidth, menuHeight));
+			channelsOptionsItems.add(new UOptionItem(null, rssFeed.getName(), rssFeed, menuWidth,
+					menuHeight));
 		}
 
 		mainMenu = new UMenuScrollable(channelsOptionsItems, 5, this, 30, 100);
@@ -64,8 +57,7 @@ public class ChannelsView extends BasicContainer implements IMenuContainer,
 
 	@Override
 	public void stepedOnOption(UOptionItem option) {
-		this.descriptionBox.setDescription(((RssFeed) option.getValue())
-				.getDescription());
+		this.descriptionBox.setDescription(((RssFeed) option.getValue()).getDescription());
 	}
 
 	@Override
@@ -75,26 +67,14 @@ public class ChannelsView extends BasicContainer implements IMenuContainer,
 	}
 
 	@Override
-	public void unmanagedKey(int keyCode) {
+	public void unmanagedMenuKey(int keyCode) {
 		switch (keyCode) {
 		case ControlKeyConstants.RED:
 			ViewManager.getInstance().changeView("MainView", null);
 			break;
 		case ControlKeyConstants.GREEN:
-			focusOnKeyboard = true;
-			keyboard = new Keyboard(this, 50, 50);
-			this.add(keyboard);
-			this.popToFront(keyboard);
-			this.keyboard.requestFocus();
-			this.keyboard.addKeyListener(keyboard);
-			this.repaint();
+			ViewManager.getInstance().changeView("AddChannelView", null);
 			break;
 		}
-	}
-
-	@Override
-	public void keyboardText(String text) {
-		System.out.println(text);
-
 	}
 }
