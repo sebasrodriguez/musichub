@@ -7,5 +7,6 @@ import MusicHub.DataTypes.RssFeed;
 public interface IRssService {
 	
 	List<RssItem> getRssItems(RssFeed feed);
+	RssFeed getRssFeed(String url);
 
 }

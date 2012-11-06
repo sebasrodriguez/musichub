@@ -19,7 +19,15 @@ public class RssManager implements IRssManager {
 	}
 
 	@Override
-	public void addFeed(RssFeed feed) {
+	public RssFeed addFeed(String url) {
+		RssFeed rssFeed = ServiceLocator.getRssService().getRssFeed(url);
+
+		if (rssFeed != null) {
+			ServiceLocator.getStorageService().addFeed(rssFeed);
+			return rssFeed;
+		}
+
+		return null;
 	}
 
 	@Override
