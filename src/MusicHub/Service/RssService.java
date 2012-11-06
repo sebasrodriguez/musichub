@@ -28,14 +28,14 @@ public class RssService implements IRssService {
 			List<RssItemBean> rssItems = rssFeed.getItems();
 			for (int i = 0; i < rssItems.size(); i++) {
 				RssItemBean rssItem = rssItems.get(i);
-				
+
 				item = new RssItem();
 				item.setTitle(rssItem.getTitle());
 				item.setContent(rssItem.getDescription());
 				item.setDate(rssItem.getPubDate());
 				item.setImageUrl(parser.getImageFromRssContent(rssItem.getDescription()));
 				item.setVotes(66);
-				
+
 				items.add(item);
 			}
 		}
@@ -44,6 +44,25 @@ public class RssService implements IRssService {
 		}
 
 		return items;
+	}
+
+	public RssFeed getRssFeed(String url) {
+		RssFeed feed = new RssFeed();
+		org.horrabin.horrorss.RssParser rss = new RssParser();
+
+		try {
+			org.horrabin.horrorss.RssFeed rssFeed = rss.load(url);
+
+			feed.setName(rssFeed.getChannel().getTitle());
+			feed.setUrl(url);
+			feed.setVotes(0);
+			feed.setDescription(rssFeed.getChannel().getDescription());
+		}
+		catch (Exception ex) {
+			return null;
+		}
+
+		return feed;
 	}
 
 }
