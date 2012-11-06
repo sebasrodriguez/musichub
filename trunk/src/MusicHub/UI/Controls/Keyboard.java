@@ -41,19 +41,18 @@ public class Keyboard extends HContainer implements KeyListener {
 	private void fillArray() {
 		kb = new ArrayList<Key>();
 		for (int i = 0; i < letters.length(); i++) {
-			Key n = new Key(xPosition, yPosition, letters.charAt(i), this.keyWidth, this.keyHeight);
-			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P' || letters.charAt(i) == '.'
-					|| letters.charAt(i) == '_') {
+			Key n = new Key(xPosition, yPosition, letters.charAt(i),
+					this.keyWidth, this.keyHeight);
+			if (letters.charAt(i) == '0' || letters.charAt(i) == 'P'
+					|| letters.charAt(i) == '.' || letters.charAt(i) == '_') {
 				if (letters.charAt(i) == '_') {
 					xPosition = xStartPosition + (keyWidth * 4);
 					yPosition += keyHeight;
-				}
-				else {
+				} else {
 					yPosition += keyHeight;
 					xPosition = xStartPosition;
 				}
-			}
-			else {
+			} else {
 				xPosition += keyWidth;
 			}
 			this.kb.add(n);
@@ -104,8 +103,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa del largo, posicionarse en el ultimo indice
 			if (currentIndex >= kb.size()) {
 				currentIndex = kb.size() - 1;
-			}
-			else {
+			} else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex - 1);
 			}
@@ -117,8 +115,7 @@ public class Keyboard extends HContainer implements KeyListener {
 			// si se pasa para los negativos, posicionarse en el primer elemento
 			if (currentIndex < 0) {
 				currentIndex = 0;
-			}
-			else {
+			} else {
 				this.paintFocusIn(currentIndex);
 				this.paintFocusOut(currentIndex + 1);
 			}
@@ -138,7 +135,9 @@ public class Keyboard extends HContainer implements KeyListener {
 			this.keyboardReceiver.keyboardText(actualString);
 			break;
 		case ControlKeyConstants.YELLOW:
-			actualString = actualString.substring(0, actualString.length() - 1);
+			if (!actualString.isEmpty()) {
+				actualString = actualString.substring(0,actualString.length() - 1);
+			}
 			this.keyboardReceiver.keyboardText(actualString);
 			break;
 		default:
