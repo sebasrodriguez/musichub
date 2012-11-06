@@ -9,9 +9,23 @@ import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 import MusicHub.DataTypes.Tweet;
 import MusicHub.Service.Contracts.ITwitterService;
+import MusicHub.Util.Conf;
 
 public class TwitterService implements ITwitterService {
 
+	String username;
+	String password;
+	String accessToken;
+	String secretToken;
+	
+	public TwitterService() {
+		// TODO Auto-generated constructor stub
+		username = Conf.getTwitterConsumerKey();
+		password = Conf.getTwitterCosumerSecret();
+		accessToken = Conf.getTwitterAccesToken();
+		secretToken = Conf.getTwitterSecretToken();
+	}
+	
 	@Override
 	public List<Tweet> getTweets() {
 		return null;
@@ -23,10 +37,7 @@ public class TwitterService implements ITwitterService {
 	public void postTweet(String tweetToPost) {
 		// TODO Auto-generated method stub
 		try {
-			String username = "8mpaQnevmxijm1jUFghTQ";
-			String password = "xNfEbwhGH1Z8kA3jdNO49oOzkTdpVm1VBtXn4ZeVW64";
-			String accessToken = "921669576-M0DYgL2hBJIQwJCLwDi4D2yDq4hB67t64jTrKZlA";
-			String secretToken = "Jjacp0Xlkvwb02kOarGuDTt4zVhoc5UjVjkXlHO1U";
+			
 			ConfigurationBuilder confBuilder = new ConfigurationBuilder();
 			confBuilder.setDebugEnabled(true).setOAuthConsumerKey(username)
 					.setOAuthConsumerSecret(password)
