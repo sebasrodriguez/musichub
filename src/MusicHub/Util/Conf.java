@@ -12,6 +12,10 @@ public class Conf {
 	private static String fontName;
 	private static int fontSize;
 	private static int itemHeight;
+	private static String twitterConsumerKey;
+	private static String twitterConsumerSecret;
+	private static String twitterAccessToken;
+	private static String twitterSecretToken;
 
 	/*
 	 * public Conf(){ }
@@ -28,6 +32,10 @@ public class Conf {
 			fontName = prop.getProperty("fontName");
 			fontSize = Integer.parseInt(prop.getProperty("fontSize"));
 			itemHeight = Integer.parseInt(prop.getProperty("itemHeight"));
+			twitterConsumerKey = prop.getProperty("twitterConsumerKey");
+			twitterConsumerSecret = prop.getProperty("twitterConsumerSecret");
+			twitterAccessToken = prop.getProperty("twitterAccessToken");
+			twitterSecretToken = prop.getProperty("twitterSecretToken");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,4 +65,19 @@ public class Conf {
 		return itemHeight;
 	}
 
+	public static String getTwitterConsumerKey() {
+		return twitterConsumerKey;
+	}
+
+	public static String getTwitterCosumerSecret() {
+		return twitterConsumerSecret;
+	}
+
+	public static String getTwitterAccesToken() {
+		return twitterAccessToken;
+	}
+
+	public static String getTwitterSecretToken() {
+		return twitterSecretToken;
+	}
 }
