@@ -6,9 +6,13 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.FocusManager;
 
 import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
@@ -18,74 +22,68 @@ import org.havi.ui.HText;
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
-import MusicHub.UI.Contracts.ISelectedOption;
+import MusicHub.UI.Contracts.IMenuContainer;
 
-public class ContentView extends BasicContainer implements ISelectedOption, KeyListener{
+public class ContentView extends BasicContainer implements IMenuContainer, KeyListener{
 	
-	private BasicPanel itemsPanel;
+	//private BasicPanel itemsPanel;
+	private BasicPanel itemsPanelB;
 	private BasicPanel detailsPanel;
 	
 	private BasicPanel focusedPanel;
 	private RssFeed canal;
 	private UMenuScrollable itemsMenu;
-	List<RssItem> feedList;
-	List<UOptionItem> itemList;
+	private List<RssItem> feedItemList;
+	
 	
 	public ContentView(RssFeed canal){		
 		this.canal= canal;
+		
+		 
 		
 		HText canalName= new HText(this.canal.getName());
 		canalName.setFont(new Font("tiresias",Font.BOLD,13));
 		canalName.setForeground(Color.WHITE);
 		canalName.setBounds(0, 10, 250, 50);	
 		
-		loadItemsbyFeed();		
+		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
+		System.out.println(feedItemList.size());
 		
-		this.add(canalName);
-		itemsPanel = new ItemsPanel(itemList,15, 15, 150, 100);
-		detailsPanel= new DetailsPanel(200,200,200,200);
+		//this.add(canalName);
 		
-		this.add(itemsPanel);
+		//itemsPanel = new ItemsPanel(feedList,0, 100, 150, 200);
+		detailsPanel= new DetailsPanel(105,50,450,500);		
+		itemsPanelB = new ItemsPanelB(this.getItemList(),0, 50, 200	, 400);
+		
+		//Muestro en el panel la info del primer Item del Feed
+		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());
+	
+		
+		
+		this.add(itemsPanelB);	
 		this.add(detailsPanel);
-		this.popToFront(itemsPanel);
-		this.popToFront(canalName);
-		//itemsMenu = new UMenuScrollable(itemList, 10, 15, 15);		
+		this.add(canalName);
+		this.pushToBack(icon);
+		
+		FocusManager.getCurrentManager().focusNextComponent();
+		System.out.println(((UMenuScrollable)FocusManager.getCurrentManager().getFocusOwner()).getNumItems());
+		
+		
+		
+		//itemsPanelB.requestFocus();
+		
+	
 	}	
 	
 	
-	private void loadItemsbyFeed(){
-		
-		feedList = new ArrayList<RssItem>();
-		feedList=ServiceLocator.getRssManager().getRssItems(canal);
-		itemList = new LinkedList<UOptionItem>();		
-			
-		for (RssItem feed:feedList){			
-			HIcon ico= new HIcon(Toolkit.getDefaultToolkit().getImage(feed.getImageUrl())) ;
-			ico.setBounds(0, 0, 20, 20);
-			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(),40,15);			
-			itemList.add(nItem);
-		}
-	}
-	
-	private void showItemDetails(){		
-		String itemContent=feedList.get(((ItemsPanel)itemsPanel).getSelectedIndexOption()).getContent();
-		String itemImgUrl=feedList.get(((ItemsPanel)itemsPanel).getSelectedIndexOption()).getImageUrl();
-		
-		((DetailsPanel)detailsPanel).showItem(itemContent,itemImgUrl );
-						
-	}
+
 	
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
+		//itemsPanelB.requestFocus();
 		super.paint(g);
-	}
-
-
-	@Override
-	public void selectedOption(int selectedIndex) {
-		// TODO Auto-generated method stub
-				
+		
 	}
 
 
@@ -103,12 +101,12 @@ public class ContentView extends BasicContainer implements ISelectedOption, KeyL
 		//boton izquierda key code = 37
 		//boton ok key code = 10
 		
-		if(e.getKeyCode()==39){
+		if(e.getKeyCode()==39){			
+			//transferFocus();	
 			
-			transferFocus();
+			System.out.println("Cambio de panel");
 			
 		}
-		
 		
 	}
 
@@ -122,6 +120,58 @@ public class ContentView extends BasicContainer implements ISelectedOption, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void selectedOption(UOptionItem selectedOption) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void stepedOnOption(UOptionItem option) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private List<UOptionItem> getItemList(){
+		
+		List<UOptionItem> itemList = new LinkedList<UOptionItem>();
+		
+		for (RssItem feed:feedItemList){	
+			
+			System.out.println(feed.getImageUrl());
+			HIcon ico=null;
+			
+				
+				if(!feed.getImageUrl().equals("")){
+					//ico = new HIcon(Toolkit.getDefaultToolkit().getImage(new URL(feed.getImageUrl())));
+					ico = new HIcon(Toolkit.getDefaultToolkit().getImage(feed.getImageUrl()));
+					ico.setBounds(0, 0, 20, 20);
+				}
+			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(), feed ,150,50);	
+			
+			itemList.add(nItem);
+			
+			
+			
+		/*	RssItemContainer item= new RssItemContainer(feed.getImageUrl(), feed.getTitle());
+			this.add(item);*/
+			
+		}
+		
+		return itemList;
+	}
+
+
+
+
+	@Override
+	public void unmanagedMenuKey(int keyCode) {
 		// TODO Auto-generated method stub
 		
 	}

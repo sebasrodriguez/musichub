@@ -15,10 +15,10 @@ import org.havi.ui.HIcon;
 
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssItem;
-import MusicHub.UI.Contracts.ISelectedOption;
+import MusicHub.UI.Contracts.IMenuContainer;
 
 //Despliega los items de un canal
-public class ItemsPanel extends BasicPanel implements KeyListener, ISelectedOption{
+public class ItemsPanel extends BasicPanel implements KeyListener, IMenuContainer{
 
 	private UMenuScrollable itemsMenu;
 	private int selectedIndex=0;
@@ -29,7 +29,7 @@ public class ItemsPanel extends BasicPanel implements KeyListener, ISelectedOpti
 		
 		//itemsMenu= new UMenuScrollable(items, itemsToShow, x, y);
 		this.setBounds(x,y,w,h);		
-		itemsMenu = new UMenuScrollable(itemsList, 10, 15, 15);
+		//itemsMenu = new UMenuScrollable(itemsList, 10, null, 15, 15);
 	}
 
 
@@ -43,12 +43,6 @@ public class ItemsPanel extends BasicPanel implements KeyListener, ISelectedOpti
 	}
 
 
-	@Override
-	public void selectedOption(int selectedIndex) {
-		// TODO Auto-generated method stub
-		this.selectedIndex=selectedIndex;
-		
-	}
 	
 	public int getSelectedIndexOption(){
 		return this.selectedIndex;
@@ -72,6 +66,20 @@ public class ItemsPanel extends BasicPanel implements KeyListener, ISelectedOpti
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void selectedOption(UOptionItem selectedOption) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void stepedOnOption(UOptionItem option) {
 		// TODO Auto-generated method stub
 		
 	}
