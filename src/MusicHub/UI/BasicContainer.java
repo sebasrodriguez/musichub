@@ -10,7 +10,7 @@ import java.awt.Toolkit;
 public class BasicContainer extends HContainer {
 
 	private static final long serialVersionUID = 1L;	
-	private HIcon icon;
+	protected HIcon icon;
 	private Image img;
 
 	public BasicContainer() {
@@ -23,11 +23,11 @@ public class BasicContainer extends HContainer {
 		this.pushToBack(icon);		
 	}
 
-	@Override
+	/*@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		super.paint(g);
-	}
+	}*/
 
 }

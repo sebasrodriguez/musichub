@@ -1,5 +1,6 @@
 package MusicHub.UI;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -81,5 +82,9 @@ public class UOptionItem extends HContainer {
 
 	public void setValue(Object value) {
 		this.value = value;
+	}
+	
+	public void setFontStyle(int style, int size){		
+		button.setFont(new Font(Conf.getFontName(), style, size));
 	}
 }

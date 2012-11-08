@@ -1,5 +1,6 @@
 package MusicHub.UI;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -121,6 +122,16 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 
 	public void setMenuParentContainer(IMenuContainer menuParentContainer) {
 		this.menuParentContainer = menuParentContainer;
+	}
+	
+	public void setFontStyle(int style, int size){		
+		//button.setFont(new Font(Conf.getFontName(), style, size));
+		
+		for (UOptionItem it:listItems){
+			it.setFontStyle(style, size);
+		}
+		
+		repaint();
 	}
 
 	// KeyListeners
