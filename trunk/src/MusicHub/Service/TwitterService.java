@@ -64,7 +64,7 @@ public class TwitterService implements ITwitterService {
 		
 	}
 
-	// Esto es obligatorio!!!
+	
 	@Override
 	public void postTweet(String tweetToPost) {
 		// TODO Auto-generated method stub
