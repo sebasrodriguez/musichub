@@ -1,6 +1,7 @@
 package MusicHub.UI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -18,8 +19,9 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		
 		System.out.println(this.getWidth());
 		
-		itemsMenu= new UMenuScrollable(itemList, 10, this, 20,0);
+		itemsMenu= new UMenuScrollable(itemList, 10, this, this.getX()+10,this.getY()+10);
 		itemsMenu.setSize(this.getWidth(), this.getHeight());
+		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
 		this.popToFront(itemsMenu);
 		
@@ -54,6 +56,12 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	
 	public int getSelectedOption(){
 		return itemsMenu.getSelectedItemIndex();
+	}
+
+	@Override
+	public void unmanagedMenuKey(int keyCode) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
