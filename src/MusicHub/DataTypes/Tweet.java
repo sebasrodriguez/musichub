@@ -4,6 +4,7 @@ public class Tweet {
 
 	private String user;
 	private String text;
+	private String userImageUrl;
 
 	public String getUser() {
 		return user;
@@ -11,6 +12,14 @@ public class Tweet {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getUserImageUrl() {
+		return userImageUrl;
+	}
+
+	public void setUserImageUrl(String userImageUrl) {
+		this.userImageUrl = userImageUrl;
 	}
 
 	public String getText() {

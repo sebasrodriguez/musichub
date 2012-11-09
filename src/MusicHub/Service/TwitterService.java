@@ -3,7 +3,6 @@ package MusicHub.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -21,7 +20,6 @@ public class TwitterService implements ITwitterService {
 	String secretToken;
 
 	public TwitterService() {
-		// TODO Auto-generated constructor stub
 		username = Conf.getTwitterConsumerKey();
 		password = Conf.getTwitterCosumerSecret();
 		accessToken = Conf.getTwitterAccesToken();
@@ -30,59 +28,52 @@ public class TwitterService implements ITwitterService {
 
 	@Override
 	public List<Tweet> getTweets() {
-		List <Tweet> twitsToReturn = null;
-		try {		
-			
-			twitsToReturn = new ArrayList<Tweet>();
-			
+		List<Tweet> tweetsToReturn = null;
+		try {
+
+			tweetsToReturn = new ArrayList<Tweet>();
+
 			ConfigurationBuilder confBuilder = new ConfigurationBuilder();
 			confBuilder.setDebugEnabled(true).setOAuthConsumerKey(username)
-					.setOAuthConsumerSecret(password)
-					.setOAuthAccessToken(accessToken)
+					.setOAuthConsumerSecret(password).setOAuthAccessToken(accessToken)
 					.setOAuthAccessTokenSecret(secretToken);
 
-						
 			Twitter twitter = new TwitterFactory(confBuilder.build()).getInstance();
-			
-			List <Status> status = twitter.getHomeTimeline();
-			Iterator <Status> itStatus = status.iterator();
-			
-			while(itStatus.hasNext()){
+
+			List<Status> status = twitter.getHomeTimeline();
+			Iterator<Status> itStatus = status.iterator();
+
+			while (itStatus.hasNext()) {
 				Status aux = itStatus.next();
 				Tweet twt = new Tweet();
+				twt.setUserImageUrl(aux.getUser().getProfileImageURL().toString());
 				twt.setUser(aux.getUser().getName());
 				twt.setText(aux.getText());
-				twitsToReturn.add(twt);
+				tweetsToReturn.add(twt);
 			}
-			
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (TwitterException e) {
 			e.printStackTrace();
 		}
 
-		return twitsToReturn;
-		
+		return tweetsToReturn;
+
 	}
 
-	
 	@Override
 	public void postTweet(String tweetToPost) {
-		// TODO Auto-generated method stub
 		try {
 
 			ConfigurationBuilder confBuilder = new ConfigurationBuilder();
 			confBuilder.setDebugEnabled(true).setOAuthConsumerKey(username)
-					.setOAuthConsumerSecret(password)
-					.setOAuthAccessToken(accessToken)
+					.setOAuthConsumerSecret(password).setOAuthAccessToken(accessToken)
 					.setOAuthAccessTokenSecret(secretToken);
 
-			Twitter twitter = new TwitterFactory(confBuilder.build())
-					.getInstance();
+			Twitter twitter = new TwitterFactory(confBuilder.build()).getInstance();
 
-			Status status = twitter.updateStatus(tweetToPost);
-
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
+			twitter.updateStatus(tweetToPost);
+		}
+		catch (TwitterException e) {
 			e.printStackTrace();
 		}
 
