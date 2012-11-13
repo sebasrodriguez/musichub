@@ -3,6 +3,7 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,6 +30,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	//private BasicPanel itemsPanel;
 	private BasicPanel itemsPanelB;
 	private BasicPanel detailsPanel;
+	private BasicPanel socialPanel;
 	
 	private BasicPanel focusedPanel;
 	private RssFeed canal;
@@ -47,26 +49,29 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		canalName.setBounds(0, 10, 250, 50);	
 		
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
-		System.out.println(feedItemList.size());
 		
 		//this.add(canalName);
 		
 		//itemsPanel = new ItemsPanel(feedList,0, 100, 150, 200);
-		detailsPanel= new DetailsPanel(105,50,450,500);		
 		itemsPanelB = new ItemsPanelB(this.getItemList(),0, 50, 200	, 400);
+		detailsPanel= new DetailsPanel(105,50,350,500);
+		socialPanel = new SocialPanel(200, 50, 200, 500);
+		
 		
 		//Muestro en el panel la info del primer Item del Feed
-		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());
-	
+		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
 		
 		this.add(itemsPanelB);	
+		this.add(socialPanel);
 		this.add(detailsPanel);
+		
 		this.add(canalName);
 		this.pushToBack(icon);
+		this.popToFront(socialPanel);
 		
-		FocusManager.getCurrentManager().focusNextComponent();
-		System.out.println(((UMenuScrollable)FocusManager.getCurrentManager().getFocusOwner()).getNumItems());
+		//FocusManager.getCurrentManager().focusNextComponent();
+		//System.out.println(((UMenuScrollable)FocusManager.getCurrentManager().getFocusOwner()).getNumItems());
 		
 		
 		
@@ -147,13 +152,16 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			System.out.println(feed.getImageUrl());
 			HIcon ico=null;
 			
+			//aux=aux.getScaledInstance(20, 20, Image.SCALE_DEFAULT);	
+			
 				
 				if(!feed.getImageUrl().equals("")){
 					//ico = new HIcon(Toolkit.getDefaultToolkit().getImage(new URL(feed.getImageUrl())));
 					ico = new HIcon(Toolkit.getDefaultToolkit().getImage(feed.getImageUrl()));
-					ico.setBounds(0, 0, 20, 20);
+					ico.setBounds(60, 0, 20, 20);
 				}
-			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(), feed ,150,50);	
+			//UOptionItem nItem= new UOptionItem(ico, "tt", feed ,300,50);
+			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(), feed ,150,50);
 			
 			itemList.add(nItem);
 			
