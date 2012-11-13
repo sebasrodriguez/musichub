@@ -17,14 +17,10 @@ public class TweetItem extends HContainer {
 	private HText userText;
 	private HText tweetText;
 	private HIcon ico;
-	private boolean isShown;
-	private Color color;
 
 	public TweetItem(String user, String tweet, String userImageUrl) {
 		super();
 		this.setBounds(0, 0, 400, 105);
-
-		color = Color.DARK_GRAY;
 
 		ExecutorService executor = Executors.newFixedThreadPool(3);
 		Runnable fetcher = new ImageFetcher(userImageUrl, ico, this, 4, 4, 50, 50);
@@ -50,8 +46,10 @@ public class TweetItem extends HContainer {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(color);
+		g.setColor(Color.DARK_GRAY);
 		g.drawRoundRect(0, 0, 375, 100, 15, 15);
+		g.setColor(Color.WHITE);
+		g.fillRoundRect(1, 1, 373, 98, 15, 15);		
 		super.paint(g);
 	}
 
@@ -68,12 +66,4 @@ public class TweetItem extends HContainer {
 
 		return finalTweet.toString();
 	}	
-
-	public boolean isShown() {
-		return isShown;
-	}
-
-	public void setShown(boolean isShown) {
-		this.isShown = isShown;
-	}
 }

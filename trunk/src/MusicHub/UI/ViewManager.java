@@ -1,5 +1,7 @@
 package MusicHub.UI;
 
+import javax.tv.xlet.XletContext;
+
 import org.havi.ui.HContainer;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
@@ -7,13 +9,13 @@ import org.havi.ui.HSceneTemplate;
 import MusicHub.DataTypes.*;
 import MusicHub.UI.Views.AddChannelView;
 import MusicHub.UI.Views.ChannelsView;
-import MusicHub.UI.Views.ContentView;
 import MusicHub.UI.Views.MainView;
 import MusicHub.UI.Views.TwitterView;
 
 public class ViewManager extends HContainer {
 
 	private static final long serialVersionUID = 1L;
+	private XletContext context;
 	private static ViewManager instance = null;
 	private HScene scene;
 	private BasicContainer visibleView;
@@ -23,12 +25,20 @@ public class ViewManager extends HContainer {
 	private TwitterView twitterView;
 	private AddChannelView addChannelView;
 
-	private ViewManager() {
+	private ViewManager(XletContext context) {
+		this.context = context;
+	}
+	
+	public static ViewManager getInstance(){
+		if(instance == null){
+			instance = new ViewManager(null);
+		}
+		return instance;
 	}
 
-	public static ViewManager getInstance() {
+	public static ViewManager getInstance(XletContext context) {
 		if (instance == null) {
-			instance = new ViewManager();
+			instance = new ViewManager(context);
 		}
 		return instance;
 	}
@@ -57,7 +67,7 @@ public class ViewManager extends HContainer {
 			visibleView = mainView;
 		}
 		if (newView == "ChannelsView") {
-			channelsView = new ChannelsView();
+			channelsView = new ChannelsView(this.context);
 			scene.add(channelsView);
 			visibleView = channelsView;
 		}

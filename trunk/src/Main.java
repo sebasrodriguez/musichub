@@ -3,16 +3,13 @@ import java.awt.event.KeyListener;
 import javax.tv.xlet.Xlet;
 import javax.tv.xlet.XletContext;
 import javax.tv.xlet.XletStateChangeException;
-import org.havi.ui.HScene;
-import org.havi.ui.HSceneFactory;
-import org.havi.ui.HSceneTemplate;
 import MusicHub.UI.ViewManager;
-import MusicHub.UI.Views.MainView;
+import MusicHub.UI.Controls.VideoResizer;
 import MusicHub.Util.Conf;
 
 public class Main implements Xlet, KeyListener {
 
-	private XletContext contexto;
+	private XletContext context;
 	private ViewManager viewManager;		
 
 	@Override
@@ -33,7 +30,8 @@ public class Main implements Xlet, KeyListener {
 
 	@Override
 	public void initXlet(XletContext arg0) throws XletStateChangeException {
-		this.contexto = arg0;
+		this.context = arg0;
+		VideoResizer.getInstance(this.context);		
 		Conf.load();
 	}
 
