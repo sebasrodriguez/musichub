@@ -1,8 +1,12 @@
 package MusicHub.UI.Views;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.tv.xlet.XletContext;
+
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.UI.BasicContainer;
@@ -12,6 +16,7 @@ import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Controls.FeedDescriptionBox;
+import MusicHub.UI.Controls.VideoResizer;
 
 public class ChannelsView extends BasicContainer implements IMenuContainer {
 
@@ -23,7 +28,14 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	private int menuHeight = 60;
 	private FeedDescriptionBox descriptionBox;
 
-	public ChannelsView() {
+	public ChannelsView(XletContext context) {
+		// Mostramos background con transparencia
+		super("../assets/Background-ChannelsView.png");
+		
+		// Cambiamos tamano video
+		VideoResizer.getInstance(null).changeVideoSize(new Rectangle(0, 0, 100, 100),
+				new Rectangle(350, 99, 330, 300));
+		
 		this.loadDescriptionBox();
 		this.loadRssChannelsMenu();
 	}
@@ -70,9 +82,11 @@ public class ChannelsView extends BasicContainer implements IMenuContainer {
 	public void unmanagedMenuKey(int keyCode) {
 		switch (keyCode) {
 		case ControlKeyConstants.RED:
+			VideoResizer.getInstance(null).returnToOriginalSize();
 			ViewManager.getInstance().changeView("MainView", null);
 			break;
 		case ControlKeyConstants.GREEN:
+			VideoResizer.getInstance(null).returnToOriginalSize();
 			ViewManager.getInstance().changeView("AddChannelView", null);
 			break;
 		}

@@ -119,8 +119,6 @@ public class TwitterTimeline extends HContainer implements KeyListener {
 				this.repaint();
 			}
 		}
-		System.out.println("CP:" + currentPosition + " TCH:" + this.timelineContainerHeight
-				+ " TH:" + this.timelineHeight);
 	}
 
 	@Override
