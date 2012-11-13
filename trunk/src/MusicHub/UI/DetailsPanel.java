@@ -6,18 +6,26 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
 import org.havi.ui.HText;
+
+import com.mortennobel.imagescaling.MultiStepRescaleOp;
+import com.mortennobel.imagescaling.ResampleOp;
 
 public class DetailsPanel extends BasicPanel {
 	
 	private String content;
 	private String imgURL;
 	private Image image;
+	//private BufferedImage bfImage;
+	//private BufferedImage rescaledImg;
 	
 	public DetailsPanel(int x, int y, int w, int h){	
 		super(x,y,w,h);
@@ -30,19 +38,21 @@ public class DetailsPanel extends BasicPanel {
 		
 		try {
 			image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
+			image= image.getScaledInstance(60, 60, Image.SCALE_DEFAULT);			
+			
+			
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		image.getScaledInstance(60, 60, image.SCALE_SMOOTH);
-		BufferedImage buffImg= new BufferedImage(60, 60, BufferedImage.TYPE_INT_RGB);
-		Graphics g = buffImg.createGraphics();
-		g.drawImage(image, 0, 0, new Color(0,0,0), null);
-		g.dispose();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 		
 		HIcon ico=null;
 		ico = new HIcon(image);
+		
 			
 	
 		ico.setBounds(this.getX()+10, this.getY()+10, 60, 60);
@@ -55,10 +65,11 @@ public class DetailsPanel extends BasicPanel {
 		
 		
 		
+		
 		this.add(contentText);
 		this.add(ico);
 		this.popToFront(ico);
-		this.repaint();
+
 		
 	}
 	
