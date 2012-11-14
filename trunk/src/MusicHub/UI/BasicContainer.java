@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class BasicContainer extends HContainer {
 
 	private static final long serialVersionUID = 1L;
-	private HIcon icon;
+	protected HIcon icon;
 	private Image img;
 	private int viewWidth = 722;
 	private int viewHeight = 576;

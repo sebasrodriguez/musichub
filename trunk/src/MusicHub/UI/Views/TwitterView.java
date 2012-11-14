@@ -16,8 +16,6 @@ public class TwitterView extends BasicContainer {
 
 		this.add(timeline);
 		this.popToFront(timeline);
-
-		timeline.requestFocus();
 	}
 
 	public void timelineUnmanagedKey(int keyCode) {
