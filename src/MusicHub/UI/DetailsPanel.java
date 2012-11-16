@@ -16,11 +16,10 @@ import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
 import org.havi.ui.HText;
 
-import com.mortennobel.imagescaling.MultiStepRescaleOp;
-import com.mortennobel.imagescaling.ResampleOp;
 
 public class DetailsPanel extends BasicPanel {
 	
+	private String title;
 	private String content;
 	private String imgURL;
 	private Image image;
@@ -30,15 +29,13 @@ public class DetailsPanel extends BasicPanel {
 	public DetailsPanel(int x, int y, int w, int h){	
 		super(x,y,w,h);
 		this.setBounds(x, y, w, h);
-		
-		
 	}
 	
-	public void showItem(String content, String imgURL){
+	public void showItem(String title, String content, String imgURL){
 		
 		try {
 			image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
-			image= image.getScaledInstance(60, 60, Image.SCALE_DEFAULT);			
+			image= image.getScaledInstance(120, 100, Image.SCALE_DEFAULT);			
 			
 			
 		} catch (MalformedURLException e1) {
@@ -55,31 +52,68 @@ public class DetailsPanel extends BasicPanel {
 		
 			
 	
-		ico.setBounds(this.getX()+10, this.getY()+10, 60, 60);
+		ico.setBounds(10, 50, 120, 100);
+		
+		HText titleText= new HText(title);
+		titleText.setFont(new Font("tiresias",Font.BOLD,13));
+		titleText.setForeground(Color.WHITE);
+		titleText.setBounds(10, 10, this.getWidth(), 20);
+		titleText.setHorizontalAlignment(titleText.HALIGN_LEFT);
+		
+		
+		if(isTooLength(content)){
+			content=wrapContent(content);
+		}
 		
 		HText contentText= new HText(content);
 		contentText.setFont(new Font("tiresias",Font.PLAIN,13));
 		contentText.setForeground(Color.WHITE);
-		contentText.setBounds(ico.getX()+70, this.getY()+10, this.getWidth(), 50);
+		contentText.setBounds(10, 150, this.getWidth(), this.getHeight()-10);
 		contentText.setHorizontalAlignment(contentText.HALIGN_LEFT);
-		
-		
+		contentText.setVerticalAlignment(contentText.VALIGN_TOP);
 		
 		
 		this.add(contentText);
+		this.add(titleText);
 		this.add(ico);
 		this.popToFront(ico);
 
 		
 	}
 	
+	private boolean isTooLength(String content){
+		return content.length()>25;
+	}
+	
+	private String wrapContent(String content){
+		
+		final int WRAP_LENGTH=62;
+		int i=0,x=0;
+		boolean f=false;
+		String wContent=new String();
+		
+		
+		while(i<content.length() && !f){			
+			
+			if(Character.isSpaceChar(content.charAt(i)) && x > WRAP_LENGTH){
+				wContent+='\n';
+				x=0;
+			}
+			else{
+				wContent+=content.charAt(i);
+				x++;
+			}
+			i++;
+		}
+		return wContent;		
+	}
+	
 	
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		g.setColor(Color.BLACK);
-		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		super.paint(g);
 	}
 
