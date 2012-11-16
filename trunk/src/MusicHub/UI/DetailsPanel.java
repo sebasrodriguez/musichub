@@ -35,7 +35,7 @@ public class DetailsPanel extends BasicPanel {
 		
 		try {
 			image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
-			image= image.getScaledInstance(120, 100, Image.SCALE_DEFAULT);			
+			image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);			
 			
 			
 		} catch (MalformedURLException e1) {
@@ -46,6 +46,9 @@ public class DetailsPanel extends BasicPanel {
 			e.printStackTrace();
 		} 
 		
+		this.content=content;
+		this.title=title;
+		
 		
 		HIcon ico=null;
 		ico = new HIcon(image);
@@ -54,30 +57,31 @@ public class DetailsPanel extends BasicPanel {
 	
 		ico.setBounds(10, 50, 120, 100);
 		
-		HText titleText= new HText(title);
+		HText titleText= new HText(this.title);
 		titleText.setFont(new Font("tiresias",Font.BOLD,13));
 		titleText.setForeground(Color.WHITE);
 		titleText.setBounds(10, 10, this.getWidth(), 20);
-		titleText.setHorizontalAlignment(titleText.HALIGN_LEFT);
+		titleText.setHorizontalAlignment(titleText.HALIGN_LEFT);		
 		
+		System.out.println("titu" + titleText);
 		
-		if(isTooLength(content)){
-			content=wrapContent(content);
+		if(isTooLength(this.content)){
+			this.content=wrapContent(this.content);
 		}
 		
-		HText contentText= new HText(content);
+		HText contentText= new HText(this.content);
 		contentText.setFont(new Font("tiresias",Font.PLAIN,13));
 		contentText.setForeground(Color.WHITE);
-		contentText.setBounds(10, 150, this.getWidth(), this.getHeight()-10);
+		contentText.setBounds(10, 180, this.getWidth(), this.getHeight()-10);
 		contentText.setHorizontalAlignment(contentText.HALIGN_LEFT);
 		contentText.setVerticalAlignment(contentText.VALIGN_TOP);
 		
 		
 		this.add(contentText);
 		this.add(titleText);
+		
 		this.add(ico);
 		this.popToFront(ico);
-
 		
 	}
 	
