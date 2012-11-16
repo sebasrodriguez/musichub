@@ -140,6 +140,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		switch (e.getKeyCode()) {
 		case 10:
 			this.getMenuParentContainer().selectedOption(itemSelected);
+			
 			break;
 		case 40:
 		case 38:

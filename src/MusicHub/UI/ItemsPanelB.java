@@ -5,20 +5,24 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
 
+import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.Contracts.IMenuContainer;
+import MusicHub.UI.Views.ContentView;
 
 public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	
 	private UMenuScrollable itemsMenu;	
+	private IMenuContainer parent;
 	
-	public ItemsPanelB(List<UOptionItem> itemList, int x, int y, int w, int h){
+	
+	public ItemsPanelB(IMenuContainer container,List<UOptionItem> itemList, int x, int y, int w, int h){
 		super(x, y, w, h);
 		
 		this.setBounds(x, y, w, h);		
 		this.setSize(w, h);
 
-		
-		itemsMenu= new UMenuScrollable(itemList, 10, this, this.getX()+10,this.getY()+10);
+		this.parent=container;
+		itemsMenu= new UMenuScrollable(itemList, 10, this, 10,10);
 		itemsMenu.setSize(this.getWidth(), this.getHeight());
 		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
@@ -38,20 +42,27 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		
 		itemsMenu.requestFocus();
 		g.setColor(Color.BLACK);
-		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		super.paint(g);
 	}
 
 	@Override
 	public void selectedOption(UOptionItem selectedOption) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
+		this.parent.selectedOption(selectedOption);
 		
 	}
 
 	@Override
 	public void stepedOnOption(UOptionItem option) {
 		// TODO Auto-generated method stub
+
 		
+		
+	}
+	
+	public String getItemDescription(String description){
+		return description;
 	}
 	
 	public int getSelectedOption(){
