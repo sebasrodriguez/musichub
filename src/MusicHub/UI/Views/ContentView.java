@@ -48,18 +48,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	public ContentView(RssFeed canal){		
 		this.canal= canal;
 		
-		 
-		
 		HText canalName= new HText(this.canal.getName());
 		canalName.setFont(new Font("tiresias",Font.BOLD,13));
 		canalName.setForeground(Color.WHITE);
 		canalName.setBounds(0, 10, this.getWidth(),50);	
 		
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
-		
-		//this.add(canalName);
-		
-		//itemsPanel = new ItemsPanel(feedList,0, 100, 150, 200);
+
 		itemsPanelB = new ItemsPanelB(this.getItemList(),0, 50, 200	, 400);
 		detailsPanel= new DetailsPanel(210,100,380,400);
 		socialPanel = new SocialPanel(600, 100, 100, 400);
@@ -77,13 +72,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		this.pushToBack(icon);
 		this.popToFront(socialPanel);
 		
-		//FocusManager.getCurrentManager().focusNextComponent();
-		//System.out.println(((UMenuScrollable)FocusManager.getCurrentManager().getFocusOwner()).getNumItems());
-		
-		
-		
-		//itemsPanelB.requestFocus();
-		
+	
 	
 	}	
 	
@@ -153,18 +142,22 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			
 			System.out.println(feed.getImageUrl());
 			HIcon ico=null;
+			UOptionItem nItem;
 			
 			//aux=aux.getScaledInstance(20, 20, Image.SCALE_DEFAULT);	
 			
 				
-				if(!feed.getImageUrl().equals("")){
-					//ico = new HIcon(Toolkit.getDefaultToolkit().getImage(new URL(feed.getImageUrl())));
-					ico = new HIcon(Toolkit.getDefaultToolkit().getImage(feed.getImageUrl()));
-					ico.setBounds(60, 0, 20, 20);
-				}
+			if(!feed.getImageUrl().equals("")){
+				//ico = new HIcon(Toolkit.getDefaultToolkit().getImage(new URL(feed.getImageUrl())));
+				//ico.setBounds(0, 0, 20, 20);
+				
+				nItem= new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed ,150,50);		
+			}
+			else{
+				nItem= new UOptionItem(null, feed.getTitle(), feed ,150,50);		
+			}
 			//UOptionItem nItem= new UOptionItem(ico, "tt", feed ,300,50);
-			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(), feed ,150,50);
-			
+			//UOptionItem nItem= new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed ,150,50);			
 			itemList.add(nItem);
 			
 			
