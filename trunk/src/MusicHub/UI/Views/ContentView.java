@@ -55,18 +55,26 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
 
-		itemsPanelB = new ItemsPanelB(this.getItemList(),0, 50, 200	, 400);
+		itemsPanelB = new ItemsPanelB(this,this.getItemList(),0, 100, 200, 400);
 		detailsPanel= new DetailsPanel(210,100,380,400);
 		socialPanel = new SocialPanel(600, 100, 100, 400);
 		
+		HText votosText= new HText("Votos: " + String.valueOf(canal.getVotes()));
+		votosText.setFont(new Font("tiresias",Font.BOLD,13));
+		votosText.setForeground(Color.BLACK);
+		votosText.setBackground(Color.WHITE);
+		votosText.setBounds(480, 65, 200, 30);
+		votosText.setHorizontalAlignment(votosText.HALIGN_RIGHT);
+		
 		
 		//Muestro en el panel la info del primer Item del Feed
-		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
+		//((DetailsPanel)detailsPanel).showItem(feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
 		
 		this.add(itemsPanelB);	
 		this.add(socialPanel);
 		this.add(detailsPanel);
+		this.add(votosText);
 		
 		this.add(canalName);
 		this.pushToBack(icon);
@@ -131,6 +139,12 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	@Override
 	public void stepedOnOption(UOptionItem option) {
 		// TODO Auto-generated method stub
+	/*RssItem it= new RssItem();
+		it.setTitle(((RssItem) option.getValue()).getTitle());
+		it.setImageUrl(((RssItem) option.getValue()).getImageUrl());
+		it.setContent(((RssItem) option.getValue()).getContent());
+		
+		((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());*/
 		
 	}
 	
@@ -185,6 +199,17 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	@Override
 	public void selectedOption(UOptionItem selectedOption) {
 		// TODO Auto-generated method stub
+		
+		RssItem it= new RssItem();
+		it.setTitle(((RssItem) selectedOption.getValue()).getTitle());
+		it.setImageUrl(((RssItem) selectedOption.getValue()).getImageUrl());
+		it.setContent(((RssItem) selectedOption.getValue()).getContent());
+		
+		
+		
+		((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());
+		((DetailsPanel)detailsPanel).repaint();
+		
 		
 	}
 

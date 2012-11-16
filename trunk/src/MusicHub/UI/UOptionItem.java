@@ -34,7 +34,7 @@ public class UOptionItem extends HContainer {
 		//this.setBackground(Color.DARK_GRAY);		
 		this.title = title;
 		button = new HTextButton(title);		
-		button.setBounds(0, 0, this.getWidth(), Conf.getItemHeight());
+		button.setBounds(10, 0, this.getWidth(), Conf.getItemHeight());
 		button.setForeground(Color.white);
 		button.setFont(new Font(Conf.getFontName(), Font.BOLD, Conf.getFontSize()));
 		button.setHorizontalAlignment(HTextButton.HALIGN_LEFT);
@@ -46,7 +46,7 @@ public class UOptionItem extends HContainer {
 				
 				Image image;
 				image= Toolkit.getDefaultToolkit().getImage(new URL(imageUrl));
-				image= image.getScaledInstance(30, 30, Image.SCALE_DEFAULT);	
+				image= image.getScaledInstance(40, 40, Image.SCALE_DEFAULT);	
 				
 				icon = new HIcon(image);
 			} catch (MalformedURLException e) {
@@ -54,12 +54,12 @@ public class UOptionItem extends HContainer {
 				e.printStackTrace();
 			}
 	
-			icon.setBounds(0, 0, 40, 40);
+			icon.setBounds(0, 0, 55, 50);
 			icon.setBackgroundMode(HIcon.BACKGROUND_FILL);
 			icon.setFocusable(false);
 			this.add(icon);
 			this.popToFront(icon);
-			button.setBounds(40, 0, this.getWidth(), this.getHeight());
+			button.setBounds(50, 0, this.getWidth(), this.getHeight());
 		}
 		
 		

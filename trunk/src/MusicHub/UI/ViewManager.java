@@ -9,6 +9,7 @@ import org.havi.ui.HSceneTemplate;
 import MusicHub.DataTypes.*;
 import MusicHub.UI.Views.AddChannelView;
 import MusicHub.UI.Views.ChannelsView;
+import MusicHub.UI.Views.ContentView;
 import MusicHub.UI.Views.MainView;
 import MusicHub.UI.Views.TwitterView;
 
