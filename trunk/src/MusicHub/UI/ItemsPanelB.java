@@ -16,8 +16,7 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		
 		this.setBounds(x, y, w, h);		
 		this.setSize(w, h);
-		
-		System.out.println(this.getWidth());
+
 		
 		itemsMenu= new UMenuScrollable(itemList, 10, this, this.getX()+10,this.getY()+10);
 		itemsMenu.setSize(this.getWidth(), this.getHeight());
