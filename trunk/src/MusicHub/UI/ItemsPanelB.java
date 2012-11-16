@@ -37,6 +37,7 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		
+		itemsMenu.requestFocus();
 		g.setColor(Color.BLACK);
 		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		super.paint(g);
