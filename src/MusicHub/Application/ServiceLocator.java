@@ -30,5 +30,9 @@ public class ServiceLocator {
 	public static ITwitterService getTwitterService() {
 		return new TwitterService();
 	}
+	
+	public static IFacebookService getFacebookService(){
+		return new FacebookService();
+	}
 
 }
