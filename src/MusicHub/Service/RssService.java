@@ -1,12 +1,9 @@
 package MusicHub.Service;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.horrabin.horrorss.RssItemBean;
 import org.horrabin.horrorss.RssParser;
-
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
@@ -34,6 +31,7 @@ public class RssService implements IRssService {
 				item.setContent(rssItem.getDescription());
 				item.setDate(rssItem.getPubDate());
 				item.setImageUrl(parser.getImageFromRssContent(rssItem.getDescription()));
+				item.setItemUrl(rssItem.getLink());
 				item.setVotes(66);
 
 				items.add(item);
