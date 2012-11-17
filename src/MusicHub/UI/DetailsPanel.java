@@ -43,7 +43,9 @@ public class DetailsPanel extends BasicPanel {
 			
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("aca");
 			e1.printStackTrace();
+			image = null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,29 +132,7 @@ public class DetailsPanel extends BasicPanel {
 		super.paint(g);
 	}
 	
-	/*public void setDescription(String description){
-		
-		
-	}
 	
-	public void setTitle(String title){
-		titleText.setTextContent(title, HState.ALL_STATES);
-	}
-	
-	public void setImg(String imagen){		
-		
-		try {
-			System.out.println("imgurl: " + imagen);
-			image= Toolkit.getDefaultToolkit().getImage(new URL(imagen));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);	
-
-		ico.setGraphicContent(image, HState.ALL_STATES);
-		ico.repaint();
-	}*/
 	
 	public Image getImage(){		
 		return this.image;
@@ -163,8 +143,7 @@ public class DetailsPanel extends BasicPanel {
 		if(isTooLength(desc)){
 			desc=wrapContent(desc);
 		}
-		contentText.setTextContent(desc, HState.ALL_STATES);
-		
+		contentText.setTextContent(desc, HState.ALL_STATES);		
 		titleText.setTextContent(title, HState.ALL_STATES);
 		
 		try {

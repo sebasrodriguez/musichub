@@ -53,6 +53,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		canalName.setForeground(Color.WHITE);
 		canalName.setBounds(0, 10, this.getWidth(),50);	
 		
+		//Toma los items del feed seleccionado
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
 
 		itemsPanelB = new ItemsPanelB(this,this.getItemList(),0, 100, 200, 400);
