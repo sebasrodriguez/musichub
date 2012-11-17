@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 
 import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
+import org.havi.ui.HState;
+import org.havi.ui.HStaticText;
 import org.havi.ui.HText;
 
 
@@ -23,8 +25,9 @@ public class DetailsPanel extends BasicPanel {
 	private String content;
 	private String imgURL;
 	private Image image;
-	//private BufferedImage bfImage;
-	//private BufferedImage rescaledImg;
+	private HText titleText;
+	private HText contentText;
+	private HIcon ico;
 	
 	public DetailsPanel(int x, int y, int w, int h){	
 		super(x,y,w,h);
@@ -32,7 +35,7 @@ public class DetailsPanel extends BasicPanel {
 	}
 	
 	public void showItem(String title, String content, String imgURL){
-		
+
 		try {
 			image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
 			image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);			
@@ -48,16 +51,23 @@ public class DetailsPanel extends BasicPanel {
 		
 		this.content=content;
 		this.title=title;
+		//this.setImg(imgURL);
 		
 		
-		HIcon ico=null;
-		ico = new HIcon(image);
+		ico=null;
+		
+		if(getImage()!=null){
+			ico = new HIcon(image);
+			ico.setBounds(10, 50, 120, 100);
+			this.add(ico);
+			this.popToFront(ico);
+		}
 		
 			
 	
-		ico.setBounds(10, 50, 120, 100);
 		
-		HText titleText= new HText(this.title);
+		
+		titleText= new HText(this.title);
 		titleText.setFont(new Font("tiresias",Font.BOLD,13));
 		titleText.setForeground(Color.WHITE);
 		titleText.setBounds(10, 10, this.getWidth(), 20);
@@ -69,7 +79,7 @@ public class DetailsPanel extends BasicPanel {
 			this.content=wrapContent(this.content);
 		}
 		
-		HText contentText= new HText(this.content);
+		contentText= new HText(this.content);
 		contentText.setFont(new Font("tiresias",Font.PLAIN,13));
 		contentText.setForeground(Color.WHITE);
 		contentText.setBounds(10, 180, this.getWidth(), this.getHeight()-10);
@@ -80,8 +90,7 @@ public class DetailsPanel extends BasicPanel {
 		this.add(contentText);
 		this.add(titleText);
 		
-		this.add(ico);
-		this.popToFront(ico);
+		
 		
 	}
 	
@@ -120,5 +129,59 @@ public class DetailsPanel extends BasicPanel {
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		super.paint(g);
 	}
+	
+	/*public void setDescription(String description){
+		
+		
+	}
+	
+	public void setTitle(String title){
+		titleText.setTextContent(title, HState.ALL_STATES);
+	}
+	
+	public void setImg(String imagen){		
+		
+		try {
+			System.out.println("imgurl: " + imagen);
+			image= Toolkit.getDefaultToolkit().getImage(new URL(imagen));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);	
+
+		ico.setGraphicContent(image, HState.ALL_STATES);
+		ico.repaint();
+	}*/
+	
+	public Image getImage(){		
+		return this.image;
+	}
+	
+	public void updateContent(String desc, String title, String imgSrc){
+		
+		if(isTooLength(desc)){
+			desc=wrapContent(desc);
+		}
+		contentText.setTextContent(desc, HState.ALL_STATES);
+		
+		titleText.setTextContent(title, HState.ALL_STATES);
+		
+		try {
+			System.out.println("imgurl: " + imgSrc);
+			image= Toolkit.getDefaultToolkit().getImage(new URL(imgSrc));
+			image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);	
+			ico.setGraphicContent(image, HState.ALL_STATES);
+			ico.repaint();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		
+	}
+	
 
 }
