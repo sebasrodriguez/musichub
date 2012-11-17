@@ -16,6 +16,9 @@ public class Conf {
 	private static String twitterConsumerSecret;
 	private static String twitterAccessToken;
 	private static String twitterSecretToken;
+	private static String facebookAccessToken;
+	private static String facebookId;
+	private static String facebookName;
 
 	/*
 	 * public Conf(){ }
@@ -36,6 +39,10 @@ public class Conf {
 			twitterConsumerSecret = prop.getProperty("twitterConsumerSecret");
 			twitterAccessToken = prop.getProperty("twitterAccessToken");
 			twitterSecretToken = prop.getProperty("twitterSecretToken");
+			facebookAccessToken = prop.getProperty("facebookAccessToken");
+			facebookId = prop.getProperty("facebookId");
+			facebookName = prop.getProperty("facebookName");
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,5 +86,15 @@ public class Conf {
 
 	public static String getTwitterSecretToken() {
 		return twitterSecretToken;
+	}
+	
+	public static String getFacebookAccessToken(){
+		return facebookAccessToken;
+	}
+	public static String getFacebookId(){
+		return facebookId;
+	}
+	public static String getFacebookName(){
+		return facebookName;
 	}
 }
