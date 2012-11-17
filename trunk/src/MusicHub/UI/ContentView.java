@@ -53,13 +53,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		//this.add(canalName);
 		
 		//itemsPanel = new ItemsPanel(feedList,0, 100, 150, 200);
-		itemsPanelB = new ItemsPanelB(this.getItemList(),0, 50, 200	, 400);
+		itemsPanelB = new ItemsPanelB(this,this.getItemList(),0, 50, 200	, 400);
 		detailsPanel= new DetailsPanel(105,50,350,500);
 		socialPanel = new SocialPanel(200, 50, 200, 500);
 		
 		
 		//Muestro en el panel la info del primer Item del Feed
-		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
+		((DetailsPanel)detailsPanel).showItem( feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
 		
 		this.add(itemsPanelB);	
@@ -161,7 +161,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 					ico.setBounds(60, 0, 20, 20);
 				}
 			//UOptionItem nItem= new UOptionItem(ico, "tt", feed ,300,50);
-			UOptionItem nItem= new UOptionItem(ico, feed.getTitle(), feed ,150,50);
+			UOptionItem nItem= new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed ,150,50);
 			
 			itemList.add(nItem);
 			
