@@ -49,17 +49,20 @@ public class UOptionItem extends HContainer {
 				image= image.getScaledInstance(40, 40, Image.SCALE_DEFAULT);	
 				
 				icon = new HIcon(image);
+				icon.setBounds(0, 0, 55, 50);
+				icon.setBackgroundMode(HIcon.BACKGROUND_FILL);
+				icon.setFocusable(false);
+				this.add(icon);
+				this.popToFront(icon);
+				button.setBounds(50, 0, this.getWidth(), this.getHeight());
+				
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				//icon=null;
 			}
 	
-			icon.setBounds(0, 0, 55, 50);
-			icon.setBackgroundMode(HIcon.BACKGROUND_FILL);
-			icon.setFocusable(false);
-			this.add(icon);
-			this.popToFront(icon);
-			button.setBounds(50, 0, this.getWidth(), this.getHeight());
+			
 		}
 		
 		

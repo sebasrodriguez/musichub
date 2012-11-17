@@ -68,7 +68,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 		
 		//Muestro en el panel la info del primer Item del Feed
-		//((DetailsPanel)detailsPanel).showItem(feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
+		((DetailsPanel)detailsPanel).showItem(feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
 		
 		this.add(itemsPanelB);	
@@ -138,14 +138,6 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 
 	@Override
 	public void stepedOnOption(UOptionItem option) {
-		// TODO Auto-generated method stub
-	/*RssItem it= new RssItem();
-		it.setTitle(((RssItem) option.getValue()).getTitle());
-		it.setImageUrl(((RssItem) option.getValue()).getImageUrl());
-		it.setContent(((RssItem) option.getValue()).getContent());
-		
-		((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());*/
-		
 	}
 	
 	private List<UOptionItem> getItemList(){
@@ -162,16 +154,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			
 				
 			if(!feed.getImageUrl().equals("")){
-				//ico = new HIcon(Toolkit.getDefaultToolkit().getImage(new URL(feed.getImageUrl())));
-				//ico.setBounds(0, 0, 20, 20);
-				
+
 				nItem= new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed ,150,50);		
 			}
 			else{
 				nItem= new UOptionItem(null, feed.getTitle(), feed ,150,50);		
 			}
-			//UOptionItem nItem= new UOptionItem(ico, "tt", feed ,300,50);
-			//UOptionItem nItem= new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed ,150,50);			
+					
 			itemList.add(nItem);
 			
 			
@@ -207,8 +196,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 		
 		
-		((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());
-		((DetailsPanel)detailsPanel).repaint();
+		//((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());
+		/*((DetailsPanel)detailsPanel).setDescription(it.getContent());
+		((DetailsPanel)detailsPanel).setTitle(it.getTitle());
+		((DetailsPanel)detailsPanel).setImg(it.getImageUrl());*/
+		
+		((DetailsPanel)detailsPanel).updateContent(it.getContent(),it.getTitle(), it.getImageUrl());
+		
 		
 		
 	}
