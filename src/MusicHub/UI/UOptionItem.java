@@ -73,10 +73,6 @@ public class UOptionItem extends HContainer {
 				}
 			});th.start();
 			
-					
-			
-	
-			
 		}
 		
 		
