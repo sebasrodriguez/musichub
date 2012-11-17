@@ -19,6 +19,11 @@ public class Conf {
 	private static String facebookAccessToken;
 	private static String facebookId;
 	private static String facebookName;
+	private static String voteUrl;
+	private static String feedVotes;
+	private static String itemVotes;
+	private static int group;
+	
 
 	/*
 	 * public Conf(){ }
@@ -42,7 +47,11 @@ public class Conf {
 			facebookAccessToken = prop.getProperty("facebookAccessToken");
 			facebookId = prop.getProperty("facebookId");
 			facebookName = prop.getProperty("facebookName");
-			
+			voteUrl = prop.getProperty("voteUrl");
+			feedVotes = prop.getProperty("feedVotes");
+			itemVotes = prop.getProperty("itemVotes");
+			group = Integer.parseInt(prop.getProperty("group"));
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,14 +96,32 @@ public class Conf {
 	public static String getTwitterSecretToken() {
 		return twitterSecretToken;
 	}
-	
-	public static String getFacebookAccessToken(){
+
+	public static String getFacebookAccessToken() {
 		return facebookAccessToken;
 	}
-	public static String getFacebookId(){
+
+	public static String getFacebookId() {
 		return facebookId;
 	}
-	public static String getFacebookName(){
+
+	public static String getFacebookName() {
 		return facebookName;
+	}
+	
+	public static String getVoteUrl(){
+		return voteUrl;
+	}
+	
+	public static String getFeedVotes(){
+		return feedVotes;
+	}
+	
+	public static String getItemVotes(){
+		return itemVotes;
+	}
+	
+	public static int getGroup(){
+		return group;
 	}
 }
