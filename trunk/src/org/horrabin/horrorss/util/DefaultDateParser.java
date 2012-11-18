@@ -59,7 +59,6 @@ public class DefaultDateParser implements DateParser {
 			  SimpleDateFormat sd = new SimpleDateFormat(pattern, Locale.ENGLISH);
 			  res = sd.parse(date);
 		  } catch (Exception e) {
-			  System.out.println("Error parsing date: " + date + " [Type: " + rssType + "] --" + e.toString());
 			  //throw e;
 		  }	  
 		  
