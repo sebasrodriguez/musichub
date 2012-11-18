@@ -6,7 +6,7 @@ import MusicHub.DataTypes.RssItem;
 public interface IVoteService {
 	
 	public void voteRssItem(RssFeed rssFeed, RssItem rssItem); 
-	public int getRssItemVotes(); //para la noticia
-	public int getRssFeedVotes(); //para el canal
+	public int getRssItemVotes(RssItem rssItem,  RssFeed rssFeed); //para la noticia
+	public int getRssFeedVotes(RssFeed rssFeed); //para el canal
 
 }

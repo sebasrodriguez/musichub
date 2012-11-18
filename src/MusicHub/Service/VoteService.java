@@ -26,13 +26,12 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 	@Override
 	public void voteRssItem(RssFeed rssFeed, RssItem rssItem) {
 		// TODO Auto-generated method stub
-		String url = Conf.getVoteUrl();
 		
+		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
 		
-				
+		String answer = this.sendData(finalUrl, "POST");
 		
-		
-
+		System.out.println(answer);
 	}
 
 /*	Parámetros entrada: 
@@ -41,9 +40,19 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 		• [ch] canal -> código del canal al que pertence el artículo
 		ejemplo: http://www.evolutiion.com/ude/damevotos?g=1&c=abcd&ch=xyz */
 	@Override
-	public int getRssItemVotes() {
+	public int getRssItemVotes(RssItem rssItem, RssFeed rssFeed) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
+		String answer = this.sendData(finalUrl, "GET");
+		
+		answer = answer.replace("{", "");
+		answer = answer.replace("}", "");
+		String answers[] = answer.split(",");
+		String answers2[] = answers[2].split(":");	
+		String answerFinal = answers2[1].replace("\"", "");
+	
+		return Integer.parseInt(answerFinal);		
 	}
 
 	
@@ -53,13 +62,22 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 		ejemplo: http://www.evolutiion.com/ude/damevotoscanal?g=1&ch=xyz */
 	
 	@Override
-	public int getRssFeedVotes() {
+	public int getRssFeedVotes(RssFeed rssFeed) {
 		// TODO Auto-generated method stub
-		return 0;
+		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&ch=" + rssFeed.getUrl();
+		String answer = this.sendData(finalUrl, "GET");
+		
+		answer = answer.replace("{", "");
+		answer = answer.replace("}", "");
+		String answers[] = answer.split(",");
+		String answers2[] = answers[2].split(":");		
+	
+		return Integer.parseInt(answers2[1]);
 	}
 
-	private String enviarDatos(String url, String metodo) {
-		String respuesta = "";
+	
+	private String sendData(String url, String method) {
+		String answer = "";
 		HttpURLConnection httpCon = null;
 		URL u = null;
 		BufferedReader rd = null;
@@ -67,7 +85,7 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 		try {
 			u = new URL(url);
 			httpCon = (HttpURLConnection) u.openConnection();
-			httpCon.setRequestMethod(metodo); // GET, POST
+			httpCon.setRequestMethod(method); // GET, POST
 			httpCon.setDoInput(true);
 			httpCon.setDoOutput(true);
 			httpCon.setUseCaches(false);
@@ -75,7 +93,7 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 			rd = new BufferedReader(new InputStreamReader(
 					httpCon.getInputStream()));
 			while ((line = rd.readLine()) != null) {
-				respuesta = respuesta + line;
+				answer = answer + line;
 			}
 			rd.close();
 			if (httpCon != null) {
@@ -89,7 +107,7 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 			httpCon.disconnect();
 			httpCon = null;
 		}
-		return respuesta;
+		return answer;
 	}
 
 }
