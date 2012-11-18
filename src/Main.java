@@ -53,26 +53,8 @@ public class Main implements Xlet, KeyListener {
 
 	@Override
 	public void startXlet() throws XletStateChangeException {
-		/*viewManager = ViewManager.getInstance();
-		viewManager.loadInitialView();*/
-		/*TwitterService tws = new TwitterService();
-		Random i = new Random();		
-		tws.postTweet("Prueba desde MusicHub " + i.nextInt());
-		List<Tweet> twts = tws.getTweets();
-		if(twts == null){
-			System.out.println("No hay twitts");
-		}else{
-			Iterator<Tweet> itAux = twts.iterator();
-			while(itAux.hasNext()){
-				Tweet twAux = itAux.next();
-				System.out.println(twAux.getUser() + " : " + twAux.getText());
-			}
-		}*/
-		FacebookService fbs = new FacebookService();
-		Random i = new Random();
-		fbs.postFacebook("Post desde java " + i.nextInt());
-		
-		
+		viewManager = ViewManager.getInstance();
+		viewManager.loadInitialView();
 	}
 
 }
