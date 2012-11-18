@@ -27,8 +27,7 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 	public void voteRssItem(RssFeed rssFeed, RssItem rssItem) {
 		// TODO Auto-generated method stub
 		
-		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
-		
+		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();		
 		String answer = this.sendData(finalUrl, "POST");
 		
 		System.out.println(answer);
