@@ -28,9 +28,9 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 		// TODO Auto-generated method stub
 		
 		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();		
-		String answer = this.sendData(finalUrl, "POST");
+		String answer = this.sendData(finalUrl, "GET");
 		
-		System.out.println(answer);
+		//System.out.println("vote answer: " + answer);
 	}
 
 /*	Parámetros entrada: 
@@ -42,7 +42,7 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 	public int getRssItemVotes(RssItem rssItem, RssFeed rssFeed) {
 		// TODO Auto-generated method stub
 		
-		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
+		String finalUrl = Conf.getItemVotes() + "?g=" + Conf.getGroup() + "&c=" + rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
 		String answer = this.sendData(finalUrl, "GET");
 		
 		answer = answer.replace("{", "");
@@ -63,15 +63,15 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 	@Override
 	public int getRssFeedVotes(RssFeed rssFeed) {
 		// TODO Auto-generated method stub
-		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&ch=" + rssFeed.getUrl();
+		String finalUrl = Conf.getFeedVotes() + "?g=" + Conf.getGroup() + "&ch=" + rssFeed.getUrl();
 		String answer = this.sendData(finalUrl, "GET");
-		
+		//System.out.println("getRssFeedVotes answer: " + answer);
 		answer = answer.replace("{", "");
 		answer = answer.replace("}", "");
 		String answers[] = answer.split(",");
 		String answers2[] = answers[2].split(":");		
 	
-		return Integer.parseInt(answers2[1]);
+		return Integer.parseInt(answers2[1].replace("\"", ""));
 	}
 
 	
@@ -107,6 +107,19 @@ ejemplo: http://www.evolutiion.com/ude/agregarvoto?g=1&c=abcd&ch=xyz
 			httpCon = null;
 		}
 		return answer;
+	}
+
+	@Override
+	public void cleanVotes() {
+		// TODO Auto-generated method stub
+		// http://www.evolutiion.com/ude/limpiar?g=1
+		String finalUrl = Conf.getCleanUrl() + "?g=" + Conf.getGroup();	 
+		String answer = this.sendData(finalUrl, "GET");
+		
+		//System.out.println("clean answer: " + answer);
+	
+			 
+		
 	}
 
 }

@@ -22,6 +22,7 @@ public class Conf {
 	private static String voteUrl;
 	private static String feedVotes;
 	private static String itemVotes;
+	private static String cleanUrl;
 	private static int group;
 	
 
@@ -50,6 +51,7 @@ public class Conf {
 			voteUrl = prop.getProperty("voteUrl");
 			feedVotes = prop.getProperty("feedVotes");
 			itemVotes = prop.getProperty("itemVotes");
+			cleanUrl = prop.getProperty("cleanUrl");
 			group = Integer.parseInt(prop.getProperty("group"));
 
 		} catch (FileNotFoundException e) {
@@ -119,6 +121,10 @@ public class Conf {
 	
 	public static String getItemVotes(){
 		return itemVotes;
+	}
+	
+	public static String getCleanUrl(){
+		return cleanUrl;
 	}
 	
 	public static int getGroup(){

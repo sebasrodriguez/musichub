@@ -34,5 +34,18 @@ public class ServiceLocator {
 	public static IFacebookService getFacebookService(){
 		return new FacebookService();
 	}
+	
+	public static IFacebookManager getFacebookManager(){
+		return new FacebookManager();
+	}
+	
+	public static IVoteManager getVoteManager(){
+		return new VoteManager();
+	}
+	
+	public static IVoteService getVoteService(){
+		return new VoteService();
+	}
+	
 
 }
