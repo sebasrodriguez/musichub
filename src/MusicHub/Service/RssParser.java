@@ -1,9 +1,8 @@
 package MusicHub.Service;
 
+import MusicHub.Service.Contracts.IRssParser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import MusicHub.Service.Contracts.IRssParser;
 
 public class RssParser implements IRssParser {
 
@@ -20,6 +19,11 @@ public class RssParser implements IRssParser {
 			}
 		}
 		return "";
+	}
+	
+	@Override
+	public String cleanHtml(String rssContent){
+		return rssContent.replaceAll("\\<.*?\\>", "");
 	}
 
 }

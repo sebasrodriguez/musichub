@@ -28,7 +28,7 @@ public class RssService implements IRssService {
 
 				item = new RssItem();
 				item.setTitle(rssItem.getTitle());
-				item.setContent(rssItem.getDescription());
+				item.setContent(parser.cleanHtml(rssItem.getDescription()));
 				item.setDate(rssItem.getPubDate());
 				item.setImageUrl(parser.getImageFromRssContent(rssItem.getDescription()));
 				item.setItemUrl(rssItem.getLink());
