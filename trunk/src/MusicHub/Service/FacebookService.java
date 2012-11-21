@@ -55,6 +55,6 @@ public class FacebookService implements IFacebookService{
 	
 	/*
 	 * Para extender el token por mas tiempo acceder a la URL (CAMBIANDO LOS DATOS POR LOS NUESTROS)
-	 * https://graph.facebook.com/oauth/access_token?client_id=371788166232987&client_secret=dee98a211a570a74ece49ad72bd2ab50&grant_type=fb_exchange_token&fb_exchange_token=EXISTING_ACCESS_TOKEN
+	 * https://graph.facebook.com/oauth/access_token?client_id=371669686256588&client_secret=aaa7c6f551165355813dea5fe581f85a&grant_type=fb_exchange_token&fb_exchange_token=EXISTING_ACCESS_TOKEN
 	 */
 }
