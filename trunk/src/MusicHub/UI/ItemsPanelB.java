@@ -3,6 +3,9 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import MusicHub.DataTypes.RssItem;
@@ -27,6 +30,7 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
 		this.popToFront(itemsMenu);
+		//addKeyListener(this);
 		
 	}
 	
@@ -72,7 +76,21 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
 		// TODO Auto-generated method stub
+		System.out.println(keyCode);
+		this.parent.unmanagedMenuKey(keyCode);
+		
 		
 	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		itemsMenu.requestFocus();
+		super.focusGained(e);
+
+	}
+
+	
+	
 
 }

@@ -39,10 +39,11 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	private BasicPanel detailsPanel;
 	private BasicPanel socialPanel;
 	
-	private BasicPanel focusedPanel;
+	private BasicPanel selectedPanel;
 	private RssFeed canal;
 	private UMenuScrollable itemsMenu;
 	private List<RssItem> feedItemList;
+	private List<BasicPanel> panelsList;
 	
 	
 	public ContentView(RssFeed canal){		
@@ -53,12 +54,19 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		canalName.setForeground(Color.WHITE);
 		canalName.setBounds(0, 10, this.getWidth(),50);	
 		
+		panelsList = new ArrayList<BasicPanel>();
+		
 		//Toma los items del feed seleccionado
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
 
 		itemsPanelB = new ItemsPanelB(this,this.getItemList(),0, 100, 200, 400);
-		detailsPanel= new DetailsPanel(210,100,380,400);
-		socialPanel = new SocialPanel(600, 100, 100, 400);
+		panelsList.add(itemsPanelB);
+		detailsPanel= new DetailsPanel(this,210,100,380,400);
+		panelsList.add(detailsPanel);
+		socialPanel = new SocialPanel(this,600, 100, 100, 400);
+		panelsList.add(socialPanel);
+		
+
 		
 		HText votosText= new HText("Votos: " + String.valueOf(canal.getVotes()));
 		votosText.setFont(new Font("tiresias",Font.BOLD,13));
@@ -81,6 +89,8 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		this.pushToBack(icon);
 		this.popToFront(socialPanel);
 		
+		selectedPanel = panelsList.get(0);
+		
 	
 	
 	}	
@@ -88,11 +98,26 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	
 
 	
+	public BasicPanel getSelectedPanel() {
+		return selectedPanel;
+	}
+
+
+
+
+	public void setSelectedPanel(BasicPanel selectedPanel) {
+		this.selectedPanel = selectedPanel;
+	}
+
+
+
+
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		//itemsPanelB.requestFocus();
+		
 		super.paint(g);
+		//itemsPanelB.requestFocus();
 		
 	}
 
@@ -180,6 +205,37 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
 		// TODO Auto-generated method stub
+		System.out.println("content: " + keyCode);
+		
+		//System.out.println(FocusManager.getCurrentManager().getFocusOwner());
+		
+		//devuelve el index del panel seleccionado
+		int sel=panelsList.indexOf(selectedPanel);
+		sel++;
+		
+		if(sel>=panelsList.size()){
+			sel=0;
+		}	
+		
+		
+		panelsList.get(sel).requestFocus();
+		selectedPanel=panelsList.get(sel);
+		System.out.println("indexSel: " + sel);
+		System.out.println("panel selec: " + panelsList.get(sel));
+		selectedPanel.repaint();
+		
+		//repaint();
+		
+		
+		
+	//	((DetailsPanel) detailsPanel).requestFocus();
+		//System.out.println(FocusManager.getCurrentManager().getFocusOwner());
+		
+		//selectedPanel.setMove(0,detailsPanel);
+		
+		
+		
+		
 		
 	}
 

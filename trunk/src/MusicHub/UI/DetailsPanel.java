@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,8 +20,10 @@ import org.havi.ui.HState;
 import org.havi.ui.HStaticText;
 import org.havi.ui.HText;
 
+import MusicHub.UI.Contracts.IMenuContainer;
 
-public class DetailsPanel extends BasicPanel {
+
+public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListener{
 	
 	private String title;
 	private String content;
@@ -28,10 +32,12 @@ public class DetailsPanel extends BasicPanel {
 	private HText titleText;
 	private HText contentText;
 	private HIcon ico;
+	private IMenuContainer parent;
 	
-	public DetailsPanel(int x, int y, int w, int h){	
+	public DetailsPanel(IMenuContainer parent,int x, int y, int w, int h){	
 		super(x,y,w,h);
 		this.setBounds(x, y, w, h);
+		this.parent=parent;
 	}
 	
 	public void showItem(String title, String content, String imgURL){
@@ -53,6 +59,7 @@ public class DetailsPanel extends BasicPanel {
 		
 		this.content=content;
 		this.title=title;
+		
 		//this.setImg(imgURL);
 		
 		
@@ -92,6 +99,7 @@ public class DetailsPanel extends BasicPanel {
 		this.add(contentText);
 		this.add(titleText);
 		
+		addKeyListener(this);
 		
 		
 	}
@@ -147,18 +155,63 @@ public class DetailsPanel extends BasicPanel {
 		titleText.setTextContent(title, HState.ALL_STATES);
 		
 		try {
-			System.out.println("imgurl: " + imgSrc);
-			image= Toolkit.getDefaultToolkit().getImage(new URL(imgSrc));
-			image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);	
-			ico.setGraphicContent(image, HState.ALL_STATES);
-			ico.repaint();
+			if(!imgSrc.equals("")){
+				image= Toolkit.getDefaultToolkit().getImage(new URL(imgSrc));
+				image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);	
+				ico.setGraphicContent(image, HState.ALL_STATES);
+				ico.repaint();
+			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}		
 		
+	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		switch (e.getKeyCode()) {
+		case 10:
+			System.out.println("details enter...");
+			break;
+		default:
+			this.parent.unmanagedMenuKey(e.getKeyCode());
+			break;
+
+			}
 		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void selectedOption(UOptionItem selectedOption) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepedOnOption(UOptionItem option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unmanagedMenuKey(int keyCode) {
+		// TODO Auto-generated method stub
+		this.parent.unmanagedMenuKey(keyCode);
 		
 	}
 	
