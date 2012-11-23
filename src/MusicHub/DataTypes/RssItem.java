@@ -13,7 +13,6 @@ public class RssItem implements Serializable {
 	private String content;
 	private int votes;
 	private String imageUrl;
-	private List<Comment> comments;
 	private String itemUrl;
 
 	public String getTitle() {
@@ -54,14 +53,6 @@ public class RssItem implements Serializable {
 
 	public void setVotes(int votes) {
 		this.votes = votes;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 	
 	public String getItemUrl(){
