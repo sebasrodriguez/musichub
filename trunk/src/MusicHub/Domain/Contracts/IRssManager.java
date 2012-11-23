@@ -9,6 +9,6 @@ public interface IRssManager {
 	List<RssFeed> getRssFeeds();
 	List<RssItem> getRssItems(RssFeed feed);	
 	RssFeed addFeed(String url);
-	void voteRss(RssItem item);
+	void addComment(RssItem rssItem, String comment);
 
 }

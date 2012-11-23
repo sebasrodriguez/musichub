@@ -14,7 +14,7 @@ import MusicHub.UI.Controls.VideoResizer;
 
 public class ChannelsView extends BasicContainer {
 
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	private FeedDescriptionBox descriptionBox;
 
 	public ChannelsView(XletContext context) {

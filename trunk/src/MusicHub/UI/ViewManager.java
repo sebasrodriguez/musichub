@@ -7,11 +7,7 @@ import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
 import MusicHub.DataTypes.*;
-import MusicHub.UI.Views.AddChannelView;
-import MusicHub.UI.Views.ChannelsView;
-import MusicHub.UI.Views.ContentView;
-import MusicHub.UI.Views.MainView;
-import MusicHub.UI.Views.TwitterView;
+import MusicHub.UI.Views.*;
 
 public class ViewManager extends HContainer {
 
@@ -25,13 +21,14 @@ public class ViewManager extends HContainer {
 	private ContentView contentsView;
 	private TwitterView twitterView;
 	private AddChannelView addChannelView;
+	private CommentsView commentsView;
 
 	private ViewManager(XletContext context) {
 		this.context = context;
 	}
-	
-	public static ViewManager getInstance(){
-		if(instance == null){
+
+	public static ViewManager getInstance() {
+		if (instance == null) {
 			instance = new ViewManager(null);
 		}
 		return instance;
@@ -77,6 +74,11 @@ public class ViewManager extends HContainer {
 			scene.add(contentsView);
 			visibleView = contentsView;
 		}
+		else if (newView == "ContentView-CommentsView") {
+			contentsView = (ContentView) args[0];
+			scene.add(contentsView);
+			visibleView = contentsView;
+		}
 		else if (newView == "TwitterView") {
 			twitterView = new TwitterView();
 			scene.add(twitterView);
@@ -86,6 +88,11 @@ public class ViewManager extends HContainer {
 			addChannelView = new AddChannelView();
 			scene.add(addChannelView);
 			visibleView = addChannelView;
+		}
+		else if (newView == "CommentsView") {
+			commentsView = new CommentsView((RssItem) args[0], (ContentView) args[1]);
+			scene.add(commentsView);
+			visibleView = commentsView;
 		}
 
 		scene.repaint();

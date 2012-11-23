@@ -13,11 +13,11 @@ public class RssManager implements IRssManager {
 	public List<RssFeed> getRssFeeds() {
 		List<RssFeed> feeds = ServiceLocator.getStorageService().getRssFeeds();
 		IVoteManager voteManager = ServiceLocator.getVoteManager();
-		
+
 		for (RssFeed rssFeed : feeds) {
 			rssFeed.setVotes(voteManager.getRssFeedVotes(rssFeed));
 		}
-		
+
 		return feeds;
 	}
 
@@ -39,7 +39,8 @@ public class RssManager implements IRssManager {
 	}
 
 	@Override
-	public void voteRss(RssItem item) {
+	public void addComment(RssItem rssItem, String comment) {
+		ServiceLocator.getStorageService().addComment(rssItem, comment);
 	}
 
 }
