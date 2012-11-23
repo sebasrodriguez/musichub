@@ -5,12 +5,20 @@ import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.Domain.Contracts.IRssManager;
+import MusicHub.Domain.Contracts.IVoteManager;
 
 public class RssManager implements IRssManager {
 
 	@Override
 	public List<RssFeed> getRssFeeds() {
-		return ServiceLocator.getStorageService().getRssFeeds();
+		List<RssFeed> feeds = ServiceLocator.getStorageService().getRssFeeds();
+		IVoteManager voteManager = ServiceLocator.getVoteManager();
+		
+		for (RssFeed rssFeed : feeds) {
+			rssFeed.setVotes(voteManager.getRssFeedVotes(rssFeed));
+		}
+		
+		return feeds;
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package MusicHub.Service;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import MusicHub.DataTypes.RssFeed;
+import MusicHub.DataTypes.RssItem;
 import MusicHub.Service.Contracts.IStorageService;
 
 public class StorageService implements IStorageService {
@@ -28,11 +31,6 @@ public class StorageService implements IStorageService {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		Random random = new Random();
-		for (RssFeed rssFeed : rssFeeds) {
-			rssFeed.setVotes(random.nextInt(100));
 		}
 
 		Collections.sort(rssFeeds, new Comparator<RssFeed>() {
@@ -62,4 +60,19 @@ public class StorageService implements IStorageService {
 		}
 	}
 
+	public void addComment(RssItem rssItem, String comment) {
+		StringBuilder formattedComment = new StringBuilder();
+
+		formattedComment.append("\n\nRss:" + rssItem.getTitle() + "\n");
+		formattedComment.append("Comentario:\n" + comment);
+
+		try {
+			FileWriter out = new FileWriter("../assets/comments.txt", true);
+			out.write(formattedComment.toString());
+			out.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
