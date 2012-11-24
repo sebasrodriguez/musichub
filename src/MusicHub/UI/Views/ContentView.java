@@ -48,6 +48,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	private List<RssItem> feedItemList;
 	private List<BasicPanel> panelsList;
 	private RssItem itemSelected;
+	private HText votosText;
 	
 	
 	public ContentView(RssFeed canal){		
@@ -77,7 +78,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 
 		
-		HText votosText= new HText("Votos: " + String.valueOf(canal.getVotes()));
+		votosText= new HText("Votos: " + String.valueOf(canal.getVotes()));
 		votosText.setFont(new Font("tiresias",Font.BOLD,13));
 		votosText.setForeground(Color.BLACK);
 		votosText.setBackground(Color.WHITE);
@@ -255,10 +256,10 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 				
 				break;
 				
-			case ControlKeyConstants.EXIT:
-				
-				HSceneFactory.getInstance().dispose(..);
+			case ControlKeyConstants.EXIT:					
+				ViewManager.getInstance().exitApplication();
 				break;
+				
 			default:
 				
 				break;
@@ -300,6 +301,18 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 
 		ViewManager.getInstance().changeView("CommentsView", args);
+	}
+	
+	public void votar(){		
+		ServiceLocator.getVoteManager().voteRssItem(canal, itemSelected);
+		int votos=canal.getVotes();
+		votos++;
+		
+		canal.setVotes(votos);
+		votosText.setTextContent("Votos: " + String.valueOf(votos), HText.ALL_STATES);
+		votosText.repaint();
+		
+		
 	}
 	
 	
