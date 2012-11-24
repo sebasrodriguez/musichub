@@ -81,27 +81,26 @@ public class StorageService implements IStorageService {
 
 	@Override
 	public String getAbout() {
-		// TODO Auto-generated method stub
 		String aboutToReturn = "";
-		
+
 		try {
 			BufferedReader buffReader = new BufferedReader(new FileReader("../assets/Help.txt"));
-			
+
 			StringBuilder strBuilder = new StringBuilder();
 			String line = buffReader.readLine();
-			
-			while(line != null){
+
+			while (line != null) {
 				strBuilder.append(line);
 				strBuilder.append("\n");
 				line = buffReader.readLine();
 			}
-			
+
 			aboutToReturn = strBuilder.toString();
 			buffReader.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}			
+		}
 		return aboutToReturn;
 	}
 }
