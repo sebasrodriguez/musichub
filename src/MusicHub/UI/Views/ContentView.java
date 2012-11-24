@@ -30,6 +30,7 @@ import MusicHub.UI.ItemsPanelB;
 import MusicHub.UI.SocialPanel;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
+import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
 
 public class ContentView extends BasicContainer implements IMenuContainer, KeyListener{
@@ -44,6 +45,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	private UMenuScrollable itemsMenu;
 	private List<RssItem> feedItemList;
 	private List<BasicPanel> panelsList;
+	private RssItem itemSelected;
 	
 	
 	public ContentView(RssFeed canal){		
@@ -90,27 +92,17 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		this.popToFront(socialPanel);
 		
 		selectedPanel = panelsList.get(0);
-		
-	
 	
 	}	
-	
-	
 
 	
 	public BasicPanel getSelectedPanel() {
 		return selectedPanel;
 	}
 
-
-
-
 	public void setSelectedPanel(BasicPanel selectedPanel) {
 		this.selectedPanel = selectedPanel;
 	}
-
-
-
 
 	@Override
 	public void paint(Graphics g) {
@@ -202,6 +194,23 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 
 
 
+	public RssFeed getCanal() {
+		return canal;
+	}
+
+	public void setCanal(RssFeed canal) {
+		this.canal = canal;
+	}
+
+	public RssItem getItemSelected() {
+		return itemSelected;
+	}
+
+	public void setItemSelected(RssItem itemSelected) {
+		this.itemSelected = itemSelected;
+	}
+
+
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
 		// TODO Auto-generated method stub
@@ -222,25 +231,9 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		selectedPanel=panelsList.get(sel);
 		System.out.println("indexSel: " + sel);
 		System.out.println("panel selec: " + panelsList.get(sel));
-		selectedPanel.repaint();
-		
-		//repaint();
-		
-		
-		
-	//	((DetailsPanel) detailsPanel).requestFocus();
-		//System.out.println(FocusManager.getCurrentManager().getFocusOwner());
-		
-		//selectedPanel.setMove(0,detailsPanel);
-		
-		
-		
-		
+		selectedPanel.repaint();	
 		
 	}
-
-
-
 
 	@Override
 	public void selectedOption(UOptionItem selectedOption) {
@@ -252,21 +245,26 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		it.setContent(((RssItem) selectedOption.getValue()).getContent());
 		
 		
+		setItemSelected(it);
 		
-		//((DetailsPanel)detailsPanel).showItem(it.getTitle(),it.getContent(),it.getImageUrl());
-		/*((DetailsPanel)detailsPanel).setDescription(it.getContent());
-		((DetailsPanel)detailsPanel).setTitle(it.getTitle());
-		((DetailsPanel)detailsPanel).setImg(it.getImageUrl());*/
 		
-		((DetailsPanel)detailsPanel).updateContent(it.getContent(),it.getTitle(), it.getImageUrl());
-		
+		((DetailsPanel)detailsPanel).updateContent(it.getContent(),it.getTitle(), it.getImageUrl());	
 		
 		
 	}
 
 
 
+	public void comentar() {
+		System.out.println("Comenta Content");
+		Object args[];
+		args = new Object[3];
+		args[0] = this;
+		args[1] = this.getCanal();
+		args[2] = this.getItemSelected();
 
+		ViewManager.getInstance().changeView("ComentView", args);
+	}
 	
 	
 
