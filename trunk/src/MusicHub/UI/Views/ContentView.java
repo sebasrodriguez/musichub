@@ -78,6 +78,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		votosText.setHorizontalAlignment(votosText.HALIGN_RIGHT);
 		
 		
+		setItemSelected(feedItemList.get(0));
 		//Muestro en el panel la info del primer Item del Feed
 		((DetailsPanel)detailsPanel).showItem(feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
@@ -259,6 +260,8 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		args = new Object[2];
 		args[0] = this;
 		args[1] = this.getItemSelected();
+		
+		
 
 		
 
