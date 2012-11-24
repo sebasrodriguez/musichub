@@ -94,12 +94,19 @@ public class ViewManager extends HContainer {
 			commentsView = new CommentsView((RssItem) args[1], (ContentView) args[0]);
 			scene.add(commentsView);
 			visibleView = commentsView;
-		} else if(newView == "AboutView"){
+		}
+		else if (newView == "AboutView") {
 			aboutView = new AboutView();
 			scene.add(aboutView);
 			visibleView = aboutView;
 		}
 
 		scene.repaint();
+	}
+
+	public void exitApplication() {
+		if (this.scene != null) {
+			HSceneFactory.getInstance().dispose(this.scene);
+		}
 	}
 }
