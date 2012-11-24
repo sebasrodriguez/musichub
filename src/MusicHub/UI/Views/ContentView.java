@@ -168,8 +168,6 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			HIcon ico=null;
 			UOptionItem nItem;
 			
-			//aux=aux.getScaledInstance(20, 20, Image.SCALE_DEFAULT);	
-			
 				
 			if(!feed.getImageUrl().equals("")){
 
@@ -181,10 +179,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 					
 			itemList.add(nItem);
 			
-			
-			
-		/*	RssItemContainer item= new RssItemContainer(feed.getImageUrl(), feed.getTitle());
-			this.add(item);*/
+
 			
 		}
 		
@@ -258,12 +253,11 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	public void comentar() {
 		System.out.println("Comenta Content");
 		Object args[];
-		args = new Object[3];
+		args = new Object[2];
 		args[0] = this;
-		args[1] = this.getCanal();
-		args[2] = this.getItemSelected();
+		args[1] = this.getItemSelected();
 
-		ViewManager.getInstance().changeView("ComentView", args);
+		ViewManager.getInstance().changeView("CommentView", args);
 	}
 	
 	
