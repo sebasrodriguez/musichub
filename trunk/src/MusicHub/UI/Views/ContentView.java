@@ -40,6 +40,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	private List<BasicPanel> panelsList;
 	private RssItem itemSelected;
 	private HText votosText;
+	private HText eventInfo;
 	
 	
 	public ContentView(RssFeed canal){		
@@ -49,6 +50,12 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		canalName.setFont(new Font("tiresias",Font.BOLD,13));
 		canalName.setForeground(Color.WHITE);
 		canalName.setBounds(0, 10, this.getWidth(),50);	
+		
+		eventInfo= new HText();
+		eventInfo.setFont(new Font("tiresias",Font.BOLD,13));
+		eventInfo.setForeground(Color.BLUE);
+		eventInfo.setBackground(Color.WHITE);
+		eventInfo.setBounds(140, 60, 300,40);	
 		
 		panelsList = new ArrayList<BasicPanel>();
 		
@@ -82,6 +89,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		((DetailsPanel)detailsPanel).showItem(feedItemList.get(0).getTitle(),feedItemList.get(0).getContent(),feedItemList.get(0).getImageUrl());	
 		
 		
+		this.add(eventInfo);
 		this.add(itemsPanelB);	
 		this.add(socialPanel);
 		this.add(detailsPanel);
@@ -200,6 +208,11 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		return itemSelected;
 	}
 
+	public HText getEventInfo() {
+		return eventInfo;
+	}
+
+
 	public void setItemSelected(RssItem itemSelected) {
 		this.itemSelected = itemSelected;
 	}
@@ -299,6 +312,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	
 	public void sendTweet(){
 		ServiceLocator.getTwitterManager().postTweet(getItemSelected().getTitle());
+		getEventInfo().setTextContent("Se ha enviado un tweet!!!", HText.ALL_STATES);
 	}
 	
 	
