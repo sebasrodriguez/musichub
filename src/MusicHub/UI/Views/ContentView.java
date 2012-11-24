@@ -234,16 +234,19 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	public void selectedOption(UOptionItem selectedOption) {
 		// TODO Auto-generated method stub
 		
-		RssItem it= new RssItem();
+		setItemSelected((RssItem) selectedOption.getValue());
+		
+		
+		/*RssItem it= new RssItem();
 		it.setTitle(((RssItem) selectedOption.getValue()).getTitle());
 		it.setImageUrl(((RssItem) selectedOption.getValue()).getImageUrl());
-		it.setContent(((RssItem) selectedOption.getValue()).getContent());
+		it.setContent(((RssItem) selectedOption.getValue()).getContent());*/
 		
 		
-		setItemSelected(it);
+		//setItemSelected(it);
 		
 		
-		((DetailsPanel)detailsPanel).updateContent(it.getContent(),it.getTitle(), it.getImageUrl());	
+		((DetailsPanel)detailsPanel).updateContent(getItemSelected().getContent(),getItemSelected().getTitle(), getItemSelected().getImageUrl());	
 		
 		
 	}
@@ -257,7 +260,9 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		args[0] = this;
 		args[1] = this.getItemSelected();
 
-		ViewManager.getInstance().changeView("CommentView", args);
+		
+
+		ViewManager.getInstance().changeView("CommentsView", args);
 	}
 	
 	
