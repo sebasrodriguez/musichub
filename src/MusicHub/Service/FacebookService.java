@@ -27,6 +27,8 @@ public class FacebookService implements IFacebookService{
 		try {
 			String messageToPost = URLEncoder.encode(toPost, "UTF-8");
 			
+			System.out.println("post: " + toPost);
+			
 			//URL url = new URL("https://graph.facebook.com/" + Conf.getFacebookId() + "/feed?access_token=" + Conf.getFacebookAccessToken());
 			URL url = new URL("https://graph.facebook.com/me/feed?access_token=" + Conf.getFacebookAccessToken());
 			URLConnection urlConnection = url.openConnection();
