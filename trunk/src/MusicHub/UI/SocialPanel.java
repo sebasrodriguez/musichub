@@ -17,6 +17,9 @@ import org.havi.ui.event.HRcEvent;
 
 
 
+import MusicHub.Application.ServiceLocator;
+import MusicHub.DataTypes.RssItem;
+import MusicHub.Service.TwitterService;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Views.ContentView;
 
@@ -29,15 +32,18 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 	private HGraphicButton fcbkBtn;
 	private HGraphicButton [] accButtons;
 	private int selected=0;
+	private RssItem itemSelected;
 	
 	
-	public SocialPanel(IMenuContainer parent,int x, int y, int w, int h) {
+	public SocialPanel(IMenuContainer parent,RssItem itemSelected,int x, int y, int w, int h) {
 		super(x, y, w, h);
 		// TODO Auto-generated constructor stub
 		
 		this.setBounds(x, y, w, h);		
 		this.setSize(w, h);
 		this.parent=parent;
+		this.itemSelected=itemSelected;
+		
 		
 		
 		
@@ -55,7 +61,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		this.add(simpletext);
 		
 		
-		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment.png");
+		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32.png");
 		comentarBtn = new HGraphicButton(comentarImg);
 		comentarBtn.setBounds(10, 55, 55, 55);
 		comentarBtn.setName("comentar");
@@ -100,7 +106,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		
 		
 		
-		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar.png");
+		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32.png");
 		votarBtn = new HGraphicButton(votarImg);
 		votarBtn.setBounds(10, 105, 55, 55);
 		votarBtn.setName("votar");
@@ -142,7 +148,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		this.add(votarBtn);
 		
 		
-		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet.png");
+		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32.png");
 		tweetBtn = new HGraphicButton(tweetImg);
 		tweetBtn.setBounds(10, 160, 55, 55);
 		tweetBtn.setName("tweeter");
@@ -167,6 +173,8 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
 					//Accion de tweetear
+					ServiceLocator.getTwitterManager().postTweet(getItemSelected().getTitle());
+				
 					break;
 				default:
 					
@@ -182,9 +190,9 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		this.add(tweetBtn);
 		
 		
-		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta.png");
+		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32.png");
 		fcbkBtn = new HGraphicButton(fcbkImg);
-		fcbkBtn.setBounds(10, 220, 55, 55);
+		fcbkBtn.setBounds(10, 220, 120, 55);
 		fcbkBtn.setName("facebook");
 		fcbkBtn.addKeyListener(new KeyListener() {
 			
@@ -206,7 +214,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
-					//Accion de votar
+					
 					break;
 				default:
 					
@@ -227,6 +235,11 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 	}
 	
 	
+	public RssItem getItemSelected() {
+		return itemSelected;
+	}
+
+
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub

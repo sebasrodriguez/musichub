@@ -11,4 +11,5 @@ public class ControlKeyConstants {
 	public static final int OK = 10;
 	public static final int UP = 38;
 	public static final int DOWN = 40;
+	public static final int EXIT = 27;
 }
