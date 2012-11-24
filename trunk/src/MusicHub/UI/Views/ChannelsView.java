@@ -50,6 +50,7 @@ public class ChannelsView extends BasicContainer {
 	}
 
 	public void selectedOption(ChannelItem channelItem) {
+		VideoResizer.getInstance(null).returnToOriginalSize();
 		Object[] args = { channelItem.getRssFeed() };
 		ViewManager.getInstance().changeView("ContentView", args);
 	}
