@@ -22,6 +22,7 @@ public class Keyboard extends HContainer implements KeyListener {
 	private int xStartPosition;
 	private ArrayList<Key> kb;
 	private int currentIndex = 0;
+	private int oldIndex = 0;
 	private String actualString = "";
 	private IKeyboardReceiver keyboardReceiver;
 
@@ -121,8 +122,29 @@ public class Keyboard extends HContainer implements KeyListener {
 			}
 			break;
 		case ControlKeyConstants.UP:
+			oldIndex = currentIndex;
+			currentIndex = currentIndex - 10;
+			
+			if(currentIndex < 0){
+				currentIndex = 0;
+			}
+			
+			this.paintFocusOut(oldIndex);
+			this.paintFocusIn(currentIndex);
+			
+			
 			break;
 		case ControlKeyConstants.DOWN:
+			oldIndex = currentIndex;
+			currentIndex = currentIndex + 10;
+			
+			if(currentIndex > kb.size() - 1){
+				currentIndex = kb.size() - 1;
+			}
+			
+			this.paintFocusOut(oldIndex);
+			this.paintFocusIn(currentIndex);			
+			
 			break;
 		case ControlKeyConstants.OK:
 			/*
