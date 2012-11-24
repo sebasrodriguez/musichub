@@ -217,7 +217,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
-					
+					ServiceLocator.getFacebookManager().postFacebook(getItemSelected().getTitle());
 					break;
 				default:
 					
