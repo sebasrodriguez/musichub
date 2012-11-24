@@ -332,7 +332,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 	}
 	
 	public void sendTweet(){
-		((ContentView)this.parent).facebook();
+		((ContentView)this.parent).sendTweet();
 	}
 	
 
