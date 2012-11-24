@@ -36,12 +36,6 @@ public class StorageService implements IStorageService {
 			e.printStackTrace();
 		}
 
-		Collections.sort(rssFeeds, new Comparator<RssFeed>() {
-			public int compare(RssFeed rssFeed1, RssFeed rssFeed2) {
-				return rssFeed2.getVotes() - rssFeed1.getVotes();
-			}
-		});
-
 		return rssFeeds;
 	}
 
