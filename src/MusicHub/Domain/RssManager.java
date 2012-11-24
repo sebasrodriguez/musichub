@@ -1,5 +1,7 @@
 package MusicHub.Domain;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
@@ -17,6 +19,12 @@ public class RssManager implements IRssManager {
 		for (RssFeed rssFeed : feeds) {
 			rssFeed.setVotes(voteManager.getRssFeedVotes(rssFeed));
 		}
+
+		Collections.sort(feeds, new Comparator<RssFeed>() {
+			public int compare(RssFeed rssFeed1, RssFeed rssFeed2) {
+				return rssFeed2.getVotes() - rssFeed1.getVotes();
+			}
+		});
 
 		return feeds;
 	}
