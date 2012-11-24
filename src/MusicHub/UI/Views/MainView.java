@@ -26,7 +26,6 @@ public class MainView extends BasicContainer implements IMenuContainer {
 
 		List<UOptionItem> itemList = new LinkedList<UOptionItem>();
 		itemList.add(new UOptionItem(null, "Canales", "ChannelsView", 150, 60));
-		itemList.add(new UOptionItem(null, "Facebook", "FacebookView", 150, 60));
 		itemList.add(new UOptionItem(null, "Twitter", "TwitterView", 150, 60));
 		itemList.add(new UOptionItem(null, "Ayuda", "HelpView", 150, 60));
 		itemList.add(new UOptionItem(null, "Acerca de", "AboutView", 150, 60));
