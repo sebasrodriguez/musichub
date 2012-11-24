@@ -9,4 +9,5 @@ public interface IStorageService {
 	List<RssFeed> getRssFeeds();
 	void addFeed(RssFeed feed);
 	void addComment(RssItem rssItem, String comment);
+	String getAbout();
 }

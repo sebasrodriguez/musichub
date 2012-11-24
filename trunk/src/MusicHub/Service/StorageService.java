@@ -1,9 +1,12 @@
 package MusicHub.Service;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -74,5 +77,31 @@ public class StorageService implements IStorageService {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String getAbout() {
+		// TODO Auto-generated method stub
+		String aboutToReturn = "";
+		
+		try {
+			BufferedReader buffReader = new BufferedReader(new FileReader("../assets/Help.txt"));
+			
+			StringBuilder strBuilder = new StringBuilder();
+			String line = buffReader.readLine();
+			
+			while(line != null){
+				strBuilder.append(line);
+				strBuilder.append("\n");
+				line = buffReader.readLine();
+			}
+			
+			aboutToReturn = strBuilder.toString();
+			buffReader.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}			
+		return aboutToReturn;
 	}
 }

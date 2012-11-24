@@ -18,6 +18,10 @@ public class ServiceLocator {
 	public static IStorageService getStorageService() {
 		return new StorageService();
 	}
+	
+	public static IStorageManager getStorageManager(){
+		return new StorageManager();
+	}
 
 	public static IRssManager getRssManager() {
 		return new RssManager();
