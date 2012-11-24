@@ -17,6 +17,7 @@ import javax.swing.FocusManager;
 
 import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
+import org.havi.ui.HSceneFactory;
 import org.havi.ui.HStaticText;
 import org.havi.ui.HText;
 
@@ -253,8 +254,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 				selectedPanel.repaint();
 				
 				break;
+				
+			case ControlKeyConstants.EXIT:
+				
+				HSceneFactory.getInstance().dispose(..);
+				break;
 			default:
-				System.out.println(keyCode);
+				
 				break;
 		}
 	}
