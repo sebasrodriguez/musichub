@@ -18,6 +18,7 @@ import org.havi.ui.event.HRcEvent;
 
 
 import MusicHub.Application.ServiceLocator;
+import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.Service.TwitterService;
 import MusicHub.UI.Contracts.IMenuContainer;
@@ -63,7 +64,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		
 		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32.png");
 		comentarBtn = new HGraphicButton(comentarImg);
-		comentarBtn.setBounds(10, 55, 55, 55);
+		comentarBtn.setBounds(10, 55, 83, 55);
 		comentarBtn.setName("comentar");
 		comentarBtn.addKeyListener(new KeyListener() {	
 			
@@ -108,7 +109,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		
 		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32.png");
 		votarBtn = new HGraphicButton(votarImg);
-		votarBtn.setBounds(10, 105, 55, 55);
+		votarBtn.setBounds(10, 105, 83, 55);
 		votarBtn.setName("votar");
 		votarBtn.addKeyListener(new KeyListener() {
 			
@@ -131,6 +132,8 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
 					//Accion de votar
+					SocialPanel.this.votar();
+					
 					break;
 				default:
 					
@@ -150,7 +153,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		
 		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32.png");
 		tweetBtn = new HGraphicButton(tweetImg);
-		tweetBtn.setBounds(10, 160, 55, 55);
+		tweetBtn.setBounds(10, 160, 83, 55);
 		tweetBtn.setName("tweeter");
 		tweetBtn.addKeyListener(new KeyListener() {
 			
@@ -192,7 +195,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		
 		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32.png");
 		fcbkBtn = new HGraphicButton(fcbkImg);
-		fcbkBtn.setBounds(10, 220, 120, 55);
+		fcbkBtn.setBounds(10, 220, 83, 55);
 		fcbkBtn.setName("facebook");
 		fcbkBtn.addKeyListener(new KeyListener() {
 			
@@ -245,8 +248,14 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		// TODO Auto-generated method stub
 		
 		//comentarBtn.requestFocus();
+		
+		g.setColor(Color.RED);
+		g.fillRect(30, 0, 10, 2);
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0, this.getWidth(), this.getHeight());
+		
+		
+		
 		super.paint(g);
 	}
 
@@ -311,6 +320,10 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 	
 	public void comentar(){		
 		((ContentView)this.parent).comentar();
+	}
+	
+	public void votar(){		
+		((ContentView)this.parent).votar();
 	}
 	
 
