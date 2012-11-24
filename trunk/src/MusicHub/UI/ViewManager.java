@@ -22,6 +22,7 @@ public class ViewManager extends HContainer {
 	private TwitterView twitterView;
 	private AddChannelView addChannelView;
 	private CommentsView commentsView;
+	private AboutView aboutView;
 
 	private ViewManager(XletContext context) {
 		this.context = context;
@@ -94,7 +95,9 @@ public class ViewManager extends HContainer {
 			scene.add(commentsView);
 			visibleView = commentsView;
 		} else if(newView == "AboutView"){
-			
+			aboutView = new AboutView();
+			scene.add(aboutView);
+			visibleView = aboutView;
 		}
 
 		scene.repaint();
