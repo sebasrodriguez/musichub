@@ -1,20 +1,13 @@
 package MusicHub.UI.Views;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import MusicHub.Application.ServiceLocator;
-import MusicHub.DataTypes.RssItem;
-import MusicHub.DataTypes.Tweet;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.UMenuScrollable;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
-import MusicHub.UI.Controls.TweetItem;
-import MusicHub.UI.Controls.TwitterTimeline;
 
 public class MainView extends BasicContainer implements IMenuContainer {
 

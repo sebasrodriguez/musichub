@@ -1,7 +1,6 @@
 package MusicHub.UI.Controls;
 
 import java.awt.Image;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
