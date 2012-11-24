@@ -176,7 +176,8 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
 					//Accion de tweetear
-					ServiceLocator.getTwitterManager().postTweet(getItemSelected().getTitle());
+					
+					SocialPanel.this.sendTweet();
 				
 					break;
 				default:
@@ -217,7 +218,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 				
 				switch(arg0.getKeyCode()){
 				case ControlKeyConstants.OK:
-					ServiceLocator.getFacebookManager().postFacebook(getItemSelected().getTitle());
+					SocialPanel.this.facebook();
 					break;
 				default:
 					
@@ -324,6 +325,14 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 	
 	public void votar(){		
 		((ContentView)this.parent).votar();
+	}
+	
+	public void facebook(){
+		((ContentView)this.parent).facebook();
+	}
+	
+	public void sendTweet(){
+		((ContentView)this.parent).facebook();
 	}
 	
 
