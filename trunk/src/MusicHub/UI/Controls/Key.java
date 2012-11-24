@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import org.havi.ui.HNavigable;
-import org.havi.ui.HText;
 import org.havi.ui.HTextButton;
 
 import MusicHub.Util.Conf;

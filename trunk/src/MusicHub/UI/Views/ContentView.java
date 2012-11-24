@@ -3,22 +3,13 @@ package MusicHub.UI.Views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.FocusManager;
-
-import org.havi.ui.HContainer;
 import org.havi.ui.HIcon;
-import org.havi.ui.HSceneFactory;
-import org.havi.ui.HStaticText;
 import org.havi.ui.HText;
 
 import MusicHub.Application.ServiceLocator;
@@ -37,6 +28,7 @@ import MusicHub.UI.Contracts.IMenuContainer;
 
 public class ContentView extends BasicContainer implements IMenuContainer, KeyListener{
 	
+	private static final long serialVersionUID = 1L;
 	//private BasicPanel itemsPanel;
 	private BasicPanel itemsPanelB;
 	private BasicPanel detailsPanel;
@@ -44,7 +36,6 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	
 	private BasicPanel selectedPanel;
 	private RssFeed canal;
-	private UMenuScrollable itemsMenu;
 	private List<RssItem> feedItemList;
 	private List<BasicPanel> panelsList;
 	private RssItem itemSelected;
@@ -174,7 +165,6 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		for (RssItem feed:feedItemList){	
 			
 			System.out.println(feed.getImageUrl());
-			HIcon ico=null;
 			UOptionItem nItem;
 			
 				

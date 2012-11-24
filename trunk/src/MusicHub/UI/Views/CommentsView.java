@@ -10,7 +10,6 @@ import org.havi.ui.HText;
 import org.havi.ui.HVisible;
 
 import MusicHub.Application.ServiceLocator;
-import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
