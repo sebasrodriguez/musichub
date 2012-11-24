@@ -44,6 +44,7 @@ public class UOptionItem extends HContainer {
 		if (imageUrl != null) {
 			
 			this.imgUrl=imageUrl;
+			System.out.println("img: "+ imgUrl);
 			Thread th= new Thread(new Runnable() {
 				
 				@Override
@@ -52,7 +53,7 @@ public class UOptionItem extends HContainer {
 					
 					try {
 						
-						Image image;
+						Image image=null;
 						image= Toolkit.getDefaultToolkit().getImage(new URL(UOptionItem.this.imgUrl));
 						image= image.getScaledInstance(40, 40, Image.SCALE_DEFAULT);	
 						

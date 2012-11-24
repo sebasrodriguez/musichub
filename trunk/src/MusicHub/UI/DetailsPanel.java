@@ -43,15 +43,19 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 	public void showItem(String title, String content, String imgURL){
 
 		try {
-			image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
-			image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);			
 			
+			image=null;
+			if(imgURL!=null || imgURL.equals("")){
+				System.out.println(imgURL);
+				image= Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
+				image= image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);			
+			}
 			
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("aca");
 			e1.printStackTrace();
-			image = null;
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
