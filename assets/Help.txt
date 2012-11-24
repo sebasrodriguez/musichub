@@ -1,6 +1,16 @@
-12/2012
-Desarrollo de Aplicaciones TV Digital interactiva
-Integrantes: 
-	Diego Busca, Santiago Maidana, Sebastian Rodriguez
+
+
+
+
+
+Fecha:    
+    12/2012
+
+Materia:    
+    Desarrollo de Aplicaciones TV Digital interactiva
+
+Integrantes:
+    Diego Busca, Santiago Maidana y Sebastian Rodriguez
+
 Docentes: 
-	Juan García y Juan Benitez
+    Juan García y Juan Benitez
