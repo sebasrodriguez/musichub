@@ -25,6 +25,7 @@ import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.BasicPanel;
+import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.DetailsPanel;
 import MusicHub.UI.ItemsPanelB;
 import MusicHub.UI.SocialPanel;
@@ -60,13 +61,18 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		
 		//Toma los items del feed seleccionado
 		feedItemList=ServiceLocator.getRssManager().getRssItems(canal);	
+		setItemSelected(feedItemList.get(0));
 
 		itemsPanelB = new ItemsPanelB(this,this.getItemList(),0, 100, 200, 400);
 		panelsList.add(itemsPanelB);
 		detailsPanel= new DetailsPanel(this,210,100,380,400);
 		panelsList.add(detailsPanel);
-		socialPanel = new SocialPanel(this,600, 100, 100, 400);
+		socialPanel = new SocialPanel(this,getItemSelected(),600, 100, 100, 400);
 		panelsList.add(socialPanel);
+		
+		itemsPanelB.setName("items panel");
+		detailsPanel.setName("details panel");
+		socialPanel.setName("Social panel");
 		
 
 		
@@ -210,25 +216,47 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
 		// TODO Auto-generated method stub
-		System.out.println("content: " + keyCode);
+		int sel;
+		switch(keyCode){
 		
-		//System.out.println(FocusManager.getCurrentManager().getFocusOwner());
-		
-		//devuelve el index del panel seleccionado
-		int sel=panelsList.indexOf(selectedPanel);
-		sel++;
-		
-		if(sel>=panelsList.size()){
-			sel=0;
-		}	
-		
-		
-		panelsList.get(sel).requestFocus();
-		selectedPanel=panelsList.get(sel);
-		System.out.println("indexSel: " + sel);
-		System.out.println("panel selec: " + panelsList.get(sel));
-		selectedPanel.repaint();	
-		
+			case ControlKeyConstants.RED:
+				
+				ViewManager.getInstance().changeView("ChannelsView", null);				
+				break;
+			case ControlKeyConstants.RIGHT:
+				
+				sel=panelsList.indexOf(selectedPanel);
+				sel++;
+				
+				if(sel>=panelsList.size()){
+					sel=0;
+				}	
+				
+				
+				panelsList.get(sel).requestFocus();
+				selectedPanel=panelsList.get(sel);
+				System.out.println("panel :" + selectedPanel.getName() );
+				selectedPanel.repaint();				
+				break;
+			case ControlKeyConstants.LEFT:
+				
+				sel=panelsList.indexOf(selectedPanel);
+				sel--;
+				
+				if(sel<0){
+					sel=panelsList.size()-1;
+				}
+				
+				panelsList.get(sel).requestFocus();
+				selectedPanel=panelsList.get(sel);
+				System.out.println("panel :" + selectedPanel.getName() );
+				selectedPanel.repaint();
+				
+				break;
+			default:
+				System.out.println(keyCode);
+				break;
+		}
 	}
 
 	@Override
