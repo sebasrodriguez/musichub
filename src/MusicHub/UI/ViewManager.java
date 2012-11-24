@@ -90,9 +90,11 @@ public class ViewManager extends HContainer {
 			visibleView = addChannelView;
 		}
 		else if (newView == "CommentsView") {
-			commentsView = new CommentsView((RssItem) args[0], (ContentView) args[1]);
+			commentsView = new CommentsView((RssItem) args[1], (ContentView) args[0]);
 			scene.add(commentsView);
 			visibleView = commentsView;
+		} else if(newView == "AboutView"){
+			
 		}
 
 		scene.repaint();
