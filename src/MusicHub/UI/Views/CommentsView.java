@@ -36,19 +36,19 @@ public class CommentsView extends BasicContainer implements IKeyboardReceiver {
 		isFinished = false;
 		title = new HText("Comentando: " + rssItem.getTitle(), new Font("Tiresias", Font.BOLD, 20),
 				Color.BLACK, Color.WHITE, new HDefaultTextLayoutManager());
-		title.setBounds(105, 20, 545, 20);
+		title.setBounds(235, 155, 545, 20);
 		title.setVisible(true);
 		title.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
 		comment = new HText("", new Font("Tiresias", Font.PLAIN, 20), Color.BLACK, Color.WHITE,
 				new HDefaultTextLayoutManager());
-		comment.setBounds(105, 55, 545, 170);
+		comment.setBounds(235, 195, 545, 170);
 		comment.setVisible(true);
 		comment.setVerticalAlignment(HVisible.VALIGN_TOP);
 		comment.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
-		RoundRectBox box = new RoundRectBox(80, 40, 600, 200, Color.DARK_GRAY);
-		keyboard = new Keyboard(this, 65, 120);
+		RoundRectBox box = new RoundRectBox(210, 180, 600, 200, Color.DARK_GRAY);
+		keyboard = new Keyboard(this, 130, 190);
 
 		this.add(title);
 		this.add(comment);
