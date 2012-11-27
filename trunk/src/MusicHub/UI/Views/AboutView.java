@@ -28,7 +28,7 @@ public class AboutView extends BasicContainer {
 		String aboutText = ServiceLocator.getStorageManager().getAbout();
 		Image img = Toolkit.getDefaultToolkit().getImage("../assets/ude.png");
 		logo = new HIcon(img);
-		logo.setBounds(105,75,160,85);
+		logo.setBounds(250,250,160,85);
 		logo.setVisible(true);
 			
 		
@@ -40,12 +40,12 @@ public class AboutView extends BasicContainer {
 
 		about = new HText(aboutText, new Font("Tiresias", Font.PLAIN, 20), Color.BLACK, Color.WHITE,
 				new HDefaultTextLayoutManager());
-		about.setBounds(105, 75, 545, 355);
+		about.setBounds(250, 250, 545, 355);
 		about.setVisible(true);
 		about.setVerticalAlignment(HVisible.VALIGN_TOP);
 		about.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
-		RoundRectBox box = new RoundRectBox(80, 60, 600, 385, Color.DARK_GRAY);
+		RoundRectBox box = new RoundRectBox(225, 235, 600, 385, Color.DARK_GRAY);
 		
 		this.add(logo);
 		this.add(title);
