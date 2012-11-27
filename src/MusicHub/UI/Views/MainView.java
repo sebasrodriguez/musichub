@@ -20,11 +20,11 @@ public class MainView extends BasicContainer implements IMenuContainer {
 		List<UOptionItem> itemList = new LinkedList<UOptionItem>();
 		itemList.add(new UOptionItem(null, "Canales", "ChannelsView", 150, 60));
 		itemList.add(new UOptionItem(null, "Twitter", "TwitterView", 150, 60));
-		itemList.add(new UOptionItem(null, "Ayuda", "HelpView", 150, 60));
+		//itemList.add(new UOptionItem(null, "Ayuda", "HelpView", 150, 60));
 		itemList.add(new UOptionItem(null, "Acerca de", "AboutView", 150, 60));
 		itemList.add(new UOptionItem(null, "Salir", "Exit", 150, 60));
 
-		mainMenu = new UMenuScrollable(itemList, 6, this, 30, 100);
+		mainMenu = new UMenuScrollable(itemList, 4, this, 30, 100);
 
 		this.add(mainMenu);
 
