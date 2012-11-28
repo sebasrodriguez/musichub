@@ -1,6 +1,5 @@
 package MusicHub.UI;
 
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import org.havi.ui.HContainer;
 import MusicHub.UI.Contracts.IMenuContainer;
-import MusicHub.Util.Conf;
 
 public class UMenuScrollable extends HContainer implements KeyListener {
 
@@ -28,7 +26,7 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 	}
 
 	private int getMenuHeight() {
-		return this.itemsToShow * Conf.getItemHeight();
+		return this.itemsToShow * this.listItems.get(0).getHeight();
 	}
 
 	// Constructor que acepta una lista de UOptionItem
@@ -123,14 +121,12 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 	public void setMenuParentContainer(IMenuContainer menuParentContainer) {
 		this.menuParentContainer = menuParentContainer;
 	}
-	
-	public void setFontStyle(int style, int size){		
-		//button.setFont(new Font(Conf.getFontName(), style, size));
-		
-		for (UOptionItem it:listItems){
+
+	public void setFontStyle(int style, int size) {
+		for (UOptionItem it : listItems) {
 			it.setFontStyle(style, size);
 		}
-		
+
 		repaint();
 	}
 
@@ -140,7 +136,6 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 		switch (e.getKeyCode()) {
 		case 10:
 			this.getMenuParentContainer().selectedOption(itemSelected);
-			
 			break;
 		case 40:
 		case 38:
@@ -186,8 +181,8 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 						this.setShownItems(shownItemsIndexes);
 
 						for (UOptionItem optionItem : listItems) {
-							optionItem.setLocation(optionItem.getX(),
-									optionItem.getY() - Conf.getItemHeight());
+							optionItem.setLocation(optionItem.getX(), optionItem.getY()
+									- optionItem.getHeight());
 						}
 					} // si movio un elemento hacia arriba muevo todos los
 						// contenidos hacia arriba
@@ -199,8 +194,8 @@ public class UMenuScrollable extends HContainer implements KeyListener {
 						this.setShownItems(shownItemsIndexes);
 
 						for (UOptionItem optionItem : listItems) {
-							optionItem.setLocation(optionItem.getX(),
-									optionItem.getY() + Conf.getItemHeight());
+							optionItem.setLocation(optionItem.getX(), optionItem.getY()
+									+ optionItem.getHeight());
 						}
 					}
 				}
