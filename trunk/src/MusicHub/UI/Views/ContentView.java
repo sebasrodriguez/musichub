@@ -42,15 +42,15 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		this.canal = canal;
 
 		HText canalName = new HText(this.canal.getName());
-		canalName.setFont(new Font("tiresias", Font.BOLD, 13));
+		canalName.setFont(new Font("tiresias", Font.BOLD, 18));
 		canalName.setForeground(Color.WHITE);
-		canalName.setBounds(0, 10, this.getWidth(), 50);
+		canalName.setBounds(0, 70, this.getWidth(), 50);
 
 		eventInfo = new HText();
 		eventInfo.setFont(new Font("tiresias", Font.BOLD, 13));
 		eventInfo.setForeground(Color.BLUE);
 		eventInfo.setBackground(Color.WHITE);
-		eventInfo.setBounds(140, 60, 300, 40);
+		eventInfo.setBounds(140, 120, 300, 40);
 
 		panelsList = new ArrayList<BasicPanel>();
 
@@ -58,11 +58,11 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		feedItemList = ServiceLocator.getRssManager().getRssItems(canal);
 		setItemSelected(feedItemList.get(0));
 
-		itemsPanelB = new ItemsPanelB(this, this.getItemList(), 0, 100, 200, 400);
+		itemsPanelB = new ItemsPanelB(this, this.getItemList(), 0, 160, 300, 540);
 		panelsList.add(itemsPanelB);
-		detailsPanel = new DetailsPanel(this, 210, 100, 380, 400);
+		detailsPanel = new DetailsPanel(this, 310, 160, 480, 540);
 		panelsList.add(detailsPanel);
-		socialPanel = new SocialPanel(this, getItemSelected(), 600, 100, 100, 400);
+		socialPanel = new SocialPanel(this, getItemSelected(), 800, 160, 230, 400);
 		panelsList.add(socialPanel);
 
 		itemsPanelB.setName("items panel");
@@ -73,7 +73,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		votosText.setFont(new Font("tiresias", Font.BOLD, 13));
 		votosText.setForeground(Color.BLACK);
 		votosText.setBackground(Color.WHITE);
-		votosText.setBounds(480, 65, 200, 30);
+		votosText.setBounds(480, 125, 200, 30);
 		votosText.setHorizontalAlignment(HVisible.HALIGN_RIGHT);
 
 		setItemSelected(feedItemList.get(0));
@@ -130,10 +130,10 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			UOptionItem nItem;
 
 			if (feed.getImageUrl() != null && !feed.getImageUrl().equals("")) {
-				nItem = new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed, 150, 50);
+				nItem = new UOptionItem(feed.getImageUrl(), feed.getTitle(), feed, 300, 65);
 			}
 			else {
-				nItem = new UOptionItem(null, feed.getTitle(), feed, 150, 50);
+				nItem = new UOptionItem(null, feed.getTitle(), feed, 300, 65);
 			}
 			itemList.add(nItem);
 		}

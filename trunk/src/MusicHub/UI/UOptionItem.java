@@ -1,6 +1,5 @@
 package MusicHub.UI;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,17 +7,18 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.havi.ui.HContainer;
+import org.havi.ui.HDefaultTextLayoutManager;
 import org.havi.ui.HIcon;
-import org.havi.ui.HTextButton;
+import org.havi.ui.HText;
+import org.havi.ui.HVisible;
+
 import MusicHub.Util.Conf;
 
 public class UOptionItem extends HContainer {
 
 	private static final long serialVersionUID = 1L;
-
-	private HTextButton button;
+	private HText txtTitle;
 	private boolean selected;
 	private boolean isShown;
 	private String title;
@@ -29,61 +29,64 @@ public class UOptionItem extends HContainer {
 	public UOptionItem(String imageUrl, String title, Object value, int width, int height) {
 		super();
 
-		this.setBounds(10, 10, width, height);
+		this.setBounds(0, 0, width, height);
 		this.selected = false;
 		this.setValue(value);
-		//this.setBackground(Color.DARK_GRAY);		
 		this.title = title;
-		button = new HTextButton(title);		
-		button.setBounds(10, 0, this.getWidth(), Conf.getItemHeight());
-		button.setForeground(Color.white);
-		button.setFont(new Font(Conf.getFontName(), Font.BOLD, Conf.getFontSize()));
-		button.setHorizontalAlignment(HTextButton.HALIGN_LEFT);
+		txtTitle = new HText(this.formatTitle(this.title));
+		txtTitle.setBounds(10, 0, this.getWidth(), this.getHeight());
+		txtTitle.setForeground(Color.WHITE);
+		txtTitle.setFont(new Font(Conf.getFontName(), Font.BOLD, 18));
+		txtTitle.setHorizontalAlignment(HVisible.HALIGN_LEFT);
+		txtTitle.setVerticalAlignment(HVisible.VALIGN_TOP);
 
-		
 		if (imageUrl != null) {
-			
-			this.imgUrl=imageUrl;
-			System.out.println("img: "+ imgUrl);
-			Thread th= new Thread(new Runnable() {
-				
+			this.imgUrl = imageUrl;
+			Thread th = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
-					
 					try {
-						
-						Image image=null;
-						image= Toolkit.getDefaultToolkit().getImage(new URL(UOptionItem.this.imgUrl));
-						image= image.getScaledInstance(40, 40, Image.SCALE_DEFAULT);	
-						
+						Image image = null;
+						image = Toolkit.getDefaultToolkit().getImage(
+								new URL(UOptionItem.this.imgUrl));
+						image = image.getScaledInstance(65, 65, Image.SCALE_DEFAULT);
+
 						icon = new HIcon(image);
-						icon.setBounds(0, 0, 50, 50);
+						icon.setBounds(0, 0, 65, 65);
 						icon.setBackgroundMode(HIcon.BACKGROUND_FILL);
 						icon.setFocusable(false);
 						UOptionItem.this.add(icon);
 						UOptionItem.this.popToFront(icon);
-						button.setBounds(50, 0, UOptionItem.this.getWidth(), UOptionItem.this.getHeight());
-						
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						//icon=null;
+						txtTitle.setLocation(65, 0);
 					}
-					
+					catch (MalformedURLException e) {
+						e.printStackTrace();
+					}
 				}
-			});th.start();
-			
+			});
+			th.start();
 		}
-		
-		
-		this.add(button);
+		this.add(txtTitle);
+	}
 
-		
+	private String formatTitle(String title) {
+		if (title.length() > 40 * 3) {
+			title = title.substring(0, 40 * 3) + "...";
+		}
+		char[] chars = title.toCharArray();
+		StringBuilder finalTitle = new StringBuilder();
+
+		for (int i = 0; i < chars.length; i++) {
+			if ((i % 40) == 0) {
+				finalTitle.append("\n");
+			}
+			finalTitle.append(chars[i]);
+		}
+
+		return finalTitle.toString();
 	}
 
 	public void paint(Graphics g) {
-		//g.setColor(Color.DARK_GRAY);		
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		super.paint(g);
 	}
@@ -123,8 +126,8 @@ public class UOptionItem extends HContainer {
 	public void setValue(Object value) {
 		this.value = value;
 	}
-	
-	public void setFontStyle(int style, int size){		
-		button.setFont(new Font(Conf.getFontName(), style, size));
+
+	public void setFontStyle(int style, int size) {
+		txtTitle.setFont(new Font(Conf.getFontName(), style, size));
 	}
 }

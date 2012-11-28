@@ -21,8 +21,8 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		this.setSize(w, h);
 
 		this.parent = container;
-		itemsMenu = new UMenuScrollable(itemList, 10, this, 10, 10);
-		itemsMenu.setSize(this.getWidth(), this.getHeight());
+		itemsMenu = new UMenuScrollable(itemList, 8, this, 10, 10);
+		// itemsMenu.setSize(this.getWidth(), );
 		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
 		this.popToFront(itemsMenu);
@@ -36,7 +36,7 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	public void paint(Graphics g) {
 		itemsMenu.requestFocus();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 15, 15);
 		super.paint(g);
 	}
 

@@ -36,7 +36,6 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 
 	public void showItem(String title, String content, String imgURL) {
 		try {
-
 			image = null;
 			if (imgURL != null && !imgURL.equals("")) {
 				image = Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
@@ -45,9 +44,6 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		}
 		catch (MalformedURLException e1) {
 			e1.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		this.content = content;
@@ -63,7 +59,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		}
 
 		titleText = new HText(this.title);
-		titleText.setFont(new Font("tiresias", Font.BOLD, 13));
+		titleText.setFont(new Font("tiresias", Font.BOLD, 15));
 		titleText.setForeground(Color.WHITE);
 		titleText.setBounds(10, 10, this.getWidth(), 20);
 		titleText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
@@ -73,9 +69,9 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		}
 
 		contentText = new HText(this.content);
-		contentText.setFont(new Font("tiresias", Font.PLAIN, 13));
+		contentText.setFont(new Font("tiresias", Font.PLAIN, 15));
 		contentText.setForeground(Color.WHITE);
-		contentText.setBounds(10, 180, this.getWidth(), this.getHeight() - 10);
+		contentText.setBounds(10, 180, this.getWidth() - 15, 350);
 		contentText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 		contentText.setVerticalAlignment(HVisible.VALIGN_TOP);
 
@@ -90,7 +86,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 	}
 
 	private String wrapContent(String content) {
-		final int WRAP_LENGTH = 62;
+		final int WRAP_LENGTH = 60;
 		int i = 0, x = 0;
 		boolean f = false;
 		String wContent = new String();
@@ -112,7 +108,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 15, 15);
 		super.paint(g);
 	}
 
