@@ -18,20 +18,20 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 	private static final long serialVersionUID = 1L;
 	private IMenuContainer parent;
-	private HGraphicButton comentarBtn;
-	private HGraphicButton votarBtn;
-	private HGraphicButton tweetBtn;
-	private HGraphicButton fcbkBtn;
+	private HGraphicButton btnComment;
+	private HGraphicButton btnVote;
+	private HGraphicButton btnTweet;
+	private HGraphicButton btnFacebook;
 	private HGraphicButton[] accButtons;
 	private int selected = 0;
-	private RssItem itemSelected;
+	private RssItem selectedItem;
 
 	public SocialPanel(IMenuContainer parent, RssItem itemSelected, int x, int y, int w, int h) {
 		super(x, y, w, h);
 		this.setBounds(x, y, w, h);
 		this.setSize(w, h);
 		this.parent = parent;
-		this.itemSelected = itemSelected;
+		this.selectedItem = itemSelected;
 
 		accButtons = new HGraphicButton[4];
 
@@ -44,10 +44,10 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		this.add(simpletext);
 
 		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32.png");
-		comentarBtn = new HGraphicButton(comentarImg);
-		comentarBtn.setBounds(10, 55, 83, 55);
-		comentarBtn.setName("comentar");
-		comentarBtn.addKeyListener(new KeyListener() {
+		btnComment = new HGraphicButton(comentarImg);
+		btnComment.setBounds(10, 55, 83, 55);
+		btnComment.setName("comentar");
+		btnComment.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -70,14 +70,14 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			}
 		});
 
-		accButtons[0] = comentarBtn;
-		this.add(comentarBtn);
+		accButtons[0] = btnComment;
+		this.add(btnComment);
 
 		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32.png");
-		votarBtn = new HGraphicButton(votarImg);
-		votarBtn.setBounds(10, 105, 83, 55);
-		votarBtn.setName("votar");
-		votarBtn.addKeyListener(new KeyListener() {
+		btnVote = new HGraphicButton(votarImg);
+		btnVote.setBounds(10, 105, 83, 55);
+		btnVote.setName("votar");
+		btnVote.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -101,15 +101,15 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			}
 		});
 
-		accButtons[1] = votarBtn;
+		accButtons[1] = btnVote;
 
-		this.add(votarBtn);
+		this.add(btnVote);
 
 		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32.png");
-		tweetBtn = new HGraphicButton(tweetImg);
-		tweetBtn.setBounds(10, 160, 83, 55);
-		tweetBtn.setName("twitter");
-		tweetBtn.addKeyListener(new KeyListener() {
+		btnTweet = new HGraphicButton(tweetImg);
+		btnTweet.setBounds(10, 160, 83, 55);
+		btnTweet.setName("twitter");
+		btnTweet.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -132,14 +132,14 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			}
 		});
 
-		accButtons[2] = tweetBtn;
-		this.add(tweetBtn);
+		accButtons[2] = btnTweet;
+		this.add(btnTweet);
 
 		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32.png");
-		fcbkBtn = new HGraphicButton(fcbkImg);
-		fcbkBtn.setBounds(10, 220, 83, 55);
-		fcbkBtn.setName("facebook");
-		fcbkBtn.addKeyListener(new KeyListener() {
+		btnFacebook = new HGraphicButton(fcbkImg);
+		btnFacebook.setBounds(10, 220, 83, 55);
+		btnFacebook.setName("facebook");
+		btnFacebook.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 			}
@@ -162,14 +162,19 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			}
 		});
 
-		accButtons[3] = fcbkBtn;
-		this.add(fcbkBtn);
+		accButtons[3] = btnFacebook;
+		this.add(btnFacebook);
 
 		addKeyListener(this);
 	}
 
-	public RssItem getItemSelected() {
-		return itemSelected;
+	public void setFocus() {
+		selected = 0;
+		btnComment.requestFocus();
+	}
+
+	public RssItem getSelectedItem() {
+		return selectedItem;
 	}
 
 	@Override
