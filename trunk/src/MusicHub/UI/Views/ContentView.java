@@ -169,7 +169,13 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 			else {
 				selectedPanel = itemsPanelB;
 			}
+
 			selectedPanel.requestFocus();
+
+			if (selectedPanel == socialPanel) {
+				((SocialPanel) socialPanel).setFocus();
+			}
+
 			selectedPanel.repaint();
 			break;
 		case ControlKeyConstants.EXIT:
