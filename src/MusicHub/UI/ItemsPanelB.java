@@ -22,7 +22,6 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 
 		this.parent = container;
 		itemsMenu = new UMenuScrollable(itemList, 8, this, 10, 10);
-		// itemsMenu.setSize(this.getWidth(), );
 		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
 		this.popToFront(itemsMenu);

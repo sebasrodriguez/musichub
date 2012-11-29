@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import org.havi.ui.HGraphicButton;
@@ -52,7 +53,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			public void keyPressed(KeyEvent arg0) {
 				switch (arg0.getKeyCode()) {
 				case ControlKeyConstants.OK:
-					SocialPanel.this.comentar();
+					SocialPanel.this.commentRssItem();
 					break;
 				default:
 					SocialPanel.this.keyPressed(arg0);
@@ -90,7 +91,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 			public void keyPressed(KeyEvent arg0) {
 				switch (arg0.getKeyCode()) {
 				case ControlKeyConstants.OK:
-					SocialPanel.this.votar();
+					SocialPanel.this.voteRssItem();
 					break;
 				default:
 					SocialPanel.this.keyPressed(arg0);
@@ -210,7 +211,6 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 			break;
 		case ControlKeyConstants.UP:
-			System.out.println("arriba");
 			selected--;
 
 			if (selected < 0)
@@ -224,12 +224,12 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 	}
 
-	public void comentar() {
-		((ContentView) this.parent).comentar();
+	public void commentRssItem() {
+		((ContentView) this.parent).commentRssItem();
 	}
 
-	public void votar() {
-		((ContentView) this.parent).votar();
+	public void voteRssItem() {
+		((ContentView) this.parent).voteRssItem();
 	}
 
 	public void facebook() {
@@ -238,5 +238,9 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 	public void sendTweet() {
 		((ContentView) this.parent).sendTweet();
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
 	}
 }

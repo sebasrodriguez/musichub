@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.havi.ui.HIcon;
@@ -58,14 +57,14 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 			this.popToFront(ico);
 		}
 
-		titleText = new HText(this.title);
+		titleText = new HText(this.wrapContent(this.title, 50));
 		titleText.setFont(new Font("tiresias", Font.BOLD, 15));
 		titleText.setForeground(Color.WHITE);
-		titleText.setBounds(10, 10, this.getWidth(), 20);
+		titleText.setBounds(10, 10, this.getWidth() - 15, 30);
 		titleText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
 		if (isTooLength(this.content)) {
-			this.content = wrapContent(this.content);
+			this.content = wrapContent(this.content, 60);
 		}
 
 		contentText = new HText(this.content);
@@ -85,14 +84,13 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		return content.length() > 25;
 	}
 
-	private String wrapContent(String content) {
-		final int WRAP_LENGTH = 60;
+	private String wrapContent(String content, int wrapLength) {
 		int i = 0, x = 0;
 		boolean f = false;
 		String wContent = new String();
 
 		while (i < content.length() && !f) {
-			if (Character.isSpaceChar(content.charAt(i)) && x > WRAP_LENGTH) {
+			if (Character.isSpaceChar(content.charAt(i)) && x > wrapLength) {
 				wContent += '\n';
 				x = 0;
 			}
@@ -118,10 +116,10 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 
 	public void updateContent(String desc, String title, String imgSrc) {
 		if (isTooLength(desc)) {
-			desc = wrapContent(desc);
+			desc = wrapContent(desc, 60);
 		}
 		contentText.setTextContent(desc, HState.ALL_STATES);
-		titleText.setTextContent(title, HState.ALL_STATES);
+		titleText.setTextContent(this.wrapContent(title, 50), HState.ALL_STATES);
 
 		try {
 			if (!imgSrc.equals("")) {
