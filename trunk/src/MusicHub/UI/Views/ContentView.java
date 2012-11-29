@@ -31,20 +31,19 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	private BasicPanel detailsPanel;
 	private BasicPanel socialPanel;
 	private BasicPanel selectedPanel;
-	private RssFeed canal;
+	private RssFeed rssFeed;
 	private List<RssItem> feedItemList;
-	private List<BasicPanel> panelsList;
-	private RssItem itemSelected;
+	private RssItem selectedItem;
 	private HText votosText;
 	private HText eventInfo;
 
-	public ContentView(RssFeed canal) {
-		this.canal = canal;
+	public ContentView(RssFeed rssFeed) {
+		this.rssFeed = rssFeed;
 
-		HText canalName = new HText(this.canal.getName());
-		canalName.setFont(new Font("tiresias", Font.BOLD, 18));
-		canalName.setForeground(Color.WHITE);
-		canalName.setBounds(0, 70, this.getWidth(), 50);
+		HText feedName = new HText(this.rssFeed.getName());
+		feedName.setFont(new Font("tiresias", Font.BOLD, 18));
+		feedName.setForeground(Color.WHITE);
+		feedName.setBounds(0, 70, this.getWidth(), 50);
 
 		eventInfo = new HText();
 		eventInfo.setFont(new Font("tiresias", Font.BOLD, 13));
@@ -52,31 +51,26 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		eventInfo.setBackground(Color.WHITE);
 		eventInfo.setBounds(140, 120, 300, 40);
 
-		panelsList = new ArrayList<BasicPanel>();
-
 		// Toma los items del feed seleccionado
-		feedItemList = ServiceLocator.getRssManager().getRssItems(canal);
-		setItemSelected(feedItemList.get(0));
+		feedItemList = ServiceLocator.getRssManager().getRssItems(rssFeed);
+		setSelectedItem(feedItemList.get(0));
 
 		itemsPanelB = new ItemsPanelB(this, this.getItemList(), 0, 160, 300, 540);
-		panelsList.add(itemsPanelB);
 		detailsPanel = new DetailsPanel(this, 310, 160, 480, 540);
-		panelsList.add(detailsPanel);
-		socialPanel = new SocialPanel(this, getItemSelected(), 800, 160, 230, 400);
-		panelsList.add(socialPanel);
+		socialPanel = new SocialPanel(this, getSelectedItem(), 800, 160, 230, 400);
 
 		itemsPanelB.setName("items panel");
 		detailsPanel.setName("details panel");
 		socialPanel.setName("Social panel");
 
-		votosText = new HText("Votos: " + String.valueOf(canal.getVotes()));
+		votosText = new HText("Votos: " + String.valueOf(rssFeed.getVotes()));
 		votosText.setFont(new Font("tiresias", Font.BOLD, 13));
 		votosText.setForeground(Color.BLACK);
 		votosText.setBackground(Color.WHITE);
 		votosText.setBounds(480, 125, 200, 30);
 		votosText.setHorizontalAlignment(HVisible.HALIGN_RIGHT);
 
-		setItemSelected(feedItemList.get(0));
+		setSelectedItem(feedItemList.get(0));
 		// Muestro en el panel la info del primer Item del Feed
 		((DetailsPanel) detailsPanel).showItem(feedItemList.get(0).getTitle(), feedItemList.get(0)
 				.getContent(), feedItemList.get(0).getImageUrl());
@@ -87,11 +81,11 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		this.add(detailsPanel);
 		this.add(votosText);
 
-		this.add(canalName);
+		this.add(feedName);
 		this.pushToBack(icon);
 		this.popToFront(socialPanel);
 
-		selectedPanel = panelsList.get(0);
+		selectedPanel = itemsPanelB;
 	}
 
 	public BasicPanel getSelectedPanel() {
@@ -141,55 +135,41 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		return itemList;
 	}
 
-	public RssFeed getCanal() {
-		return canal;
+	public RssFeed getRssFeed() {
+		return rssFeed;
 	}
 
-	public void setCanal(RssFeed canal) {
-		this.canal = canal;
+	public void setRssFeed(RssFeed rssFeed) {
+		this.rssFeed = rssFeed;
 	}
 
-	public RssItem getItemSelected() {
-		return itemSelected;
+	public RssItem getSelectedItem() {
+		return selectedItem;
 	}
 
 	public HText getEventInfo() {
 		return eventInfo;
 	}
 
-	public void setItemSelected(RssItem itemSelected) {
-		this.itemSelected = itemSelected;
+	public void setSelectedItem(RssItem selectedItem) {
+		this.selectedItem = selectedItem;
 	}
 
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
-		int sel;
 		switch (keyCode) {
 		case ControlKeyConstants.RED:
 			ViewManager.getInstance().changeView("ChannelsView", null);
 			break;
 		case ControlKeyConstants.RIGHT:
-			sel = panelsList.indexOf(selectedPanel);
-			sel++;
-
-			if (sel >= panelsList.size()) {
-				sel = 0;
-			}
-
-			panelsList.get(sel).requestFocus();
-			selectedPanel = panelsList.get(sel);
-			selectedPanel.repaint();
-			break;
 		case ControlKeyConstants.LEFT:
-			sel = panelsList.indexOf(selectedPanel);
-			sel--;
-
-			if (sel < 0) {
-				sel = panelsList.size() - 1;
+			if (selectedPanel == itemsPanelB) {
+				selectedPanel = socialPanel;
 			}
-
-			panelsList.get(sel).requestFocus();
-			selectedPanel = panelsList.get(sel);
+			else {
+				selectedPanel = itemsPanelB;
+			}
+			selectedPanel.requestFocus();
 			selectedPanel.repaint();
 			break;
 		case ControlKeyConstants.EXIT:
@@ -202,36 +182,37 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 
 	@Override
 	public void selectedOption(UOptionItem selectedOption) {
-		setItemSelected((RssItem) selectedOption.getValue());
-		((DetailsPanel) detailsPanel).updateContent(getItemSelected().getContent(),
-				getItemSelected().getTitle(), getItemSelected().getImageUrl());
+		setSelectedItem((RssItem) selectedOption.getValue());
+		((DetailsPanel) detailsPanel).updateContent(getSelectedItem().getContent(),
+				getSelectedItem().getTitle(), getSelectedItem().getImageUrl());
 	}
 
-	public void comentar() {
+	public void commentRssItem() {
 		Object args[];
 		args = new Object[2];
 		args[0] = this;
-		args[1] = this.getItemSelected();
+		args[1] = this.getSelectedItem();
 
 		ViewManager.getInstance().changeView("CommentsView", args);
 	}
 
-	public void votar() {
-		ServiceLocator.getVoteManager().voteRssItem(canal, itemSelected);
-		int votos = canal.getVotes();
-		votos++;
+	public void voteRssItem() {
+		ServiceLocator.getVoteManager().voteRssItem(rssFeed, selectedItem);
+		int votes = rssFeed.getVotes();
+		votes++;
 
-		canal.setVotes(votos);
-		votosText.setTextContent("Votos: " + String.valueOf(votos), HText.ALL_STATES);
+		rssFeed.setVotes(votes);
+		votosText.setTextContent("Votos: " + String.valueOf(votes), HText.ALL_STATES);
 		votosText.repaint();
 	}
 
 	public void facebook() {
-		ServiceLocator.getFacebookManager().postFacebook(getItemSelected().getTitle());
+		ServiceLocator.getFacebookManager().postFacebook(getSelectedItem().getTitle());
+		getEventInfo().setTextContent("Se ha posteado en facebook!!!", HText.ALL_STATES);
 	}
 
 	public void sendTweet() {
-		ServiceLocator.getTwitterManager().postTweet(getItemSelected().getTitle());
+		ServiceLocator.getTwitterManager().postTweet(getSelectedItem().getTitle());
 		getEventInfo().setTextContent("Se ha enviado un tweet!!!", HText.ALL_STATES);
 	}
 }

@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.havi.ui.HContainer;
-import org.havi.ui.HDefaultTextLayoutManager;
 import org.havi.ui.HIcon;
 import org.havi.ui.HText;
 import org.havi.ui.HVisible;
@@ -70,14 +69,14 @@ public class UOptionItem extends HContainer {
 	}
 
 	private String formatTitle(String title) {
-		if (title.length() > 40 * 3) {
-			title = title.substring(0, 40 * 3) + "...";
+		if (title.length() > 39 * 3) {
+			title = title.substring(0, 39 * 3) + "...";
 		}
 		char[] chars = title.toCharArray();
 		StringBuilder finalTitle = new StringBuilder();
 
 		for (int i = 0; i < chars.length; i++) {
-			if ((i % 40) == 0) {
+			if ((i % 39) == 0) {
 				finalTitle.append("\n");
 			}
 			finalTitle.append(chars[i]);

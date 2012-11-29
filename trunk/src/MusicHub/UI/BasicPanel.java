@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 import org.havi.ui.HContainer;
 
-public class BasicPanel extends HContainer implements FocusListener, KeyListener {
+public abstract class BasicPanel extends HContainer implements FocusListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
