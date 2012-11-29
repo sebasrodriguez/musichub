@@ -11,7 +11,7 @@ public class TwitterView extends BasicContainer {
 	private static final long serialVersionUID = 1L;
 
 	public TwitterView() {
-		TwitterTimeline timeline = new TwitterTimeline(150, 50, ServiceLocator.getTwitterService()
+		TwitterTimeline timeline = new TwitterTimeline(300, 150, ServiceLocator.getTwitterService()
 				.getTweets(), this);
 
 		this.add(timeline);
