@@ -69,14 +69,14 @@ public class UOptionItem extends HContainer {
 	}
 
 	private String formatTitle(String title) {
-		if (title.length() > 39 * 3) {
-			title = title.substring(0, 39 * 3) + "...";
+		if (title.length() > 36 * 3) {
+			title = title.substring(0, 36 * 3) + "...";
 		}
 		char[] chars = title.toCharArray();
 		StringBuilder finalTitle = new StringBuilder();
 
 		for (int i = 0; i < chars.length; i++) {
-			if ((i % 39) == 0) {
+			if ((i % 36) == 0) {
 				finalTitle.append("\n");
 			}
 			finalTitle.append(chars[i]);
