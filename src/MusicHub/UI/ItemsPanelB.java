@@ -3,7 +3,7 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.FocusEvent;
+import java.awt.Polygon;
 import java.util.List;
 import MusicHub.UI.Contracts.IMenuContainer;
 
@@ -16,6 +16,8 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	public ItemsPanelB(IMenuContainer container, List<UOptionItem> itemList, int x, int y, int w,
 			int h) {
 		super(x, y, w, h);
+
+		super.hasFocus = true;
 
 		this.setBounds(x, y, w, h);
 		this.setSize(w, h);
@@ -33,9 +35,15 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 
 	@Override
 	public void paint(Graphics g) {
-		itemsMenu.requestFocus();
 		g.setColor(Color.BLACK);
 		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 15, 15);
+
+		if (super.hasFocus) {
+			itemsMenu.requestFocus();
+			g.setColor(Color.RED);
+			g.fillRect(0, 0, this.getWidth(), 5);
+		}
+
 		super.paint(g);
 	}
 
@@ -60,11 +68,4 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 	public void unmanagedMenuKey(int keyCode) {
 		this.parent.unmanagedMenuKey(keyCode);
 	}
-
-	@Override
-	public void focusGained(FocusEvent e) {
-		itemsMenu.requestFocus();
-		super.focusGained(e);
-	}
-
 }

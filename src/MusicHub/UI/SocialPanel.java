@@ -1,15 +1,12 @@
 package MusicHub.UI;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import org.havi.ui.HGraphicButton;
-import org.havi.ui.HText;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Views.ContentView;
@@ -32,20 +29,13 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		this.setSize(w, h);
 		this.parent = parent;
 		this.selectedItem = itemSelected;
+		this.hasFocus = false;
 
 		accButtons = new HGraphicButton[4];
 
-		HText simpletext = new HText("Social");
-		simpletext.setFont(new Font("tiresias", Font.BOLD, 13));
-		simpletext.setForeground(Color.WHITE);
-		simpletext.setBounds(0, 0, this.getWidth(), 20);
-		simpletext.setHorizontalAlignment(HText.HALIGN_CENTER);
-
-		this.add(simpletext);
-
 		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32.png");
 		btnComment = new HGraphicButton(comentarImg);
-		btnComment.setBounds(10, 55, 83, 55);
+		btnComment.setBounds(20, 10, this.getWidth() - 30, 40);
 		btnComment.setName("comentar");
 		btnComment.addKeyListener(new KeyListener() {
 
@@ -75,7 +65,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32.png");
 		btnVote = new HGraphicButton(votarImg);
-		btnVote.setBounds(10, 105, 83, 55);
+		btnVote.setBounds(20, 65, this.getWidth() - 30, 40);
 		btnVote.setName("votar");
 		btnVote.addKeyListener(new KeyListener() {
 
@@ -107,7 +97,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32.png");
 		btnTweet = new HGraphicButton(tweetImg);
-		btnTweet.setBounds(10, 160, 83, 55);
+		btnTweet.setBounds(20, 120, this.getWidth() - 30, 40);
 		btnTweet.setName("twitter");
 		btnTweet.addKeyListener(new KeyListener() {
 
@@ -137,7 +127,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32.png");
 		btnFacebook = new HGraphicButton(fcbkImg);
-		btnFacebook.setBounds(10, 220, 83, 55);
+		btnFacebook.setBounds(20, 180, this.getWidth() - 30, 40);
 		btnFacebook.setName("facebook");
 		btnFacebook.addKeyListener(new KeyListener() {
 			@Override
@@ -168,7 +158,9 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		addKeyListener(this);
 	}
 
-	public void setFocus() {
+	@Override
+	public void focusGained() {
+		super.focusGained();
 		selected = 0;
 		btnComment.requestFocus();
 	}
@@ -179,10 +171,13 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(30, 0, 10, 2);
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 15, 15);
+
+		if (super.hasFocus) {
+			g.setColor(Color.RED);
+			g.fillRect(0, 0, this.getWidth(), 5);
+		}
 
 		super.paint(g);
 	}
@@ -243,9 +238,5 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 	public void sendTweet() {
 		((ContentView) this.parent).sendTweet();
-	}
-
-	@Override
-	public void focusGained(FocusEvent e) {
 	}
 }
