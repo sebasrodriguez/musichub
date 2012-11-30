@@ -1,26 +1,17 @@
 package MusicHub.UI;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import org.havi.ui.HContainer;
 
-public abstract class BasicPanel extends HContainer implements FocusListener, KeyListener {
+public abstract class BasicPanel extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
+	protected boolean hasFocus;
 
 	public BasicPanel(int x, int y, int w, int h) {
 		super();
-	}
-
-	@Override
-	public void focusGained(FocusEvent e) {
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) {
+		hasFocus = false;
 	}
 
 	@Override
@@ -33,5 +24,13 @@ public abstract class BasicPanel extends HContainer implements FocusListener, Ke
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
+	}
+
+	public void focusGained() {
+		hasFocus = true;
+	}
+
+	public void focusLost() {
+		hasFocus = false;
 	}
 }

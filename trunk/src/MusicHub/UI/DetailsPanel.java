@@ -159,5 +159,4 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 	public void unmanagedMenuKey(int keyCode) {
 		this.parent.unmanagedMenuKey(keyCode);
 	}
-
 }
