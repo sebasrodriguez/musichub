@@ -89,7 +89,7 @@ public class Keyboard extends HContainer implements KeyListener {
 	 * Pinta el fondo de negro para sacar el foco
 	 */
 	private void paintFocusOut(int index) {
-		this.getComponent(index).setBackground(Color.BLACK);
+		this.getComponent(index).setBackground(Color.DARK_GRAY);
 		this.repaint();
 	}
 
