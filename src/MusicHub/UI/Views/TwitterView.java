@@ -11,7 +11,8 @@ public class TwitterView extends BasicContainer {
 	private static final long serialVersionUID = 1L;
 
 	public TwitterView() {
-		TwitterTimeline timeline = new TwitterTimeline(300, 150, ServiceLocator.getTwitterService()
+		super("../assets/twitter-view-bg.png");
+		TwitterTimeline timeline = new TwitterTimeline(300, 125, ServiceLocator.getTwitterService()
 				.getTweets(), this);
 
 		this.add(timeline);
@@ -22,6 +23,9 @@ public class TwitterView extends BasicContainer {
 		switch (keyCode) {
 		case ControlKeyConstants.RED:
 			ViewManager.getInstance().changeView("MainView", null);
+			break;
+		case ControlKeyConstants.EXIT:
+			ViewManager.getInstance().exitApplication();
 			break;
 		}
 	}

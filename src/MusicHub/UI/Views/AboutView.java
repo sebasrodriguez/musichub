@@ -2,8 +2,11 @@ package MusicHub.UI.Views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import org.havi.ui.HDefaultTextLayoutManager;
 import org.havi.ui.HIcon;
@@ -12,9 +15,11 @@ import org.havi.ui.HVisible;
 
 import MusicHub.Application.ServiceLocator;
 import MusicHub.UI.BasicContainer;
+import MusicHub.UI.ControlKeyConstants;
+import MusicHub.UI.ViewManager;
 import MusicHub.UI.Controls.RoundRectBox;
 
-public class AboutView extends BasicContainer {
+public class AboutView extends BasicContainer implements KeyListener {
 	
 	private static final long serialVersionUID = 1L;
 	private HText title;
@@ -24,6 +29,7 @@ public class AboutView extends BasicContainer {
 	
 	
 	public AboutView(){	
+		super();
 		
 		String aboutText = ServiceLocator.getStorageManager().getAbout();
 		Image img = Toolkit.getDefaultToolkit().getImage("../assets/ude.png");
@@ -57,14 +63,45 @@ public class AboutView extends BasicContainer {
 		this.popToFront(about);	
 		this.popToFront(logo);
 		
+		this.addKeyListener(this);
+		
 	
 	}
+
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub	
+		switch(e.getKeyCode()){
+		case ControlKeyConstants.RED:
+			ViewManager.getInstance().changeView("MainView", null);
+			break;
+		case ControlKeyConstants.EXIT:
+			ViewManager.getInstance().exitApplication();		
+			break;
+		}
+		
+	}
+
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	/*public void paint(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
-		g.drawRoundRect(0, 0, 375, 100, 15, 15);
-		g.setColor(Color.WHITE);
-		g.fillRoundRect(1, 1, 373, 98, 15, 15);		
+	public void paint(Graphics g){
 		super.paint(g);
-	}*/
+		this.requestFocus();
+	}
 }
