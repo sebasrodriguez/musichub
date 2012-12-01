@@ -116,6 +116,9 @@ public class CommentsView extends BasicContainer implements IKeyboardReceiver {
 				ViewManager.getInstance().changeView("ContentView-CommentsView", args);
 			}
 			break;
+		case ControlKeyConstants.EXIT:
+			ViewManager.getInstance().exitApplication();
+			break;
 		}
 	}
 }
