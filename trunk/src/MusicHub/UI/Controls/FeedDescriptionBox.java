@@ -16,7 +16,7 @@ public class FeedDescriptionBox extends HContainer {
 	private HText description;
 
 	public FeedDescriptionBox() {
-		this.setBounds(20, 520, 990, 80);
+		this.setBounds(20, 500, 990, 80);
 
 		title = new HText("Descripci—n", new Font("Tiresias", Font.BOLD, 20), Color.WHITE, Color.WHITE,
 				new HDefaultTextLayoutManager());
