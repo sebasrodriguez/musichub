@@ -11,8 +11,7 @@ import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.ViewManager;
 
-
-public class MainView extends BasicContainer implements  KeyListener {
+public class MainView extends BasicContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private HTextButton htbChannel;
@@ -29,149 +28,131 @@ public class MainView extends BasicContainer implements  KeyListener {
 		super("../assets/init_bg.png");
 
 		htbChannel = new HTextButton("Canales");
-		htbChannel.setFont(new Font("tiresias",Font.BOLD,22));
-		htbChannel.setForeground(Color.WHITE);		
+		htbChannel.setFont(new Font("tiresias", Font.BOLD, 22));
+		htbChannel.setForeground(Color.WHITE);
 		htbChannel.setBounds(xPosition, yPosition, width, height);
 		htbChannel.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
-		
-		
-			
+
 		htbTwitter = new HTextButton("Twitter");
-		htbTwitter.setFont(new Font("tiresias",Font.BOLD,22));
+		htbTwitter.setFont(new Font("tiresias", Font.BOLD, 22));
 		htbTwitter.setForeground(Color.WHITE);
 		htbTwitter.setBounds(xPosition, yPosition + 40, width, height);
 		htbTwitter.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
-		
-		
+
 		htbAbout = new HTextButton("Acerca de");
-		htbAbout.setFont(new Font("tiresias",Font.BOLD,22));
+		htbAbout.setFont(new Font("tiresias", Font.BOLD, 22));
 		htbAbout.setForeground(Color.WHITE);
 		htbAbout.setBounds(xPosition, yPosition + 80, width, height);
 		htbAbout.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
-		
-		
+
 		htbExit = new HTextButton("Salir");
-		htbExit.setFont(new Font("tiresias",Font.BOLD,22));
+		htbExit.setFont(new Font("tiresias", Font.BOLD, 22));
 		htbExit.setForeground(Color.WHITE);
 		htbExit.setBounds(xPosition, yPosition + 120, width, height);
 		htbExit.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
-		
-			
+
 		this.add(htbChannel);
 		this.add(htbTwitter);
 		this.add(htbAbout);
 		this.add(htbExit);
-		
-		
+
 		this.popToFront(htbChannel);
 		this.popToFront(htbTwitter);
 		this.popToFront(htbAbout);
 		this.popToFront(htbExit);
-		
-		this.selectedOption = "Channel";	
-		this.addKeyListener(this);		
+
+		this.selectedOption = "Channel";
+		this.addKeyListener(this);
 	}
 
 	@Override
-	public void paint(Graphics g) {		
-		switch(this.selectedOption){
-		case "Channel":
-			htbChannel.setForeground(new Color(244,244,134));
+	public void paint(Graphics g) {
+		if (this.selectedOption.equals("Channel")) {
+			htbChannel.setForeground(new Color(244, 244, 134));
 			htbTwitter.setForeground(Color.WHITE);
 			htbAbout.setForeground(Color.WHITE);
 			htbExit.setForeground(Color.WHITE);
-			break;
-		case "Twitter":
-			htbTwitter.setForeground(new Color(244,244,134));
-			htbChannel.setForeground(Color.WHITE);
-			htbAbout.setForeground(Color.WHITE);
-			htbExit.setForeground(Color.WHITE);
-			break;
-		case "About":
-			htbAbout.setForeground(new Color(244,244,134));
-			htbTwitter.setForeground(Color.WHITE);
-			htbChannel.setForeground(Color.WHITE);
-			htbExit.setForeground(Color.WHITE);
-			break;
-		case "Exit":
-			htbExit.setForeground(new Color(244,244,134));
-			htbTwitter.setForeground(Color.WHITE);
-			htbAbout.setForeground(Color.WHITE);
-			htbChannel.setForeground(Color.WHITE);
-			break;
 		}
-		this.requestFocus();		
+		else if (this.selectedOption.equals("Twitter")) {
+			htbTwitter.setForeground(new Color(244, 244, 134));
+			htbChannel.setForeground(Color.WHITE);
+			htbAbout.setForeground(Color.WHITE);
+			htbExit.setForeground(Color.WHITE);
+		}
+		else if (this.selectedOption.equals("About")) {
+			htbAbout.setForeground(new Color(244, 244, 134));
+			htbTwitter.setForeground(Color.WHITE);
+			htbChannel.setForeground(Color.WHITE);
+			htbExit.setForeground(Color.WHITE);
+		}
+		else if (this.selectedOption.equals("Exit")) {
+			htbExit.setForeground(new Color(244, 244, 134));
+			htbTwitter.setForeground(Color.WHITE);
+			htbAbout.setForeground(Color.WHITE);
+			htbChannel.setForeground(Color.WHITE);
+		}
+
+		this.requestFocus();
 		super.paint(g);
 	}
 
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
-		// TODO Auto-generated method stub		
-		switch(keyEvent.getKeyCode()){
+		switch (keyEvent.getKeyCode()) {
 		case ControlKeyConstants.UP:
-			switch(this.selectedOption){
-			case "Channel":
-				this.selectedOption = "Channel";				
-				break;
-			case "Twitter":
-				this.selectedOption = "Channel";					
-				break;
-			case "About":
-				this.selectedOption = "Twitter";	
-				break;
-			case "Exit":
+			if (this.selectedOption.equals("Channel")) {
+				this.selectedOption = "Channel";
+			}
+			else if (this.selectedOption.equals("Twitter")) {
+				this.selectedOption = "Channel";
+			}
+			else if (this.selectedOption.equals("About")) {
+				this.selectedOption = "Twitter";
+			}
+			else if (this.selectedOption.equals("Exit")) {
 				this.selectedOption = "About";
-				break;			
-			}			
+			}
 			break;
 		case ControlKeyConstants.DOWN:
-			switch(this.selectedOption){
-			case "Channel":
+			if (this.selectedOption.equals("Channel")) {
 				this.selectedOption = "Twitter";
-				break;
-			case "Twitter":
+			}
+			else if (this.selectedOption.equals("Twitter")) {
 				this.selectedOption = "About";
-				break;
-			case "About":
+			}
+			else if (this.selectedOption.equals("About")) {
 				this.selectedOption = "Exit";
-				break;
-			case "Exit":
+			}
+			else if (this.selectedOption.equals("Exit")) {
 				this.selectedOption = "Exit";
-				break;			
-			}			
-			break;	
+			}
+			break;
 		case ControlKeyConstants.OK:
-			switch(this.selectedOption){
-			case "Channel":
+			if (this.selectedOption.equals("Channel")) {
 				ViewManager.getInstance().changeView("ChannelsView", null);
-				break;
-			case "Twitter":
+			}
+			else if (this.selectedOption.equals("Twitter")) {
 				ViewManager.getInstance().changeView("TwitterView", null);
-				break;
-			case "About":
-				ViewManager.getInstance().changeView("AboutView", null);				
-				break;
-			case "Exit":
+			}
+			else if (this.selectedOption.equals("About")) {
+				ViewManager.getInstance().changeView("AboutView", null);
+			}
+			else if (this.selectedOption.equals("Exit")) {
 				ViewManager.getInstance().exitApplication();
-				break;			
-			}		
+			}
 			break;
 		case ControlKeyConstants.EXIT:
-			ViewManager.getInstance().exitApplication();		
+			ViewManager.getInstance().exitApplication();
 			break;
-		}		
-		this.repaint();		
+		}
+		this.repaint();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
