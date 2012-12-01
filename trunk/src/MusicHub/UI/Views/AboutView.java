@@ -32,13 +32,13 @@ public class AboutView extends BasicContainer implements KeyListener {
 		String aboutText = ServiceLocator.getStorageManager().getAbout();
 		Image img = Toolkit.getDefaultToolkit().getImage("../assets/logoUDE_2.png");
 		logo = new HIcon(img);
-		logo.setBounds(430,150,190,100);
+		logo.setBounds(430,105,190,100);
 		logo.setVisible(true);
 			
 				
 		about = new HText(aboutText, new Font("Tiresias", Font.BOLD, 22), Color.WHITE, Color.WHITE,
 				new HDefaultTextLayoutManager());
-		about.setBounds(290, 150, 545, 400);
+		about.setBounds(290, 105, 545, 400);
 		about.setVisible(true);
 		about.setVerticalAlignment(HVisible.VALIGN_TOP);
 		about.setHorizontalAlignment(HVisible.HALIGN_LEFT);
