@@ -67,26 +67,26 @@ public class MainView extends BasicContainer implements KeyListener {
 
 	@Override
 	public void paint(Graphics g) {
-		if (this.selectedOption.equals("Channel")) {
-			htbChannel.setForeground(new Color(244, 244, 134));
+		if (this.selectedOption.equals("Channel")) {			
+			htbChannel.setForeground(Color.DARK_GRAY);
 			htbTwitter.setForeground(Color.WHITE);
 			htbAbout.setForeground(Color.WHITE);
 			htbExit.setForeground(Color.WHITE);
 		}
 		else if (this.selectedOption.equals("Twitter")) {
-			htbTwitter.setForeground(new Color(244, 244, 134));
+			htbTwitter.setForeground(Color.DARK_GRAY);
 			htbChannel.setForeground(Color.WHITE);
 			htbAbout.setForeground(Color.WHITE);
 			htbExit.setForeground(Color.WHITE);
 		}
 		else if (this.selectedOption.equals("About")) {
-			htbAbout.setForeground(new Color(244, 244, 134));
+			htbAbout.setForeground(Color.DARK_GRAY);
 			htbTwitter.setForeground(Color.WHITE);
 			htbChannel.setForeground(Color.WHITE);
 			htbExit.setForeground(Color.WHITE);
 		}
 		else if (this.selectedOption.equals("Exit")) {
-			htbExit.setForeground(new Color(244, 244, 134));
+			htbExit.setForeground(Color.DARK_GRAY);
 			htbTwitter.setForeground(Color.WHITE);
 			htbAbout.setForeground(Color.WHITE);
 			htbChannel.setForeground(Color.WHITE);
