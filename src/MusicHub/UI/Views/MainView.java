@@ -4,10 +4,10 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 import MusicHub.UI.BasicContainer;
-import MusicHub.UI.UMenuScrollable;
-import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
+import MusicHub.UI.Controls.UMenuScrollable;
+import MusicHub.UI.Controls.UOptionItem;
 
 public class MainView extends BasicContainer implements IMenuContainer {
 
