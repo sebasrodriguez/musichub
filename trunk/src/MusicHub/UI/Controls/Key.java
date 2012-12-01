@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import org.havi.ui.HNavigable;
 import org.havi.ui.HTextButton;
+import org.havi.ui.HVisible;
 
 import MusicHub.Util.Conf;
 
@@ -23,9 +24,9 @@ public class Key extends HTextButton implements KeyListener, HNavigable {
 		this.x = x;
 		this.y = y;
 		this.setBounds(this.x, this.y, width, height);
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.DARK_GRAY);
 		this.setForeground(Color.WHITE);
-		this.setFont(new Font(Conf.getFontName(), Font.BOLD, 20));
+		this.setFont(new Font(Conf.getFontName(), Font.BOLD, 20));	
 
 	}
 
