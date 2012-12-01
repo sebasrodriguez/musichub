@@ -11,7 +11,7 @@ public class BasicContainer extends HContainer {
 	protected HIcon icon;
 	private Image img;
 	private int viewWidth = 1024;
-	private int viewHeight = 768;
+	private int viewHeight = 698;
 
 	public BasicContainer() {
 		this.setBounds(0, 0, this.viewWidth, this.viewHeight);
