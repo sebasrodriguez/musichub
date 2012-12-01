@@ -1,6 +1,6 @@
 package MusicHub.UI.Contracts;
 
-import MusicHub.UI.UOptionItem;
+import MusicHub.UI.Controls.UOptionItem;
 
 public interface IMenuContainer {
 

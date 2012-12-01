@@ -1,4 +1,4 @@
-package MusicHub.UI;
+package MusicHub.UI.Controls;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import org.havi.ui.HGraphicButton;
 import MusicHub.DataTypes.RssItem;
+import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.Contracts.IMenuContainer;
 import MusicHub.UI.Views.ContentView;
 

@@ -13,14 +13,14 @@ import MusicHub.Application.ServiceLocator;
 import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.BasicContainer;
-import MusicHub.UI.BasicPanel;
 import MusicHub.UI.ControlKeyConstants;
-import MusicHub.UI.DetailsPanel;
-import MusicHub.UI.NewsPanel;
-import MusicHub.UI.SocialPanel;
-import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
 import MusicHub.UI.Contracts.IMenuContainer;
+import MusicHub.UI.Controls.BasicPanel;
+import MusicHub.UI.Controls.DetailsPanel;
+import MusicHub.UI.Controls.NewsPanel;
+import MusicHub.UI.Controls.SocialPanel;
+import MusicHub.UI.Controls.UOptionItem;
 
 public class ContentView extends BasicContainer implements IMenuContainer, KeyListener {
 

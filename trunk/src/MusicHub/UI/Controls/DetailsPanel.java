@@ -1,4 +1,4 @@
-package MusicHub.UI;
+package MusicHub.UI.Controls;
 
 import java.awt.Color;
 import java.awt.Font;
