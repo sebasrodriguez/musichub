@@ -16,7 +16,7 @@ import MusicHub.UI.BasicContainer;
 import MusicHub.UI.BasicPanel;
 import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.DetailsPanel;
-import MusicHub.UI.ItemsPanelB;
+import MusicHub.UI.NewsPanel;
 import MusicHub.UI.SocialPanel;
 import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
@@ -57,7 +57,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 		feedItemList = ServiceLocator.getRssManager().getRssItems(rssFeed);
 		setSelectedItem(feedItemList.get(0));
 
-		itemsPanelB = new ItemsPanelB(this, this.getItemList(), 10, 110, 300, 540);
+		itemsPanelB = new NewsPanel(this, this.getItemList(), 10, 110, 300, 540);
 		detailsPanel = new DetailsPanel(this, 320, 110, 480, 540);
 		socialPanel = new SocialPanel(this, getSelectedItem(), 810, 110, 200, 230);
 

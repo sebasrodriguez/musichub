@@ -3,17 +3,16 @@ package MusicHub.UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.util.List;
 import MusicHub.UI.Contracts.IMenuContainer;
 
-public class ItemsPanelB extends BasicPanel implements IMenuContainer {
+public class NewsPanel extends BasicPanel implements IMenuContainer {
 
 	private static final long serialVersionUID = 1L;
 	private UMenuScrollable itemsMenu;
 	private IMenuContainer parent;
 
-	public ItemsPanelB(IMenuContainer container, List<UOptionItem> itemList, int x, int y, int w,
+	public NewsPanel(IMenuContainer container, List<UOptionItem> itemList, int x, int y, int w,
 			int h) {
 		super(x, y, w, h);
 
@@ -29,7 +28,7 @@ public class ItemsPanelB extends BasicPanel implements IMenuContainer {
 		this.popToFront(itemsMenu);
 	}
 
-	public ItemsPanelB(int x, int y, int w, int h) {
+	public NewsPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 
