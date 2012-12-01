@@ -17,54 +17,42 @@ import MusicHub.Application.ServiceLocator;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.ViewManager;
-import MusicHub.UI.Controls.RoundRectBox;
 
 public class AboutView extends BasicContainer implements KeyListener {
 	
 	private static final long serialVersionUID = 1L;
-	private HText title;
 	private HText about;
 	private HIcon logo;
 	
 	
 	
 	public AboutView(){	
-		super();
+		super("../assets/acerca-de-view.png");
 		
 		String aboutText = ServiceLocator.getStorageManager().getAbout();
-		Image img = Toolkit.getDefaultToolkit().getImage("../assets/ude.png");
+		Image img = Toolkit.getDefaultToolkit().getImage("../assets/logoUDE_2.png");
 		logo = new HIcon(img);
-		logo.setBounds(250,250,160,85);
+		logo.setBounds(430,150,190,100);
 		logo.setVisible(true);
 			
-		
-		title = new HText("Acerca de\n", new Font("Tiresias", Font.BOLD, 25),
-				Color.BLACK, Color.WHITE, new HDefaultTextLayoutManager());
-		title.setBounds(105, 20, 470, 20);
-		title.setVisible(true);
-		title.setHorizontalAlignment(HVisible.HALIGN_LEFT);
-
-		about = new HText(aboutText, new Font("Tiresias", Font.PLAIN, 20), Color.BLACK, Color.WHITE,
+				
+		about = new HText(aboutText, new Font("Tiresias", Font.PLAIN, 22), Color.BLACK, Color.WHITE,
 				new HDefaultTextLayoutManager());
-		about.setBounds(250, 250, 545, 355);
+		about.setBounds(290, 150, 545, 400);
 		about.setVisible(true);
 		about.setVerticalAlignment(HVisible.VALIGN_TOP);
 		about.setHorizontalAlignment(HVisible.HALIGN_LEFT);
+		about.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 
-		RoundRectBox box = new RoundRectBox(225, 235, 600, 385, Color.DARK_GRAY);
 		
-		this.add(logo);
-		this.add(title);
+		
+		this.add(logo);		
 		this.add(about);
-		this.add(box);
-	
-		this.popToFront(box);
-		this.popToFront(title);		
+				
 		this.popToFront(about);	
-		this.popToFront(logo);
+		this.popToFront(logo);		
 		
 		this.addKeyListener(this);
-		
 	
 	}
 
