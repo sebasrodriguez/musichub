@@ -36,7 +36,7 @@ public class AboutView extends BasicContainer implements KeyListener {
 		logo.setVisible(true);
 			
 				
-		about = new HText(aboutText, new Font("Tiresias", Font.PLAIN, 22), Color.BLACK, Color.WHITE,
+		about = new HText(aboutText, new Font("Tiresias", Font.BOLD, 22), Color.WHITE, Color.WHITE,
 				new HDefaultTextLayoutManager());
 		about.setBounds(290, 150, 545, 400);
 		about.setVisible(true);
