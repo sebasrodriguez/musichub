@@ -12,7 +12,7 @@ public class TwitterView extends BasicContainer {
 
 	public TwitterView() {
 		super("../assets/twitter-view-bg.png");
-		TwitterTimeline timeline = new TwitterTimeline(300, 125, ServiceLocator.getTwitterService()
+		TwitterTimeline timeline = new TwitterTimeline(300, 110, ServiceLocator.getTwitterService()
 				.getTweets(), this);
 
 		this.add(timeline);
