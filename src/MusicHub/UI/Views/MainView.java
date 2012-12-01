@@ -10,11 +10,11 @@ import org.havi.ui.HVisible;
 
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
-import MusicHub.UI.UOptionItem;
+//import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
-import MusicHub.UI.Contracts.IMenuContainer;
+//import MusicHub.UI.Contracts.IMenuContainer;
 
-public class MainView extends BasicContainer implements IMenuContainer, KeyListener {
+public class MainView extends BasicContainer implements  KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private HTextButton htbChannel;
@@ -106,7 +106,7 @@ public class MainView extends BasicContainer implements IMenuContainer, KeyListe
 		super.paint(g);
 	}
 
-	@Override
+/*	@Override
 	public void selectedOption(UOptionItem selectedOption) {
 		ViewManager.getInstance().changeView((String) selectedOption.getValue(), null);
 	}
@@ -118,7 +118,7 @@ public class MainView extends BasicContainer implements IMenuContainer, KeyListe
 	@Override
 	public void unmanagedMenuKey(int keyCode) {
 	}
-
+*/
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
 		// TODO Auto-generated method stub		
