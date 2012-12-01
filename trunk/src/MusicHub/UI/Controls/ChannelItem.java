@@ -23,18 +23,18 @@ public class ChannelItem extends HContainer {
 	public ChannelItem(RssFeed rssFeed) {
 		super();
 		this.rssFeed = rssFeed;
-		this.setBounds(0, 0, 280, 30);
+		this.setBounds(0, 0, 360, 30);
 
 		channelName = new HText(this.formatName(rssFeed.getName()), new Font("Tiresias", Font.BOLD, 17),
 				Color.DARK_GRAY, Color.WHITE, new HDefaultTextLayoutManager());
-		channelName.setBounds(5, 5, 200, 20);
-		channelName.setVisible(true);
+		channelName.setBounds(5, 5, 280, 20);
+		channelName.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		channelName.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
-		channelVotes = new HText(Integer.toString(rssFeed.getVotes()), new Font("Tiresias", Font.BOLD, 22), Color.DARK_GRAY,
-				Color.WHITE, new HDefaultTextLayoutManager());
-		channelVotes.setBounds(206, 5, 70, 20);
-		channelVotes.setVisible(true);
+		channelVotes = new HText(Integer.toString(rssFeed.getVotes()), new Font("Tiresias", Font.BOLD, 22),
+				Color.DARK_GRAY, Color.WHITE, new HDefaultTextLayoutManager());
+		channelVotes.setBounds(266, 5, 80, 20);
+		channelVotes.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		channelVotes.setHorizontalAlignment(HVisible.HALIGN_CENTER);
 
 		this.add(channelName);
@@ -42,7 +42,7 @@ public class ChannelItem extends HContainer {
 	}
 
 	private String formatName(String name) {
-		if (name.length() >= 25) {
+		if (name.length() >= 30) {
 			name = name.substring(0, 23);
 			name += "...";
 		}
@@ -51,18 +51,10 @@ public class ChannelItem extends HContainer {
 
 	public void paint(Graphics g) {
 		if (this.isSelected()) {
-			this.backgroundColor = Color.DARK_GRAY;
-			channelName.setBackground(Color.DARK_GRAY);
-			channelVotes.setBackground(Color.DARK_GRAY);
-			channelName.setForeground(Color.WHITE);
-			channelVotes.setForeground(Color.WHITE);
+			this.backgroundColor = Color.LIGHT_GRAY;			
 		}
 		else {
-			this.backgroundColor = Color.WHITE;
-			channelName.setBackground(Color.WHITE);
-			channelVotes.setBackground(Color.WHITE);
-			channelName.setForeground(Color.DARK_GRAY);
-			channelVotes.setForeground(Color.DARK_GRAY);
+			this.backgroundColor = Color.WHITE;			
 		}
 
 		g.setColor(Color.DARK_GRAY);

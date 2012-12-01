@@ -16,18 +16,19 @@ public class FeedDescriptionBox extends HContainer {
 	private HText description;
 
 	public FeedDescriptionBox() {
-		this.setBounds(20, 420, 320, 100);
+		this.setBounds(20, 520, 990, 80);
 
-		title = new HText("Descripci—n", new Font("Tiresias", Font.BOLD, 20), Color.DARK_GRAY,
-				Color.WHITE, new HDefaultTextLayoutManager());
+		title = new HText("Descripci—n", new Font("Tiresias", Font.BOLD, 20), Color.WHITE, Color.WHITE,
+				new HDefaultTextLayoutManager());
 		title.setBounds(5, 5, 150, 20);
-		title.setVisible(true);
+		title.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		title.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
-		description = new HText("", new Font("Tiresias", Font.PLAIN, 15), Color.WHITE,
-				Color.DARK_GRAY, new HDefaultTextLayoutManager());
-		description.setBounds(5, 35, 300, 50);
+		description = new HText("", new Font("Tiresias", Font.BOLD, 15), Color.DARK_GRAY, Color.WHITE,
+				new HDefaultTextLayoutManager());
+		description.setBounds(5, 35, 550, 50);
 		description.setVisible(true);
+		description.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		description.setVerticalAlignment(HVisible.VALIGN_TOP);
 		description.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
@@ -39,7 +40,7 @@ public class FeedDescriptionBox extends HContainer {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRoundRect(0, 30, this.getWidth(), this.getHeight() - 30, 15, 15);
 		super.paint(g);
 	}
@@ -53,7 +54,7 @@ public class FeedDescriptionBox extends HContainer {
 		StringBuilder finalDescription = new StringBuilder();
 
 		for (int i = 0; i < chars.length; i++) {
-			if ((i % 46) == 0) {
+			if ((i % 90) == 0) {
 				finalDescription.append("\n");
 			}
 			finalDescription.append(chars[i]);
