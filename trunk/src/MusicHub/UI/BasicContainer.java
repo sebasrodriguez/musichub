@@ -16,7 +16,7 @@ public class BasicContainer extends HContainer {
 	public BasicContainer() {
 		this.setBounds(0, 0, this.viewWidth, this.viewHeight);
 
-		img = Toolkit.getDefaultToolkit().getImage("../assets/bgLogo1024.png");
+		img = Toolkit.getDefaultToolkit().getImage("../assets/MusicHub-Background.png");
 		icon = new HIcon(img, 0, 0, this.getWidth(),this.getHeight());
 
 		this.add(icon);
