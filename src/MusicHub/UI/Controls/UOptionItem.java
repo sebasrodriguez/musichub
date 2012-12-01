@@ -39,15 +39,14 @@ public class UOptionItem extends HContainer {
 		txtTitle.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 		txtTitle.setVerticalAlignment(HVisible.VALIGN_TOP);
 
-		if (imageUrl != null) {
+		if (imageUrl != null && imageUrl.length() > 0 && imageUrl.toLowerCase().startsWith("http")) {
 			this.imgUrl = imageUrl;
 			Thread th = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
 						Image image = null;
-						image = Toolkit.getDefaultToolkit().getImage(
-								new URL(UOptionItem.this.imgUrl));
+						image = Toolkit.getDefaultToolkit().getImage(new URL(UOptionItem.this.imgUrl));
 						image = image.getScaledInstance(65, 65, Image.SCALE_DEFAULT);
 
 						icon = new HIcon(image);
@@ -59,7 +58,6 @@ public class UOptionItem extends HContainer {
 						txtTitle.setLocation(65, 0);
 					}
 					catch (MalformedURLException e) {
-						e.printStackTrace();
 					}
 				}
 			});

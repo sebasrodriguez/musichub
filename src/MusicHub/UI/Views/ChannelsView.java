@@ -1,8 +1,15 @@
 package MusicHub.UI.Views;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
 import javax.tv.xlet.XletContext;
+
+import org.havi.ui.HText;
+import org.havi.ui.HVisible;
+
 import MusicHub.Application.ServiceLocator;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
@@ -18,16 +25,23 @@ public class ChannelsView extends BasicContainer {
 	private FeedDescriptionBox descriptionBox;
 
 	public ChannelsView(XletContext context) {
-		// Mostramos background con transparencia
-		super("../assets/Background-ChannelsView.png");
+		super("../assets/channel-view-bg.png");
 
 		// Cambiamos tamano video
-		VideoResizer.getInstance(null).changeVideoSize(new Rectangle(0, 0, 100, 100),
-				new Rectangle(350, 99, 330, 300));
+		VideoResizer.getInstance(null)
+				.changeVideoSize(new Rectangle(0, 0, 100, 100), new Rectangle(428, 140, 582, 365));
+
+		HText channelsTitle = new HText("Canales");
+		channelsTitle.setFont(new Font("tiresias", Font.BOLD, 18));
+		channelsTitle.setForeground(Color.WHITE);
+		channelsTitle.setBounds(0, 47, this.getWidth(), 50);
+		channelsTitle.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 
 		this.loadDescriptionBox();
-		ChannelsList channelsList = new ChannelsList(10, 99, ServiceLocator.getRssManager()
-				.getRssFeeds(), this);
+		ChannelsList channelsList = new ChannelsList(10, 99, ServiceLocator.getRssManager().getRssFeeds(), this);
+
+		this.add(channelsTitle);
+		this.popToFront(channelsTitle);
 
 		this.add(channelsList);
 		this.popToFront(channelsList);
@@ -46,7 +60,12 @@ public class ChannelsView extends BasicContainer {
 	}
 
 	public void stepedOnOption(ChannelItem channelItem) {
-		this.descriptionBox.setDescription(channelItem.getRssFeed().getDescription());
+		if (channelItem.getRssFeed().getDescription() != null && channelItem.getRssFeed().getDescription().length() > 0) {
+			this.descriptionBox.setDescription(channelItem.getRssFeed().getDescription());
+		}
+		else {
+			this.descriptionBox.setDescription("No hay descripcion para el canal seleccionado");
+		}
 	}
 
 	public void selectedOption(ChannelItem channelItem) {

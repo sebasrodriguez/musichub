@@ -15,13 +15,13 @@ import org.havi.ui.HIcon;
 import org.havi.ui.HText;
 import org.havi.ui.HVisible;
 import MusicHub.DataTypes.RssFeed;
+import MusicHub.UI.ControlKeyConstants;
 import MusicHub.UI.Views.ChannelsView;
 
 public class ChannelsList extends HContainer implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<RssFeed> rssFeeds;
 	private List<ChannelItem> channelsItems;
 	private HText channelsHeader;
 	private HText votesHeader;
@@ -30,29 +30,31 @@ public class ChannelsList extends HContainer implements KeyListener {
 	private HIcon downArrow;
 	private ChannelItem selectedItem;
 	private int selectedItemIndex = 0;
-	private int currentPosition = 0;
 	private ChannelsView channelsView;
 
 	public ChannelsList(int x, int y, List<RssFeed> rssFeeds, ChannelsView channelsView) {
-		this.setBounds(x, y, 400, 300);
+		this.setBounds(x, y, 410, 410);
+		
+		
 
-		channelsHeader = new HText("Canal", new Font("Tiresias", Font.BOLD, 22), Color.DARK_GRAY,
-				Color.WHITE, new HDefaultTextLayoutManager());
+		channelsHeader = new HText("Canal");
+		channelsHeader.setFont(new Font("tiresias", Font.BOLD, 18));
+		channelsHeader.setForeground(Color.WHITE);
 		channelsHeader.setBounds(60, 5, 80, 25);
-		channelsHeader.setVisible(true);
 		channelsHeader.setHorizontalAlignment(HVisible.HALIGN_LEFT);
+		channelsHeader.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 
-		votesHeader = new HText("Votos", new Font("Tiresias", Font.BOLD, 22), Color.DARK_GRAY,
-				Color.WHITE, new HDefaultTextLayoutManager());
-		votesHeader.setBounds(260, 5, 70, 25);
-		votesHeader.setVisible(true);
+		votesHeader = new HText("Votos", new Font("Tiresias", Font.BOLD, 22), Color.WHITE, Color.DARK_GRAY,
+				new HDefaultTextLayoutManager());
+		votesHeader.setBounds(323, 5, 70, 25);
+		votesHeader.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		votesHeader.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
-		this.channelsContainer = new HContainer(50, 40, 380, 300);
+		this.channelsContainer = new HContainer(50, 40, 580, 350);
 		Image upImg = Toolkit.getDefaultToolkit().getImage("../assets/up-arrow-small.png");
 		Image downImg = Toolkit.getDefaultToolkit().getImage("../assets/down-arrow-small.png");
 		this.upArrow = new HIcon(upImg, 10, 40, 25, 25);
-		this.downArrow = new HIcon(downImg, 10, 305 - 40, 25, 25);
+		this.downArrow = new HIcon(downImg, 10, 355, 25, 25);
 		this.channelsView = channelsView;
 
 		this.add(channelsHeader);
@@ -92,7 +94,7 @@ public class ChannelsList extends HContainer implements KeyListener {
 		// set shown items
 		int i = 0;
 		for (ChannelItem channelItem : this.channelsItems) {
-			if (i > 5) {
+			if (i > 7) {
 				break;
 			}
 			channelItem.setShown(true);
@@ -133,11 +135,11 @@ public class ChannelsList extends HContainer implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case 10:
+		case ControlKeyConstants.OK:
 			this.channelsView.selectedOption(selectedItem);
 			break;
-		case 40:
-		case 38:
+		case ControlKeyConstants.UP:
+		case ControlKeyConstants.DOWN:
 			// set selected item
 			selectedItem.setSelected(false);
 			if (e.getKeyCode() == 40) {
@@ -168,7 +170,7 @@ public class ChannelsList extends HContainer implements KeyListener {
 			// scroll menu if selected item is not visible
 			List<Integer> shownItemsIndexes = this.getShownItemsIndexes();
 
-			if (this.channelsItems.size() > 6) {
+			if (this.channelsItems.size() > 8) {
 				// Si movio un elemento para abajo actualizo todos los visibles
 				if (shownItemsIndexes.get(shownItemsIndexes.size() - 1) + 1 == selectedItemIndex) {
 					// actualizamos la lista de elementos mostrados
@@ -177,8 +179,8 @@ public class ChannelsList extends HContainer implements KeyListener {
 					this.setShownItems(shownItemsIndexes);
 
 					for (ChannelItem channelItem : this.channelsItems) {
-						channelItem.setLocation(channelItem.getX(), channelItem.getY()
-								- (channelItem.getHeight() + 15));
+						channelItem
+								.setLocation(channelItem.getX(), channelItem.getY() - (channelItem.getHeight() + 15));
 					}
 				}
 				else if (shownItemsIndexes.get(0) - 1 == selectedItemIndex) {
@@ -187,8 +189,8 @@ public class ChannelsList extends HContainer implements KeyListener {
 					this.setShownItems(shownItemsIndexes);
 
 					for (ChannelItem channelItem : this.channelsItems) {
-						channelItem.setLocation(channelItem.getX(), channelItem.getY()
-								+ (channelItem.getHeight() + 15));
+						channelItem
+								.setLocation(channelItem.getX(), channelItem.getY() + (channelItem.getHeight() + 15));
 					}
 				}
 			}
@@ -229,7 +231,6 @@ public class ChannelsList extends HContainer implements KeyListener {
 
 	@Override
 	public void paint(Graphics g) {
-
 		super.paint(g);
 		this.requestFocus();
 	}

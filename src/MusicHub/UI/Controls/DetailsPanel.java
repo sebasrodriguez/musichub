@@ -36,7 +36,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 	public void showItem(String title, String content, String imgURL) {
 		try {
 			image = null;
-			if (imgURL != null && !imgURL.equals("")) {
+			if (imgURL != null && !imgURL.equals("") && imgURL.startsWith("http")) {
 				image = Toolkit.getDefaultToolkit().getImage(new URL(imgURL));
 				image = image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 			}
@@ -122,7 +122,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		titleText.setTextContent(this.wrapContent(title, 50), HState.ALL_STATES);
 
 		try {
-			if (!imgSrc.equals("")) {
+			if (!imgSrc.equals("") && imgSrc.length() > 0 && imgSrc.toLowerCase().startsWith("http")) {
 				image = Toolkit.getDefaultToolkit().getImage(new URL(imgSrc));
 				image = image.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 				ico.setGraphicContent(image, HState.ALL_STATES);
