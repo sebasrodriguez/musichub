@@ -7,12 +7,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
-
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
-//import MusicHub.UI.UOptionItem;
 import MusicHub.UI.ViewManager;
-//import MusicHub.UI.Contracts.IMenuContainer;
+
 
 public class MainView extends BasicContainer implements  KeyListener {
 
@@ -106,19 +104,6 @@ public class MainView extends BasicContainer implements  KeyListener {
 		super.paint(g);
 	}
 
-/*	@Override
-	public void selectedOption(UOptionItem selectedOption) {
-		ViewManager.getInstance().changeView((String) selectedOption.getValue(), null);
-	}
-
-	@Override
-	public void stepedOnOption(UOptionItem option) {
-	}
-
-	@Override
-	public void unmanagedMenuKey(int keyCode) {
-	}
-*/
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
 		// TODO Auto-generated method stub		
