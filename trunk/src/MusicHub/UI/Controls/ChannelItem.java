@@ -43,7 +43,7 @@ public class ChannelItem extends HContainer {
 
 	private String formatName(String name) {
 		if (name.length() >= 30) {
-			name = name.substring(0, 23);
+			name = name.substring(0, 30);
 			name += "...";
 		}
 		return name;
