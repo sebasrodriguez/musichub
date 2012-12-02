@@ -7,8 +7,7 @@ import java.util.regex.Pattern;
 public class RssParser implements IRssParser {
 
 	private static final Pattern IMG_PATTERN = Pattern.compile(
-			"<img\\s+.*?(?:src\\s*=\\s*(?:'|\")(.*?)(?:'|\"))(.*?)/>", Pattern.DOTALL
-					| Pattern.CASE_INSENSITIVE);
+			"<img\\s+.*?(?:src\\s*=\\s*(?:'|\")(.*?)(?:'|\"))(.*?)/>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public String getImageFromRssContent(String rssContent) {
@@ -20,10 +19,28 @@ public class RssParser implements IRssParser {
 		}
 		return "";
 	}
-	
+
 	@Override
-	public String cleanHtml(String rssContent){
-		return rssContent.replaceAll("\\<.*?\\>", "");
+	public String cleanHtml(String rssContent) {
+		String cleanedHtml = rssContent.replaceAll("\\<.*?\\>", "");
+
+		cleanedHtml = cleanedHtml.replace("&nbsp;", " ");
+		cleanedHtml = cleanedHtml.replace("&aacute;", "a");
+		cleanedHtml = cleanedHtml.replace("&eacute;", "e");
+		cleanedHtml = cleanedHtml.replace("&iacute;", "i");
+		cleanedHtml = cleanedHtml.replace("&oacute;", "o");
+		cleanedHtml = cleanedHtml.replace("&uacute;", "u");
+		
+		cleanedHtml = cleanedHtml.replace("&Aacute;", "a");
+		cleanedHtml = cleanedHtml.replace("&Eacute;", "e");
+		cleanedHtml = cleanedHtml.replace("&Iacute;", "i");
+		cleanedHtml = cleanedHtml.replace("&Oacute;", "o");
+		cleanedHtml = cleanedHtml.replace("&Uacute;", "u");
+		
+		cleanedHtml = cleanedHtml.replace("&ldquo;", "\"");
+		cleanedHtml = cleanedHtml.replace("&rdquo;", "\"");
+
+		return cleanedHtml;
 	}
 
 }
