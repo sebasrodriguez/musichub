@@ -25,10 +25,10 @@ import MusicHub.UI.Controls.UOptionItem;
 public class ContentView extends BasicContainer implements IMenuContainer, KeyListener {
 
 	private static final long serialVersionUID = 1L;
-	private BasicPanel newsPanel;
+	public BasicPanel newsPanel;
 	private BasicPanel detailsPanel;
-	private BasicPanel socialPanel;
-	private BasicPanel selectedPanel;
+	public BasicPanel socialPanel;
+	public BasicPanel selectedPanel;
 	private RssFeed rssFeed;
 	private List<RssItem> feedItemList;
 	private RssItem selectedItem;
@@ -194,7 +194,7 @@ public class ContentView extends BasicContainer implements IMenuContainer, KeyLi
 	public void commentRssItem() {
 		Object args[];
 		args = new Object[2];
-		args[0] = this;
+		args[0] = this.getRssFeed();
 		args[1] = this.getSelectedItem();
 
 		ViewManager.getInstance().changeView("CommentsView", args);
