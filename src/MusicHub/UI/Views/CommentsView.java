@@ -10,6 +10,7 @@ import org.havi.ui.HText;
 import org.havi.ui.HVisible;
 
 import MusicHub.Application.ServiceLocator;
+import MusicHub.DataTypes.RssFeed;
 import MusicHub.DataTypes.RssItem;
 import MusicHub.UI.BasicContainer;
 import MusicHub.UI.ControlKeyConstants;
@@ -27,19 +28,18 @@ public class CommentsView extends BasicContainer implements IKeyboardReceiver {
 	private boolean isFinished;
 	private RssItem rssItem;
 	private String tempComment;
-	private ContentView contentView;
+	private RssFeed rssFeed;
 
-	public CommentsView(RssItem rssItem, ContentView contentView) {
+	public CommentsView(RssItem rssItem, RssFeed rssFeed) {
 		super("../assets/keyboard-view-bg.png");
-		
-		
+
 		this.rssItem = rssItem;
-		this.contentView = contentView;
+		this.rssFeed = rssFeed;
 
 		isFinished = false;
-		
-		title = new HText("Comentando: " + rssItem.getTitle(), new Font("Tiresias", Font.BOLD, 20),
-				Color.WHITE, Color.WHITE, new HDefaultTextLayoutManager());
+
+		title = new HText("Comentando: " + rssItem.getTitle(), new Font("Tiresias", Font.BOLD, 20), Color.WHITE,
+				Color.WHITE, new HDefaultTextLayoutManager());
 		title.setBounds(150, 80, 1000, 20);
 		title.setVisible(true);
 		title.setHorizontalAlignment(HVisible.HALIGN_LEFT);
@@ -100,20 +100,19 @@ public class CommentsView extends BasicContainer implements IKeyboardReceiver {
 				ServiceLocator.getRssManager().addComment(this.rssItem, this.tempComment);
 				comment.setVerticalAlignment(HVisible.VALIGN_CENTER);
 				comment.setHorizontalAlignment(HVisible.HALIGN_CENTER);
-				comment.setTextContent(
-						"Comentario enviado con exito\n\n Presione VERDE para continuar",
+				comment.setTextContent("Comentario enviado con exito\n\n Presione VERDE para continuar",
 						HState.ALL_STATES);
 				isFinished = true;
 			}
 			else {
-				Object[] args = { this.contentView };
-				ViewManager.getInstance().changeView("ContentView-CommentsView", args);
+				Object[] args = { this.rssFeed };
+				ViewManager.getInstance().changeView("ContentView", args);
 			}
 			break;
 		case ControlKeyConstants.RED:
 			if (!isFinished) {
-				Object[] args = { this.contentView };
-				ViewManager.getInstance().changeView("ContentView-CommentsView", args);
+				Object[] args = { this.rssFeed };
+				ViewManager.getInstance().changeView("ContentView", args);
 			}
 			break;
 		case ControlKeyConstants.EXIT:

@@ -44,10 +44,10 @@ public class ViewManager extends HContainer {
 
 	public void loadInitialView() {
 		HSceneTemplate template = new HSceneTemplate();
-		template.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
-				new org.havi.ui.HScreenDimension(1, 1), HSceneTemplate.REQUIRED);
-		template.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION, new org.havi.ui.HScreenPoint(
-				0, 0), HSceneTemplate.REQUIRED);
+		template.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION, new org.havi.ui.HScreenDimension(1, 1),
+				HSceneTemplate.REQUIRED);
+		template.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION, new org.havi.ui.HScreenPoint(0, 0),
+				HSceneTemplate.REQUIRED);
 		this.scene = HSceneFactory.getInstance().getBestScene(template);
 
 		mainView = new MainView();
@@ -75,11 +75,6 @@ public class ViewManager extends HContainer {
 			scene.add(contentsView);
 			visibleView = contentsView;
 		}
-		else if (newView == "ContentView-CommentsView") {
-			contentsView = (ContentView) args[0];
-			scene.add(contentsView);
-			visibleView = contentsView;
-		}
 		else if (newView == "TwitterView") {
 			twitterView = new TwitterView();
 			scene.add(twitterView);
@@ -91,7 +86,7 @@ public class ViewManager extends HContainer {
 			visibleView = addChannelView;
 		}
 		else if (newView == "CommentsView") {
-			commentsView = new CommentsView((RssItem) args[1], (ContentView) args[0]);
+			commentsView = new CommentsView((RssItem) args[1], (RssFeed) args[0]);
 			scene.add(commentsView);
 			visibleView = commentsView;
 		}
