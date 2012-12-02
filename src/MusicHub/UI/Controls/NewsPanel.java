@@ -12,8 +12,7 @@ public class NewsPanel extends BasicPanel implements IMenuContainer {
 	private UMenuScrollable itemsMenu;
 	private IMenuContainer parent;
 
-	public NewsPanel(IMenuContainer container, List<UOptionItem> itemList, int x, int y, int w,
-			int h) {
+	public NewsPanel(IMenuContainer container, List<UOptionItem> itemList, int x, int y, int w, int h) {
 		super(x, y, w, h);
 
 		super.hasFocus = true;
@@ -22,7 +21,7 @@ public class NewsPanel extends BasicPanel implements IMenuContainer {
 		this.setSize(w, h);
 
 		this.parent = container;
-		itemsMenu = new UMenuScrollable(itemList, 8, this, 10, 10);
+		itemsMenu = new UMenuScrollable(itemList, 7, this, 10, 10);
 		itemsMenu.setFontStyle(Font.PLAIN, 13);
 		this.add(itemsMenu);
 		this.popToFront(itemsMenu);

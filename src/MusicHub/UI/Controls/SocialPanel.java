@@ -34,7 +34,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 		accButtons = new HGraphicButton[4];
 
-		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32.png");
+		Image comentarImg = Toolkit.getDefaultToolkit().getImage("../assets/comment_32_red.png");
 		btnComment = new HGraphicButton(comentarImg);
 		btnComment.setBounds(20, 10, this.getWidth() - 30, 40);
 		btnComment.setName("comentar");
@@ -64,7 +64,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		accButtons[0] = btnComment;
 		this.add(btnComment);
 
-		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32.png");
+		Image votarImg = Toolkit.getDefaultToolkit().getImage("../assets/votar_32_red.png");
 		btnVote = new HGraphicButton(votarImg);
 		btnVote.setBounds(20, 65, this.getWidth() - 30, 40);
 		btnVote.setName("votar");
@@ -96,7 +96,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 
 		this.add(btnVote);
 
-		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32.png");
+		Image tweetImg = Toolkit.getDefaultToolkit().getImage("../assets/tweet_32_red.png");
 		btnTweet = new HGraphicButton(tweetImg);
 		btnTweet.setBounds(20, 120, this.getWidth() - 30, 40);
 		btnTweet.setName("twitter");
@@ -126,7 +126,7 @@ public class SocialPanel extends BasicPanel implements IMenuContainer {
 		accButtons[2] = btnTweet;
 		this.add(btnTweet);
 
-		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32.png");
+		Image fcbkImg = Toolkit.getDefaultToolkit().getImage("../assets/me_gusta_32_red.png");
 		btnFacebook = new HGraphicButton(fcbkImg);
 		btnFacebook.setBounds(20, 180, this.getWidth() - 30, 40);
 		btnFacebook.setName("facebook");

@@ -57,14 +57,15 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 			this.popToFront(ico);
 		}
 
-		titleText = new HText(this.wrapContent(this.title, 50));
+		titleText = new HText(this.wrapContent(this.title, 60, 3));
 		titleText.setFont(new Font("tiresias", Font.BOLD, 15));
 		titleText.setForeground(Color.WHITE);
 		titleText.setBounds(10, 10, this.getWidth() - 15, 30);
+		titleText.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		titleText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
 		if (isTooLength(this.content)) {
-			this.content = wrapContent(this.content, 60);
+			this.content = wrapContent(this.content, 65, 21);
 		}
 
 		contentText = new HText(this.content);
@@ -72,6 +73,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		contentText.setForeground(Color.WHITE);
 		contentText.setBounds(10, 180, this.getWidth() - 15, 350);
 		contentText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
+		contentText.setBackgroundMode(HVisible.NO_BACKGROUND_FILL);
 		contentText.setVerticalAlignment(HVisible.VALIGN_TOP);
 
 		this.add(contentText);
@@ -84,28 +86,32 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		return content.length() > 25;
 	}
 
-	private String wrapContent(String content, int wrapLength) {
-		int i = 0, x = 0;
-		boolean f = false;
-		String wContent = new String();
+	private String wrapContent(String content, int wrapLength, int maxLines) {
+		StringBuilder wrappedContent = new StringBuilder();
+		char[] chars = content.toCharArray();
+		int j = 0;
+		int lines = 1;
 
-		while (i < content.length() && !f) {
-			if (Character.isSpaceChar(content.charAt(i)) && x > wrapLength) {
-				wContent += '\n';
-				x = 0;
+		for (int i = 0; i < chars.length; i++) {
+			if (j == wrapLength) {
+				wrappedContent.append("\n");
+				j = 0;
+				lines++;
+				if (lines > maxLines) {
+					wrappedContent.append("...");
+					break;
+				}
 			}
-			else {
-				wContent += content.charAt(i);
-				x++;
-			}
-			i++;
+			wrappedContent.append(chars[i]);
+			j++;
 		}
-		return wContent;
+
+		return wrappedContent.toString();
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.DARK_GRAY);
 		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 15, 15);
 		super.paint(g);
 	}
@@ -116,10 +122,10 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 
 	public void updateContent(String desc, String title, String imgSrc) {
 		if (isTooLength(desc)) {
-			desc = wrapContent(desc, 60);
+			desc = wrapContent(desc, 65, 21);
 		}
 		contentText.setTextContent(desc, HState.ALL_STATES);
-		titleText.setTextContent(this.wrapContent(title, 50), HState.ALL_STATES);
+		titleText.setTextContent(this.wrapContent(title, 60, 3), HState.ALL_STATES);
 
 		try {
 			if (!imgSrc.equals("") && imgSrc.length() > 0 && imgSrc.toLowerCase().startsWith("http")) {
