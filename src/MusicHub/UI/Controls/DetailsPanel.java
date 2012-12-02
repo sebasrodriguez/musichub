@@ -65,7 +65,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 		titleText.setHorizontalAlignment(HVisible.HALIGN_LEFT);
 
 		if (isTooLength(this.content)) {
-			this.content = wrapContent(this.content, 65, 21);
+			this.content = wrapContent(this.content, 64, 21);
 		}
 
 		contentText = new HText(this.content);
@@ -122,7 +122,7 @@ public class DetailsPanel extends BasicPanel implements IMenuContainer, KeyListe
 
 	public void updateContent(String desc, String title, String imgSrc) {
 		if (isTooLength(desc)) {
-			desc = wrapContent(desc, 65, 21);
+			desc = wrapContent(desc, 64, 21);
 		}
 		contentText.setTextContent(desc, HState.ALL_STATES);
 		titleText.setTextContent(this.wrapContent(title, 60, 3), HState.ALL_STATES);

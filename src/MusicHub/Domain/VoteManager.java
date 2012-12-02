@@ -9,44 +9,37 @@ public class VoteManager implements IVoteManager {
 
 	@Override
 	public void voteRssItem(RssFeed rssFeed, RssItem rssItem) {
-		// TODO Auto-generated method stub
-		if(rssFeed.getUrl().isEmpty() || rssItem.getItemUrl().isEmpty()){
-			
-		}else{
+		if (rssFeed.getUrl() != null && !rssFeed.getUrl().isEmpty() && rssItem.getItemUrl() != null
+				&& !rssItem.getItemUrl().isEmpty()) {
 			ServiceLocator.getVoteService().voteRssItem(rssFeed, rssItem);
 		}
-		
 	}
 
 	@Override
 	public int getRssItemVotes(RssItem rssItem, RssFeed rssFeed) {
-		// TODO Auto-generated method stub
 		int result = 0;
-		if(rssFeed.getUrl().isEmpty() || rssItem.getItemUrl().isEmpty()){
-			
-		}else{
+
+		if (rssFeed.getUrl() != null && !rssFeed.getUrl().isEmpty() && rssItem.getItemUrl() != null
+				&& !rssItem.getItemUrl().isEmpty()) {
 			result = ServiceLocator.getVoteService().getRssItemVotes(rssItem, rssFeed);
 		}
+
 		return result;
 	}
 
 	@Override
 	public int getRssFeedVotes(RssFeed rssFeed) {
-		// TODO Auto-generated method stub
 		int result = 0;
-		if(rssFeed.getUrl().isEmpty()){
-			
-		}else{
+
+		if (rssFeed.getUrl() != null && !rssFeed.getUrl().isEmpty()) {
 			result = ServiceLocator.getVoteService().getRssFeedVotes(rssFeed);
 		}
-		return result;		
+
+		return result;
 	}
 
 	@Override
 	public void cleanVotes() {
-		// TODO Auto-generated method stub
 		ServiceLocator.getVoteService().cleanVotes();
-		
 	}
-
 }
