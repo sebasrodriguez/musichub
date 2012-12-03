@@ -10,7 +10,9 @@ Materia:
     Desarrollo de Aplicaciones TV Digital interactiva
 
 Integrantes:
-    Diego Busca, Santiago Maidana y Sebastian Rodriguez
+    Diego Busca 
+    Santiago Maidana 
+    Sebastian Rodriguez
 
 Docentes: 
-    Juan García y Juan Benitez
+    Juan Garcia y Juan Benitez
