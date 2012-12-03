@@ -28,7 +28,7 @@ public class AddChannelView extends BasicContainer implements IKeyboardReceiver 
 	private HText messageText;
 
 	public AddChannelView() {
-		super("../assets/base_bg.png");
+		super("../assets/add-channel-view-bg.png");
 
 		HText viewTitle = new HText("Agregar canal nuevo");
 		viewTitle.setFont(new Font("tiresias", Font.BOLD, 18));
