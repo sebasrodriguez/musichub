@@ -16,15 +16,17 @@ public class VoteService implements IVoteService {
 
 	@Override
 	public void voteRssItem(RssFeed rssFeed, RssItem rssItem) {
-		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c="
-				+ rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
+		String itemUrl = rssItem.getItemUrl().trim();
+		String rssUrl = rssFeed.getUrl().trim();
+		String finalUrl = Conf.getVoteUrl() + "?g=" + Conf.getGroup() + "&c=" + itemUrl + "&ch=" + rssUrl;
 		this.sendData(finalUrl, "GET");
 	}
 
 	@Override
 	public int getRssItemVotes(RssItem rssItem, RssFeed rssFeed) {
-		String finalUrl = Conf.getItemVotes() + "?g=" + Conf.getGroup() + "&c="
-				+ rssItem.getItemUrl() + "&ch=" + rssFeed.getUrl();
+		String itemUrl = rssItem.getItemUrl().trim();
+		String rssUrl = rssFeed.getUrl().trim();
+		String finalUrl = Conf.getItemVotes() + "?g=" + Conf.getGroup() + "&c=" + itemUrl + "&ch=" + rssUrl;
 		String answer = this.sendData(finalUrl, "GET");
 
 		answer = answer.replace("{", "");
