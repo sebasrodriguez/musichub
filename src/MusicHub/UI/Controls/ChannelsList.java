@@ -38,7 +38,7 @@ public class ChannelsList extends HContainer implements KeyListener {
 		
 
 		channelsHeader = new HText("Canal");
-		channelsHeader.setFont(new Font("tiresias", Font.BOLD, 18));
+		channelsHeader.setFont(new Font("tiresias", Font.BOLD, 22));
 		channelsHeader.setForeground(Color.WHITE);
 		channelsHeader.setBounds(60, 5, 80, 25);
 		channelsHeader.setHorizontalAlignment(HVisible.HALIGN_LEFT);
