@@ -75,14 +75,16 @@ public class ChannelsView extends BasicContainer {
 	}
 
 	public void unmanagedMenuKey(int keyCode) {
+		VideoResizer.getInstance(null).returnToOriginalSize();
 		switch (keyCode) {
 		case ControlKeyConstants.RED:
-			VideoResizer.getInstance(null).returnToOriginalSize();
 			ViewManager.getInstance().changeView("MainView", null);
 			break;
 		case ControlKeyConstants.GREEN:
-			VideoResizer.getInstance(null).returnToOriginalSize();
 			ViewManager.getInstance().changeView("AddChannelView", null);
+			break;
+		case ControlKeyConstants.EXIT:
+			ViewManager.getInstance().exitApplication();
 			break;
 		}
 	}

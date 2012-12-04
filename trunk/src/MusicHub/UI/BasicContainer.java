@@ -17,17 +17,17 @@ public class BasicContainer extends HContainer {
 		this.setBounds(0, 0, this.viewWidth, this.viewHeight);
 
 		img = Toolkit.getDefaultToolkit().getImage("../assets/MusicHub-Background.png");
-		icon = new HIcon(img, 0, 0, this.getWidth(),this.getHeight());
+		icon = new HIcon(img, 0, 0, this.getWidth(), this.getHeight());
 
 		this.add(icon);
 		this.pushToBack(icon);
 	}
-	
-	public BasicContainer(String backgroundImage){
+
+	public BasicContainer(String backgroundImage) {
 		this.setBounds(0, 0, this.viewWidth, this.viewHeight);
 
 		img = Toolkit.getDefaultToolkit().getImage(backgroundImage);
-		icon = new HIcon(img, 0, 0, this.getWidth(),this.getHeight());
+		icon = new HIcon(img, 0, 0, this.getWidth(), this.getHeight());
 
 		this.add(icon);
 		this.pushToBack(icon);
@@ -39,5 +39,9 @@ public class BasicContainer extends HContainer {
 
 	public int getViewHeight() {
 		return this.viewHeight;
+	}
+
+	public void exit() {
+		ViewManager.getInstance().exitApplication();
 	}
 }
