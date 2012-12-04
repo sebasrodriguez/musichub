@@ -93,6 +93,9 @@ public class AddChannelView extends BasicContainer implements IKeyboardReceiver 
 		case ControlKeyConstants.RED:
 			ViewManager.getInstance().changeView("ChannelsView", null);
 			break;
+		case ControlKeyConstants.EXIT:
+			ViewManager.getInstance().exitApplication();
+			break;
 		}
 	}
 
